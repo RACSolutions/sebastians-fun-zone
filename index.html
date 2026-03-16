@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sebastian's Fun Zone!</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
+.home-screen{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.home-title{color:#fff;font-size:2.5rem;margin-bottom:40px;text-shadow:0 0 20px rgba(255,255,255,.3)}
+.app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;max-width:450px}
+.app-icon{width:120px;height:120px;border-radius:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s;box-shadow:0 8px 25px rgba(0,0,0,.3)}
+.app-icon:hover{transform:scale(1.1)}.app-icon:active{transform:scale(.95)}
+.app-icon .ie{font-size:3rem}
+.app-label{color:#fff;font-size:.9rem;margin-top:8px;text-align:center}
+.am{background:linear-gradient(135deg,#e74c3c,#c0392b)}.ar{background:linear-gradient(135deg,#2ecc71,#1a9c54)}
+.af{background:linear-gradient(135deg,#3498db,#2176ae)}.at{background:linear-gradient(135deg,#2c3e50,#1a252f)}
+.as{background:linear-gradient(135deg,#0b0b3b,#1b1b6b)}.amc{background:linear-gradient(135deg,#4a8c2a,#2d5a1a)}
+.app-page{display:none;min-height:100vh;padding:20px;flex-direction:column;align-items:center;overflow-y:auto}
+.app-page.active{display:flex}
+.pm{background:linear-gradient(135deg,#e74c3c,#c0392b)}.pr{background:linear-gradient(135deg,#2ecc71,#1a9c54)}
+.pf{background:linear-gradient(135deg,#3498db,#2176ae)}.pt{background:linear-gradient(135deg,#0c1a2e,#1a3a5c,#0c1a2e)}
+.ps{background:linear-gradient(135deg,#0b0b2b,#1a1a4e,#0b0b2b)}.pmc{background:linear-gradient(135deg,#2d5a1a,#4a8c2a,#2d5a1a)}
+.top-bar{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:600px;margin-bottom:15px}
+.nb{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);color:#fff;font-size:1.1rem;padding:10px 20px;border-radius:50px;cursor:pointer;transition:background .2s}
+.nb:hover{background:rgba(255,255,255,.3)}.nb:disabled{opacity:.3;cursor:default}
+.pe{font-size:5rem;margin-bottom:10px}
+.ptl{color:#fff;font-size:2.2rem;margin-bottom:25px;text-shadow:2px 2px 4px rgba(0,0,0,.3)}
+.cc{background:#fff;border-radius:20px;padding:30px;max-width:600px;width:100%;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.2);margin-bottom:20px;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.cc .mt{font-size:1.5rem;color:#333;line-height:1.6}
+.mp{width:180px;height:267px;object-fit:cover;border-radius:12px;margin-bottom:15px;box-shadow:0 5px 20px rgba(0,0,0,.3)}
+.mpf{width:180px;height:267px;border-radius:12px;margin-bottom:15px;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,#2c3e50,#4a6fa5);box-shadow:0 5px 20px rgba(0,0,0,.3)}
+.mn{font-size:2rem;font-weight:bold;color:#e74c3c}.my{color:#999;font-size:1rem;margin:5px 0}.md{color:#555;font-size:1.15rem;margin-top:10px}
+.ra{font-size:1.4rem;color:#e67e22;font-weight:bold;margin-top:15px;min-height:30px}
+.ab{font-size:1.3rem;padding:14px 35px;border:none;border-radius:50px;color:#fff;cursor:pointer;font-weight:bold;transition:transform .1s;box-shadow:0 5px 20px rgba(0,0,0,.2);margin:5px}
+.ab:active{transform:scale(.95)}
+.bm{background:linear-gradient(135deg,#fff,#f0f0f0);color:#e74c3c}
+.br{background:linear-gradient(135deg,#fff,#f0f0f0);color:#1a9c54}
+.ba{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.bf{background:linear-gradient(135deg,#fff,#f0f0f0);color:#2176ae}
+.btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.ctr{color:rgba(255,255,255,.7);font-size:.9rem;margin-top:10px}
+.cw{width:100%;max-width:620px;margin-bottom:20px}
+.clb{display:flex;align-items:center;justify-content:center;gap:15px;margin-bottom:18px}
+.ca{width:50px;height:50px;border-radius:50%;border:2px solid rgba(255,255,255,.5);background:rgba(255,255,255,.15);color:#fff;font-size:1.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.ca:hover{background:rgba(255,255,255,.3);transform:scale(1.1)}.ca:active{transform:scale(.9)}
+.cl{color:#fff;font-size:1.4rem;font-weight:bold;text-shadow:0 2px 6px rgba(0,0,0,.4);min-width:200px;text-align:center}
+.cd{display:flex;justify-content:center;gap:8px;margin-bottom:18px}
+.dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.3);transition:all .3s;cursor:pointer}
+.dot.active{background:#fff;transform:scale(1.3);box-shadow:0 0 10px rgba(255,255,255,.5)}
+.cv{perspective:1200px;overflow:hidden;width:100%}
+.ct{display:flex;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
+.cs{min-width:100%}
+.ic{background:rgba(255,255,255,.95);border-radius:16px;padding:22px;margin-bottom:15px;box-shadow:0 5px 20px rgba(0,0,0,.2)}
+.ic h3{color:#1a3a5c;font-size:1.2rem;margin-bottom:8px}.ic p{color:#444;font-size:1.05rem;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:100%}
+.sc{background:rgba(255,255,255,.95);border-radius:16px;padding:20px;text-align:center;box-shadow:0 5px 20px rgba(0,0,0,.2)}
+.sc .bn{font-size:2.2rem;font-weight:bold;color:#1a3a5c}.sc .lb{font-size:.85rem;color:#888;margin-top:4px}
+.qo{display:block;width:100%;padding:14px;margin:8px 0;border:2px solid #ddd;border-radius:12px;background:#fff;font-size:1.1rem;cursor:pointer;text-align:left;transition:all .2s;color:#333}
+.qo:hover{border-color:#1a3a5c;background:#f0f4f8}
+.qo.correct{border-color:#2ecc71;background:#d4efdf;color:#1a7d42;font-weight:bold}
+.qo.wrong{border-color:#e74c3c;background:#fadbd8;color:#c0392b}
+.qr{font-size:1.2rem;font-weight:bold;margin-top:12px;min-height:30px}
+.ti{display:flex;gap:15px;margin-bottom:15px}
+.tt{background:#1a3a5c;color:#fff;padding:8px 12px;border-radius:10px;font-weight:bold;font-size:.9rem;white-space:nowrap;height:fit-content}
+.te{background:rgba(255,255,255,.95);border-radius:12px;padding:14px;box-shadow:0 3px 12px rgba(0,0,0,.15);flex:1}
+.te p{color:#444;font-size:1rem;line-height:1.4}
+.hi{width:100%;max-width:600px;border-radius:16px;margin-bottom:20px;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+@media(max-width:500px){.app-grid{gap:20px}.app-icon{width:95px;height:95px;border-radius:22px}.ie{font-size:2.4rem!important}.home-title{font-size:1.8rem}.ptl{font-size:1.6rem}.mt{font-size:1.2rem!important}.mn{font-size:1.5rem}.sg{grid-template-columns:1fr}.mp,.mpf{width:140px;height:207px}.nb{padding:8px 14px;font-size:1rem}.cl{font-size:1.1rem;min-width:150px}}
+</style>
+</head>
+<body>
+<div class="home-screen" id="home">
+<h1 class="home-title">Sebastian's Fun Zone</h1>
+<div class="app-grid">
+<div><div class="app-icon am" onclick="openApp('movies')"><span class="ie">&#127916;</span></div><div class="app-label">Movies</div></div>
+<div><div class="app-icon ar" onclick="openApp('riddles')"><span class="ie">&#129300;</span></div><div class="app-label">Riddles</div></div>
+<div><div class="app-icon af" onclick="openApp('facts')"><span class="ie">&#129504;</span></div><div class="app-label">Fun Facts</div></div>
+<div><div class="app-icon at" onclick="openApp('titanic')"><span class="ie">&#128674;</span></div><div class="app-label">Titanic</div></div>
+<div><div class="app-icon as" onclick="openApp('space')"><span class="ie">&#128640;</span></div><div class="app-label">Space</div></div>
+<div><div class="app-icon amc" onclick="openApp('minecraft')"><span class="ie">&#9935;&#65039;</span></div><div class="app-label">Minecraft</div></div>
+</div></div>
+
+<div class="app-page pm" id="page-movies">
+<div class="top-bar"><button class="nb" onclick="goHome()">&#8592; Home</button><div><button class="nb" id="movie-back-btn" onclick="goBack('movie')" disabled>&#9664;</button> <button class="nb" id="movie-fwd-btn" onclick="goForward('movie')" disabled>&#9654;</button></div></div>
+<div class="pe">&#127916;&#127871;</div><h2 class="ptl">Random Kids Movie</h2>
+<div class="cc"><div id="movie-display" class="mt">Tap New Movie!</div></div>
+<button class="ab bm" onclick="showNew('movie')">New Movie!</button></div>
+
+<div class="app-page pr" id="page-riddles">
+<div class="top-bar"><button class="nb" onclick="goHome()">&#8592; Home</button><div><button class="nb" id="riddle-back-btn" onclick="goBack('riddle')" disabled>&#9664;</button> <button class="nb" id="riddle-fwd-btn" onclick="goForward('riddle')" disabled>&#9654;</button></div></div>
+<div class="pe">&#129300;&#10067;</div><h2 class="ptl">Riddles</h2>
+<div class="cc"><div id="riddle-display" class="mt">Tap New Riddle!</div><div id="riddle-answer" class="ra"></div></div>
+<div class="btns"><button class="ab br" onclick="showNew('riddle')">New Riddle!</button><button class="ab ba" onclick="showAnswer()">Show Answer</button></div></div>
+
+<div class="app-page pf" id="page-facts">
+<div class="top-bar"><button class="nb" onclick="goHome()">&#8592; Home</button><div><button class="nb" id="fact-back-btn" onclick="goBack('fact')" disabled>&#9664;</button> <button class="nb" id="fact-fwd-btn" onclick="goForward('fact')" disabled>&#9654;</button></div></div>
+<div class="pe">&#129504;&#10024;</div><h2 class="ptl">Fun Facts</h2>
+<div class="cc"><div id="fact-display" class="mt">Tap for a fun fact!</div></div>
+<button class="ab bf" onclick="showNew('fact')">New Fact!</button></div>
+
+<div class="app-page pt" id="page-titanic">
+<div class="top-bar"><button class="nb" onclick="goHome()">&#8592; Home</button></div>
+<div class="pe">&#128674;</div><h2 class="ptl">The Titanic</h2>
+<img class="hi" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/RMS_Titanic_3.jpg/1280px-RMS_Titanic_3.jpg" alt="RMS Titanic">
+<div class="cw" id="titanic-carousel"><div class="clb"><button class="ca" onclick="cPrev('titanic')">&#9664;</button><div class="cl" id="titanic-cl">Ship Stats</div><button class="ca" onclick="cNext('titanic')">&#9654;</button></div><div class="cd" id="titanic-dots"></div><div class="cv"><div class="ct" id="titanic-track">
+<div class="cs"><div class="sg"><div class="sc"><div class="bn">882 ft</div><div class="lb">Length (2.5 football fields!)</div></div><div class="sc"><div class="bn">175 ft</div><div class="lb">Height (17-story building!)</div></div><div class="sc"><div class="bn">2,224</div><div class="lb">People on board</div></div><div class="sc"><div class="bn">4</div><div class="lb">Giant smokestacks</div></div><div class="sc"><div class="bn">23 knots</div><div class="lb">Top speed (26 mph)</div></div><div class="sc"><div class="bn">20</div><div class="lb">Lifeboats (not enough!)</div></div><div class="sc"><div class="bn">$7.5M</div><div class="lb">Cost ($200M today!)</div></div><div class="sc"><div class="bn">10,000+</div><div class="lb">Light bulbs</div></div></div></div>
+<div class="cs"><div class="ic"><h3>&#127959;&#65039; 3 Years to Build</h3><p>15,000+ workers in Belfast, Ireland.</p></div><div class="ic"><h3>&#127860; Fancy Food</h3><p>10-course dinners! 40,000 eggs for one trip.</p></div><div class="ic"><h3>&#127946; Swimming Pool!</h3><p>One of the first ships with a heated pool, gym, and library.</p></div><div class="ic"><h3>&#129482; Huge Iceberg</h3><p>100 ft above water, probably 400 ft total!</p></div><div class="ic"><h3>&#128021; 12 Dogs on Board</h3><p>3 survived - two Pomeranians and a Pekingese.</p></div><div class="ic"><h3>&#127925; Band Played On</h3><p>8 musicians played as the ship sank. Heroes.</p></div><div class="ic"><h3>&#128236; Royal Mail Ship</h3><p>3,423 bags of mail. RMS = Royal Mail Ship.</p></div><div class="ic"><h3>4&#65039;&#8419; Fake 4th Funnel</h3><p>Only 3 worked. The 4th was just for looks!</p></div></div>
+<div class="cs"><div class="ti"><div class="tt">Apr 10, 1912</div><div class="te"><p><b>Sets sail!</b> Southampton to New York.</p></div></div><div class="ti"><div class="tt">Apr 14, 11:40 PM</div><div class="te"><p><b>Iceberg!</b> Ship scrapes the right side.</p></div></div><div class="ti"><div class="tt">Apr 15, 12:05 AM</div><div class="te"><p><b>Lifeboats ordered!</b> Women and children first.</p></div></div><div class="ti"><div class="tt">Apr 15, 2:20 AM</div><div class="te"><p><b>Sinks.</b> 2 hours 40 minutes total.</p></div></div><div class="ti"><div class="tt">Apr 15, 4:00 AM</div><div class="te"><p><b>Rescue!</b> Carpathia saves 710 survivors.</p></div></div><div class="ti"><div class="tt">Sep 1, 1985</div><div class="te"><p><b>Found!</b> 73 years later, 12,500 ft deep.</p></div></div></div>
+<div class="cs"><div class="ic"><h3 id="titanic-qq">Titanic Quiz!</h3><div id="titanic-qo"></div><div id="titanic-qr" class="qr"></div><div style="margin-top:15px"><button class="ab" style="background:#2c3e50" onclick="nextQ('titanic')">Next!</button></div><div class="ctr" style="color:#888" id="titanic-qc"></div></div></div>
+</div></div></div></div>
+
+<div class="app-page ps" id="page-space">
+<div class="top-bar"><button class="nb" onclick="goHome()">&#8592; Home</button></div>
+<div class="pe">&#128640;&#127756;</div><h2 class="ptl">Explore Space!</h2>
+<img class="hi" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Solar_sys8.jpg/1280px-Solar_sys8.jpg" alt="Solar System">
+<div class="cw" id="space-carousel"><div class="clb"><button class="ca" onclick="cPrev('space')">&#9664;</button><div class="cl" id="space-cl">The Planets</div><button class="ca" onclick="cNext('space')">&#9654;</button></div><div class="cd" id="space-dots"></div><div class="cv"><div class="ct" id="space-track">
+<div class="cs"><div class="ic"><h3>&#9728;&#65039; The Sun</h3><p>1.3 million Earths fit inside! 93 million miles away.</p></div><div class="ic"><h3>1. Mercury</h3><p>Smallest! 88-day year. 800&#176;F day, -290&#176;F night.</p></div><div class="ic"><h3>2. Venus</h3><p>Hottest at 900&#176;F! Spins backwards.</p></div><div class="ic"><h3>3. Earth &#127758;</h3><p>Our home! Only planet with life.</p></div><div class="ic"><h3>4. Mars &#128308;</h3><p>Olympus Mons: 3x taller than Everest!</p></div><div class="ic"><h3>5. Jupiter</h3><p>Biggest! Great Red Spot storm: 350+ years old.</p></div><div class="ic"><h3>6. Saturn &#128141;</h3><p>Beautiful rings! Could float in water. 146 moons!</p></div><div class="ic"><h3>7. Uranus</h3><p>Spins on its side! -357&#176;F.</p></div><div class="ic"><h3>8. Neptune &#128153;</h3><p>Windiest! 1,200+ mph winds. 165-year orbit.</p></div></div>
+<div class="cs"><div class="ic"><h3>&#129296; Space is Silent</h3><p>No air = no sound!</p></div><div class="ic"><h3>&#128099; Moon Footprints Last Forever</h3><p>No wind! 1969 prints still there.</p></div><div class="ic"><h3>&#11088; More Stars Than Sand</h3><p>200 billion trillion stars!</p></div><div class="ic"><h3>&#128142; Diamond Rain</h3><p>On Jupiter and Saturn!</p></div><div class="ic"><h3>&#128760; ISS: 17,500 mph</h3><p>16 sunrises per day!</p></div><div class="ic"><h3>&#129509; Space Suits: $12M</h3><p>A tiny spaceship you wear!</p></div></div>
+<div class="cs"><div class="ic"><h3>&#129489;&#8205;&#128640; Yuri Gagarin (1961)</h3><p>First human in space!</p></div><div class="ic"><h3>&#127769; Neil Armstrong (1969)</h3><p>First Moon walk! 600M watched.</p></div><div class="ic"><h3>&#128105;&#8205;&#128640; Mae Jemison (1992)</h3><p>First African American woman in space!</p></div><div class="ic"><h3>&#128302; Mars Rovers</h3><p>Curiosity & Perseverance exploring now!</p></div><div class="ic"><h3>&#128752; Voyager 1</h3><p>15 billion miles away! Golden record for aliens.</p></div></div>
+<div class="cs"><div class="ic"><h3 id="space-qq">Space Quiz!</h3><div id="space-qo"></div><div id="space-qr" class="qr"></div><div style="margin-top:15px"><button class="ab" style="background:#0b0b3b" onclick="nextQ('space')">Next!</button></div><div class="ctr" style="color:#888" id="space-qc"></div></div></div>
+</div></div></div></div>
+
+<div class="app-page pmc" id="page-minecraft">
+<div class="top-bar"><button class="nb" onclick="goHome()">&#8592; Home</button></div>
+<div class="pe">&#9935;&#65039;&#129001;</div><h2 class="ptl">Minecraft!</h2>
+<svg width="280" height="160" viewBox="0 0 280 160" style="border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.5);margin-bottom:20px"><rect width="280" height="160" fill="#87CEEB"/><rect x="220" y="15" width="30" height="30" fill="#FFE44D"/><rect x="20" y="25" width="70" height="10" fill="#fff" opacity=".8"/><rect x="0" y="90" width="280" height="15" fill="#5B8C2A"/><rect x="0" y="105" width="280" height="25" fill="#8B5E3C"/><rect x="0" y="130" width="280" height="30" fill="#808080"/><rect x="90" y="138" width="8" height="8" fill="#4AEDD9"/><rect x="200" y="142" width="8" height="8" fill="#4AEDD9"/><rect x="150" y="135" width="8" height="8" fill="#FFD700"/><rect x="40" y="50" width="10" height="40" fill="#6B4226"/><rect x="25" y="35" width="40" height="30" fill="#2D7A2D"/><rect x="180" y="55" width="10" height="35" fill="#6B4226"/><rect x="165" y="40" width="40" height="30" fill="#2D7A2D"/><rect x="120" y="62" width="12" height="12" fill="#C69C6D"/><rect x="120" y="58" width="12" height="6" fill="#4A3728"/><rect x="120" y="74" width="12" height="14" fill="#00AAAA"/><rect x="120" y="88" width="5" height="10" fill="#2B2B8B"/><rect x="127" y="88" width="5" height="10" fill="#2B2B8B"/><rect x="250" y="72" width="10" height="22" fill="#2D7A2D"/><rect x="250" y="94" width="4" height="6" fill="#2D7A2D"/><rect x="256" y="94" width="4" height="6" fill="#2D7A2D"/><rect x="251" y="75" width="3" height="3" fill="#1a1a1a"/><rect x="256" y="75" width="3" height="3" fill="#1a1a1a"/><text x="140" y="152" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="2">M I N E C R A F T</text></svg>
+<div class="cw" id="minecraft-carousel"><div class="clb"><button class="ca" onclick="cPrev('minecraft')">&#9664;</button><div class="cl" id="minecraft-cl">Cool Facts</div><button class="ca" onclick="cNext('minecraft')">&#9654;</button></div><div class="cd" id="minecraft-dots"></div><div class="cv"><div class="ct" id="minecraft-track">
+<div class="cs"><div class="ic"><h3>&#127758; 300M+ Copies Sold!</h3><p>Best-selling game ever! More than the US population.</p></div><div class="ic"><h3>&#128100; One Person Made It</h3><p>Notch built v1 in just 6 days in 2009!</p></div><div class="ic"><h3>&#129001; Creeper = Accident</h3><p>Notch mixed up pig height/length. Kept the creepy result!</p></div><div class="ic"><h3>&#128506; 8x Bigger Than Earth</h3><p>Worlds are 60 million blocks wide!</p></div><div class="ic"><h3>&#128142; Diamonds: 0.0846%</h3><p>Best at Y level -59. Happy mining!</p></div><div class="ic"><h3>&#128218; Enchanting Table</h3><p>Uses "Standard Galactic Alphabet" from Commander Keen!</p></div><div class="ic"><h3>&#127891; Used in 115+ Countries</h3><p>Minecraft Education teaches math, science, and coding!</p></div><div class="ic"><h3>&#127874; Almost "Cave Game"</h3><p>Mine + craft. Great name choice, Notch!</p></div></div>
+<div class="cs"><div class="ic"><h3>&#129503; Zombie</h3><p>Burns in sun! Baby zombies are faster. Can wear armor.</p></div><div class="ic"><h3>&#128128; Skeleton</h3><p>If it kills a creeper, you get a music disc!</p></div><div class="ic"><h3>&#129001; Creeper</h3><p>Silent + explosive! Scared of cats.</p></div><div class="ic"><h3>&#128065;&#65039; Enderman</h3><p>Don't look at their eyes! Hates water.</p></div><div class="ic"><h3>&#128009; Ender Dragon</h3><p>Final boss! 12,000 XP drop.</p></div><div class="ic"><h3>&#11088; Wither</h3><p>Can destroy obsidian! Drops Nether Star.</p></div><div class="ic"><h3>&#129433; Axolotl</h3><p>5 colors! Blue = 1 in 1,200 chance.</p></div><div class="ic"><h3>&#128029; Bee</h3><p>Makes honey! Whole hive attacks if you hit one.</p></div><div class="ic"><h3>&#128049; Cat</h3><p>Scares creepers! Brings you gifts while you sleep.</p></div></div>
+<div class="cs"><div class="ic"><h3>&#128167; Water Bucket</h3><p>Place before landing = zero fall damage!</p></div><div class="ic"><h3>&#128293; Lava = 100 Smelts</h3><p>Best fuel in the game!</p></div><div class="ic"><h3>&#128737;&#65039; Shield vs Creeper</h3><p>Blocks explosion completely!</p></div><div class="ic"><h3>&#9935;&#65039; Fortune III</h3><p>Up to 4 diamonds from one ore!</p></div><div class="ic"><h3>&#127968; Build Near Villages</h3><p>Free food, beds, and trades!</p></div><div class="ic"><h3>&#128674; Ice Boat Highway</h3><p>70 blocks/sec on blue ice! Faster than Elytra.</p></div></div>
+<div class="cs"><div class="ic"><h3 id="mc-qq">Minecraft Quiz!</h3><div id="mc-qo"></div><div id="mc-qr" class="qr"></div><div style="margin-top:15px"><button class="ab" style="background:#2d5a1a" onclick="nextQ('mc')">Next!</button></div><div class="ctr" style="color:#888" id="mc-qc"></div></div></div>
+<div class="cs"><div class="ic" style="padding:15px"><h3 style="font-size:1.4rem">&#9935;&#65039; Ore Merge!</h3><p style="margin-bottom:8px">Tap 3 of the same ore to merge into the next! Make a Diamond to win!</p><div style="background:#f0f4f0;border-radius:10px;padding:8px;margin-bottom:10px;font-size:.85rem;color:#555;text-align:center">Dirt x3 &#8594; Stone x3 &#8594; Coal x3 &#8594; Iron x3 &#8594; Gold x3 &#8594; Emerald x3 &#8594; <b>Diamond!</b></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:5px"><div style="font-size:1rem;font-weight:bold;color:#1a3a5c" id="merge-level">Level 1: Make Stone!</div><div style="font-size:.9rem;color:#888" id="merge-moves">Moves: 0</div><button class="ab" style="background:#2d5a1a;padding:8px 16px;font-size:.95rem" onclick="resetMerge()">New Game</button></div><div style="display:flex;justify-content:center;gap:8px;margin-bottom:10px;align-items:center"><div id="slot-0" style="width:46px;height:46px;border-radius:10px;border:3px dashed #bbb;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:#f5f5f5"></div><div style="font-size:1.2rem;color:#aaa">+</div><div id="slot-1" style="width:46px;height:46px;border-radius:10px;border:3px dashed #bbb;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:#f5f5f5"></div><div style="font-size:1.2rem;color:#aaa">+</div><div id="slot-2" style="width:46px;height:46px;border-radius:10px;border:3px dashed #bbb;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:#f5f5f5"></div><div style="font-size:1.2rem;color:#aaa">=</div><div id="merge-preview" style="width:46px;height:46px;border-radius:10px;border:3px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:#fafafa">?</div></div><div id="merge-grid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;max-width:330px;margin:0 auto"></div><div id="merge-msg" style="font-size:1.1rem;font-weight:bold;margin-top:10px;min-height:28px;color:#1a3a5c"></div></div></div>
+</div></div></div></div>
+
+<script>
+function openApp(n){document.getElementById('home').style.display='none';document.getElementById('page-'+n).classList.add('active');window.scrollTo(0,0)}
+function goHome(){document.querySelectorAll('.app-page').forEach(p=>p.classList.remove('active'));document.getElementById('home').style.display='flex'}
+function createShuffler(a){let d=[];return function(){if(!d.length){d=[...Array(a.length).keys()];for(let i=d.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[d[i],d[j]]=[d[j],d[i]]}}return a[d.pop()]}}
+
+const hist={movie:[],riddle:[],fact:[]},hp={movie:-1,riddle:-1,fact:-1};
+function uNav(t){document.getElementById(t+'-back-btn').disabled=hp[t]<=0;document.getElementById(t+'-fwd-btn').disabled=hp[t]>=hist[t].length-1}
+function goBack(t){if(hp[t]>0){hp[t]--;rI(t,hist[t][hp[t]]);uNav(t)}}
+function goForward(t){if(hp[t]<hist[t].length-1){hp[t]++;rI(t,hist[t][hp[t]]);uNav(t)}}
+function showNew(t){let i=shuf[t]();hist[t]=hist[t].slice(0,hp[t]+1);hist[t].push(i);hp[t]=hist[t].length-1;rI(t,i);uNav(t)}
+function rI(t,i){if(t==='movie')rM(i);else if(t==='riddle')rR(i);else rF(i)}
+
+const movies=[
+{t:"Toy Story",y:1995,d:"Toys come alive!",e:"\u{1F920}",i:"https://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg"},
+{t:"Finding Nemo",y:2003,d:"Dad fish searches the ocean.",e:"\u{1F420}",i:"https://upload.wikimedia.org/wikipedia/en/2/29/Finding_Nemo.jpg"},
+{t:"Shrek",y:2001,d:"A grumpy ogre's adventure.",e:"\u{1F7E2}",i:"https://upload.wikimedia.org/wikipedia/en/7/7b/Shrek_%28character%29.png"},
+{t:"Moana",y:2016,d:"Brave girl sails the ocean.",e:"\u{1F33A}",i:"https://upload.wikimedia.org/wikipedia/en/2/26/Moana_Teaser_Poster.jpg"},
+{t:"Coco",y:2017,d:"A boy visits the Land of the Dead.",e:"\u{1F3B8}",i:"https://upload.wikimedia.org/wikipedia/en/9/98/Coco_%282017_film%29_poster.jpg"},
+{t:"Up",y:2009,d:"Old man flies house with balloons!",e:"\u{1F388}",i:"https://upload.wikimedia.org/wikipedia/en/0/05/Up_%282009_film%29.jpg"},
+{t:"Frozen",y:2013,d:"Sisters and ice magic.",e:"\u2744\uFE0F",i:"https://upload.wikimedia.org/wikipedia/en/0/05/Frozen_%282013_film%29_poster.jpg"},
+{t:"Inside Out",y:2015,d:"Emotions inside a girl's brain!",e:"\u{1F60A}",i:"https://upload.wikimedia.org/wikipedia/en/0/0a/Inside_Out_%282015_film%29_poster.jpg"},
+{t:"Kung Fu Panda",y:2008,d:"Clumsy panda becomes a warrior.",e:"\u{1F43C}",i:"https://upload.wikimedia.org/wikipedia/en/5/57/Kung_Fu_Panda_poster.jpg"},
+{t:"WALL-E",y:2008,d:"Lonely robot falls in love.",e:"\u{1F916}",i:"https://upload.wikimedia.org/wikipedia/en/c/c2/WALL-E.jpg"},
+{t:"Encanto",y:2021,d:"Magical family, one girl without a gift.",e:"\u2728",i:"https://upload.wikimedia.org/wikipedia/en/1/1d/Encanto_poster.jpg"},
+{t:"Spider-Man: Spider-Verse",y:2018,d:"Not the only Spider-Man!",e:"\u{1F577}\uFE0F",i:"https://upload.wikimedia.org/wikipedia/en/b/b0/Spider-Man_Into_the_Spider-Verse_poster.jpg"},
+{t:"Super Mario Bros. Movie",y:2023,d:"Mario in the Mushroom Kingdom!",e:"\u{1F344}",i:"https://upload.wikimedia.org/wikipedia/en/4/44/The_Super_Mario_Bros._Movie_poster.jpg"},
+{t:"How to Train Your Dragon",y:2010,d:"Viking kid befriends a dragon.",e:"\u{1F409}",i:"https://upload.wikimedia.org/wikipedia/en/9/99/How_to_Train_Your_Dragon_Poster.jpg"},
+{t:"Zootopia",y:2016,d:"Bunny becomes a police officer.",e:"\u{1F430}",i:"https://upload.wikimedia.org/wikipedia/en/9/96/Zootopia_%28movie_poster%29.jpg"},
+{t:"Turning Red",y:2022,d:"Girl turns into a red panda!",e:"\u{1F43C}",i:"https://upload.wikimedia.org/wikipedia/en/1/10/Turning_Red_poster.jpg"},
+];
+function rM(m){document.getElementById('movie-display').innerHTML='<div style="width:100%;display:flex;flex-direction:column;align-items:center"><img class="mp" src="'+m.i+'" alt="'+m.t+'" onerror="this.outerHTML=\'<div class=mpf>'+m.e+'</div>\'"><span class="mn">'+m.t+'</span><div class="my">('+m.y+')</div><div class="md">'+m.d+'</div></div>'}
+
+const riddles=[
+{q:"What has hands but can't clap?",a:"A clock!"},{q:"What has legs but doesn't walk?",a:"A table!"},
+{q:"What can you catch but not throw?",a:"A cold!"},{q:"What goes up but never comes down?",a:"Your age!"},
+{q:"What has a head and tail but no body?",a:"A coin!"},{q:"What gets wetter the more it dries?",a:"A towel!"},
+{q:"What has keys but no locks?",a:"A piano!"},{q:"What has a neck but no head?",a:"A bottle!"},
+{q:"What building has the most stories?",a:"A library!"},{q:"What has four wheels and flies?",a:"A garbage truck!"},
+{q:"What has one eye but can't see?",a:"A needle!"},{q:"What has teeth but can't bite?",a:"A comb!"},
+{q:"What can you break without picking it up?",a:"A promise!"},{q:"What word is spelled wrong in every dictionary?",a:"Wrong!"},
+{q:"What room has no doors or windows?",a:"A mushroom!"},{q:"What is full of holes but holds water?",a:"A sponge!"},
+{q:"What has 88 keys but can't open a door?",a:"A piano!"},{q:"What goes up and down but doesn't move?",a:"Stairs!"},
+{q:"What is so fragile saying its name breaks it?",a:"Silence!"},{q:"What has 13 hearts but no organs?",a:"A deck of cards!"},
+{q:"What gets bigger the more you take away?",a:"A hole!"},{q:"Where does Friday come before Thursday?",a:"The dictionary!"},
+{q:"What has four fingers and a thumb but isn't alive?",a:"A glove!"},{q:"What tastes better than it smells?",a:"Your tongue!"},
+{q:"The more you take, the more you leave behind.",a:"Footsteps!"},{q:"What has words but never speaks?",a:"A book!"},
+{q:"What runs but never walks?",a:"A river!"},{q:"What can fill a room but takes no space?",a:"Light!"},
+{q:"What has ears but can't hear?",a:"A cornfield!"},{q:"What goes through cities but never moves?",a:"A road!"},
+];
+let curR=null;
+function rR(r){curR=r;document.getElementById('riddle-display').textContent=r.q;document.getElementById('riddle-answer').textContent=''}
+function showAnswer(){if(curR)document.getElementById('riddle-answer').textContent=curR.a}
+
+const facts=[
+{e:"\u{1F9A9}",t:"Flamingo group = 'flamboyance'!"},{e:"\u{1F36F}",t:"3,000-year-old honey still good!"},
+{e:"\u{1F419}",t:"Octopuses: 3 hearts, blue blood!"},{e:"\u{1F34C}",t:"Bananas are berries!"},
+{e:"\u{1F988}",t:"Sharks are older than trees!"},{e:"\u2601\uFE0F",t:"Clouds weigh 1M+ pounds!"},
+{e:"\u{1F9A6}",t:"Otters hold hands while sleeping!"},{e:"\u{1F98B}",t:"Butterflies taste with feet!"},
+{e:"\u{1F42C}",t:"Dolphins sleep one eye open!"},{e:"\u26A1",t:"Lightning: 5x hotter than the Sun!"},
+{e:"\u{1F40C}",t:"Snails sleep for 3 years!"},{e:"\u{1F418}",t:"Elephants can't jump!"},
+{e:"\u{1F48E}",t:"Diamond rain on Jupiter & Saturn!"},{e:"\u{1F40A}",t:"Crocs can't stick out their tongue!"},
+{e:"\u{1F404}",t:"Cows have best friends!"},{e:"\u2B50",t:"More stars than grains of sand!"},
+];
+function rF(f){document.getElementById('fact-display').innerHTML='<div style="font-size:4rem;margin-bottom:10px">'+f.e+'</div><div>'+f.t+'</div>'}
+
+const shuf={movie:createShuffler(movies),riddle:createShuffler(riddles),fact:createShuffler(facts)};
+
+// CAROUSEL
+const car={titanic:{i:0,l:["Ship Stats","Cool Facts","Timeline","Quiz!"],c:4},space:{i:0,l:["The Planets","Amazing Facts","Explorers","Quiz!"],c:4},minecraft:{i:0,l:["Cool Facts","Mobs Guide","Tips & Tricks","Quiz!","Ore Merge!"],c:5}};
+function initC(n){let c=car[n],el=document.getElementById(n+'-dots');el.innerHTML='';for(let i=0;i<c.c;i++){let d=document.createElement('div');d.className='dot'+(i?'':' active');d.onclick=(()=>{let idx=i;return()=>cGo(n,idx)})();el.appendChild(d)}upC(n)}
+function upC(n){let c=car[n];document.getElementById(n+'-track').style.transform='translateX(-'+c.i*100+'%)';let lb=document.getElementById(n+'-cl');lb.style.opacity='0';setTimeout(()=>{lb.textContent=c.l[c.i];lb.style.transition='opacity .3s';lb.style.opacity='1'},150);let dots=document.getElementById(n+'-dots').children;for(let i=0;i<dots.length;i++)dots[i].classList.toggle('active',i===c.i);document.getElementById('page-'+n).scrollTo({top:0,behavior:'smooth'})}
+function cNext(n){car[n].i=(car[n].i+1)%car[n].c;upC(n)}
+function cPrev(n){car[n].i=(car[n].i-1+car[n].c)%car[n].c;upC(n)}
+function cGo(n,i){car[n].i=i;upC(n)}
+function addSw(n){let el=document.getElementById(n+'-track'),sx=0;el.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});el.addEventListener('touchend',e=>{let dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50){dx<0?cNext(n):cPrev(n)}},{passive:true})}
+['titanic','space','minecraft'].forEach(n=>{initC(n);addSw(n)});
+
+// QUIZZES
+const qd={titanic:{qs:[{q:"How long was it?",o:["500 ft","882 ft","1200 ft","650 ft"],a:1},{q:"Year it sank?",o:["1905","1915","1912","1920"],a:2},{q:"How many smokestacks?",o:["2","3","5","4"],a:3},{q:"How many funnels worked?",o:["4","2","3","1"],a:2},{q:"Departed from?",o:["New York","Belfast","Southampton","Liverpool"],a:2},{q:"Headed to?",o:["London","Paris","New York","Boston"],a:2},{q:"People on board?",o:["~1000","~2224","~5000","~3500"],a:1},{q:"Lifeboats?",o:["50","32","20","10"],a:2},{q:"Wreck depth?",o:["500ft","5000ft","12500ft","25000ft"],a:2},{q:"RMS means?",o:["Really Massive Ship","Royal Mail Ship","Royal Maritime Svc","Registered Marine Ship"],a:1}],sh:null,cur:null,cnt:0},
+space:{qs:[{q:"Biggest planet?",o:["Saturn","Jupiter","Neptune","Earth"],a:1},{q:"Red Planet?",o:["Venus","Jupiter","Mars","Mercury"],a:2},{q:"First Moon walker?",o:["Aldrin","Gagarin","Armstrong","Glenn"],a:2},{q:"How many planets?",o:["7","8","9","10"],a:1},{q:"Hottest planet?",o:["Mercury","Venus","Mars","Jupiter"],a:1},{q:"Closest star?",o:["Polaris","Sirius","The Sun","Alpha Centauri"],a:2},{q:"Spins on its side?",o:["Neptune","Uranus","Saturn","Mars"],a:1},{q:"Floats in water?",o:["Jupiter","Mars","Saturn","Neptune"],a:2},{q:"ISS speed?",o:["1000mph","7500mph","17500mph","50000mph"],a:2},{q:"Great Red Spot?",o:["Mars","Saturn","Neptune","Jupiter"],a:3}],sh:null,cur:null,cnt:0},
+mc:{qs:[{q:"Almost called?",o:["Block World","Cave Game","Mine World","Dig & Build"],a:1},{q:"Creeper origin?",o:["Contest","Pig mistake","Copy","Artist"],a:1},{q:"Best diamond level?",o:["Y 12","Y -59","Y 64","Y 0"],a:1},{q:"Endermen fear?",o:["Fire","Cats","Water","Swords"],a:2},{q:"Copies sold?",o:["50M","100M","200M","300M+"],a:3},{q:"Scares Creepers?",o:["Dogs","Cats","Torches","Golems"],a:1},{q:"Lava smelts?",o:["10","50","64","100"],a:3},{q:"Creator?",o:["Notch","Jeb","Herobrine","Steve"],a:0},{q:"Lightning+pig?",o:["Dies","Zombified Piglin","Powers","Nothing"],a:1},{q:"More diamonds/ore?",o:["Silk Touch","Efficiency","Fortune","Unbreaking"],a:2},{q:"Axolotl colors?",o:["3","5","7","10"],a:1},{q:"Rarest axolotl?",o:["Pink","Yellow","Blue","Brown"],a:2}],sh:null,cur:null,cnt:0}};
+Object.keys(qd).forEach(k=>qd[k].sh=createShuffler(qd[k].qs));
+function nextQ(t){let d=qd[t];d.cur=d.sh();d.cnt++;document.getElementById(t+'-qq').textContent=d.cur.q;document.getElementById(t+'-qr').textContent='';document.getElementById(t+'-qc').textContent='#'+d.cnt;let el=document.getElementById(t+'-qo');el.innerHTML='';d.cur.o.forEach((o,i)=>{let b=document.createElement('button');b.className='qo';b.textContent=o;b.onclick=()=>{el.querySelectorAll('.qo').forEach((x,j)=>{x.disabled=true;x.style.cursor='default';if(j===d.cur.a)x.classList.add('correct')});document.getElementById(t+'-qr').innerHTML=i===d.cur.a?'<span style="color:#2ecc71">Correct!</span>':'<span style="color:#e74c3c">Check the green one!</span>';if(i!==d.cur.a)b.classList.add('wrong')};el.appendChild(b)})}
+['titanic','space','mc'].forEach(nextQ);
+
+// ORE MERGE GAME
+const ores=[{n:"Dirt",e:"\u{1F7EB}",c:"#8B5E3C"},{n:"Stone",e:"\u{1FAA8}",c:"#808080"},{n:"Coal",e:"\u2B1B",c:"#333"},{n:"Iron",e:"\u2B1C",c:"#D4D4D4"},{n:"Gold",e:"\u{1F7E1}",c:"#FFD700"},{n:"Emerald",e:"\u{1F7E2}",c:"#2ECC71"},{n:"Diamond",e:"\u{1F48E}",c:"#4AEDD9"}];
+const lvlG=["Level 1: Make Stone!","Level 2: Make Coal!","Level 3: Make Iron!","Level 4: Make Gold!","Level 5: Make Emerald!","Level 6: Make DIAMOND!","YOU WIN!"];
+let mS=[],mSC=[],mMv=0,mLv=0,mG=[];
+function rOre(){let mx=Math.min(mLv+1,ores.length-2),w=[];for(let i=0;i<=mx;i++)w.push(mx-i+2);let tot=w.reduce((a,b)=>a+b),r=Math.random()*tot;for(let i=0;i<=mx;i++){r-=w[i];if(r<=0)return i}return 0}
+function resetMerge(){mS=[];mSC=[];mMv=0;mLv=0;mG=[];document.getElementById('merge-level').textContent=lvlG[0];document.getElementById('merge-moves').textContent='Moves: 0';document.getElementById('merge-msg').textContent='';clrSlots();let g=document.getElementById('merge-grid');g.innerHTML='';for(let i=0;i<36;i++){let oi=rOre();mG.push(oi);let c=document.createElement('div');stC(c,oi,i);g.appendChild(c)}}
+function stC(c,oi,gi){let o=ores[oi];c.style.cssText='width:100%;aspect-ratio:1;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.4rem;transition:all .3s;border:3px solid transparent;box-shadow:0 2px 6px rgba(0,0,0,.15);background:'+o.c;c.textContent=o.e;c.dataset.idx=gi;c.onclick=function(){selC(gi,c)}}
+function selC(gi,cell){let oi=mG[gi],pos=mSC.indexOf(cell);if(pos!==-1){cell.style.border='3px solid transparent';cell.style.transform='scale(1)';mS.splice(pos,1);mSC.splice(pos,1);upSlots();return}if(mS.length>=3)return;if(oi>=ores.length-1){document.getElementById('merge-msg').innerHTML='<span style="color:#4AEDD9">Diamond is max!</span>';return}if(mS.length>0&&oi!==mS[0]){document.getElementById('merge-msg').innerHTML='<span style="color:#e74c3c">Pick 3 of the SAME!</span>';cell.style.transform='scale(.9)';setTimeout(()=>cell.style.transform='scale(1)',200);return}mS.push(oi);mSC.push(cell);cell.style.border='3px solid #fff';cell.style.transform='scale(1.1)';document.getElementById('merge-msg').textContent='';upSlots();if(mS.length===3)setTimeout(doMrg,400)}
+function clrSlots(){for(let i=0;i<3;i++){let s=document.getElementById('slot-'+i);s.textContent='';s.style.borderColor='#bbb';s.style.background='#f5f5f5'}document.getElementById('merge-preview').textContent='?';document.getElementById('merge-preview').style.borderColor='#ddd'}
+function upSlots(){for(let i=0;i<3;i++){let s=document.getElementById('slot-'+i);if(i<mS.length){let o=ores[mS[i]];s.textContent=o.e;s.style.borderColor=o.c;s.style.background=o.c+'33'}else{s.textContent='';s.style.borderColor='#bbb';s.style.background='#f5f5f5'}}let p=document.getElementById('merge-preview');if(mS.length>0){let nx=ores[mS[0]+1];p.textContent=nx.e;p.style.borderColor=nx.c}else{p.textContent='?';p.style.borderColor='#ddd'}}
+function doMrg(){let oi=mS[0],ni=oi+1,no=ores[ni];mMv++;document.getElementById('merge-moves').textContent='Moves: '+mMv;mSC.forEach(c=>{c.style.transform='scale(0)';c.style.opacity='0'});setTimeout(()=>{let fc=mSC[0],fi=parseInt(fc.dataset.idx);mG[fi]=ni;stC(fc,ni,fi);fc.style.transform='scale(1.3)';fc.style.boxShadow='0 0 20px '+no.c;setTimeout(()=>{fc.style.transform='scale(1)';fc.style.boxShadow='0 2px 6px rgba(0,0,0,.15)'},300);for(let i=1;i<3;i++){let c=mSC[i],idx=parseInt(c.dataset.idx),nr=rOre();mG[idx]=nr;stC(c,nr,idx)}if(ni>mLv){mLv=ni;if(mLv>=ores.length-1){document.getElementById('merge-level').textContent=lvlG[6];document.getElementById('merge-msg').innerHTML='<div style="font-size:1.4rem">\u{1F48E} DIAMOND! '+mMv+' moves! \u{1F48E}</div>'}else{document.getElementById('merge-level').textContent=lvlG[mLv];document.getElementById('merge-msg').innerHTML='<span style="color:'+no.c+'">Level up! '+no.n+'!</span>'}}else if(ni===ores.length-1){document.getElementById('merge-msg').innerHTML='<div style="font-size:1.3rem">\u{1F48E} Another Diamond!</div>'}else{document.getElementById('merge-msg').innerHTML='<span style="color:'+no.c+'">'+no.e+' '+no.n+'!</span>'}mS=[];mSC=[];clrSlots()},350)}
+resetMerge();
+</script>
+</body>
+</html>
