@@ -156,14 +156,28 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 <div class="app-page pmc" id="page-minecraft">
 <div class="top-bar"><button class="nb" onclick="goHome()">&#8592; Home</button></div>
 <div class="pe">&#9935;&#65039;&#129001;</div><h2 class="ptl">Minecraft!</h2>
-<svg width="280" height="160" viewBox="0 0 280 160" style="border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.5);margin-bottom:20px"><rect width="280" height="160" fill="#87CEEB"/><rect x="220" y="15" width="30" height="30" fill="#FFE44D"/><rect x="20" y="25" width="70" height="10" fill="#fff" opacity=".8"/><rect x="0" y="90" width="280" height="15" fill="#5B8C2A"/><rect x="0" y="105" width="280" height="25" fill="#8B5E3C"/><rect x="0" y="130" width="280" height="30" fill="#808080"/><rect x="90" y="138" width="8" height="8" fill="#4AEDD9"/><rect x="200" y="142" width="8" height="8" fill="#4AEDD9"/><rect x="150" y="135" width="8" height="8" fill="#FFD700"/><rect x="40" y="50" width="10" height="40" fill="#6B4226"/><rect x="25" y="35" width="40" height="30" fill="#2D7A2D"/><rect x="180" y="55" width="10" height="35" fill="#6B4226"/><rect x="165" y="40" width="40" height="30" fill="#2D7A2D"/><rect x="120" y="62" width="12" height="12" fill="#C69C6D"/><rect x="120" y="58" width="12" height="6" fill="#4A3728"/><rect x="120" y="74" width="12" height="14" fill="#00AAAA"/><rect x="120" y="88" width="5" height="10" fill="#2B2B8B"/><rect x="127" y="88" width="5" height="10" fill="#2B2B8B"/><rect x="250" y="72" width="10" height="22" fill="#2D7A2D"/><rect x="250" y="94" width="4" height="6" fill="#2D7A2D"/><rect x="256" y="94" width="4" height="6" fill="#2D7A2D"/><rect x="251" y="75" width="3" height="3" fill="#1a1a1a"/><rect x="256" y="75" width="3" height="3" fill="#1a1a1a"/><text x="140" y="152" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="2">M I N E C R A F T</text></svg>
-<div class="cw" id="minecraft-carousel"><div class="clb"><button class="ca" onclick="cPrev('minecraft')">&#9664;</button><div class="cl" id="minecraft-cl">Cool Facts</div><button class="ca" onclick="cNext('minecraft')">&#9654;</button></div><div class="cd" id="minecraft-dots"></div><div class="cv"><div class="ct" id="minecraft-track">
-<div class="cs"><div class="ic"><h3>&#127758; 300M+ Copies Sold!</h3><p>Best-selling game ever! More than the US population.</p></div><div class="ic"><h3>&#128100; One Person Made It</h3><p>Notch built v1 in just 6 days in 2009!</p></div><div class="ic"><h3>&#129001; Creeper = Accident</h3><p>Notch mixed up pig height/length. Kept the creepy result!</p></div><div class="ic"><h3>&#128506; 8x Bigger Than Earth</h3><p>Worlds are 60 million blocks wide!</p></div><div class="ic"><h3>&#128142; Diamonds: 0.0846%</h3><p>Best at Y level -59. Happy mining!</p></div><div class="ic"><h3>&#128218; Enchanting Table</h3><p>Uses "Standard Galactic Alphabet" from Commander Keen!</p></div><div class="ic"><h3>&#127891; Used in 115+ Countries</h3><p>Minecraft Education teaches math, science, and coding!</p></div><div class="ic"><h3>&#127874; Almost "Cave Game"</h3><p>Mine + craft. Great name choice, Notch!</p></div></div>
-<div class="cs"><div class="ic"><h3>&#129503; Zombie</h3><p>Burns in sun! Baby zombies are faster. Can wear armor.</p></div><div class="ic"><h3>&#128128; Skeleton</h3><p>If it kills a creeper, you get a music disc!</p></div><div class="ic"><h3>&#129001; Creeper</h3><p>Silent + explosive! Scared of cats.</p></div><div class="ic"><h3>&#128065;&#65039; Enderman</h3><p>Don't look at their eyes! Hates water.</p></div><div class="ic"><h3>&#128009; Ender Dragon</h3><p>Final boss! 12,000 XP drop.</p></div><div class="ic"><h3>&#11088; Wither</h3><p>Can destroy obsidian! Drops Nether Star.</p></div><div class="ic"><h3>&#129433; Axolotl</h3><p>5 colors! Blue = 1 in 1,200 chance.</p></div><div class="ic"><h3>&#128029; Bee</h3><p>Makes honey! Whole hive attacks if you hit one.</p></div><div class="ic"><h3>&#128049; Cat</h3><p>Scares creepers! Brings you gifts while you sleep.</p></div></div>
-<div class="cs"><div class="ic"><h3>&#128167; Water Bucket</h3><p>Place before landing = zero fall damage!</p></div><div class="ic"><h3>&#128293; Lava = 100 Smelts</h3><p>Best fuel in the game!</p></div><div class="ic"><h3>&#128737;&#65039; Shield vs Creeper</h3><p>Blocks explosion completely!</p></div><div class="ic"><h3>&#9935;&#65039; Fortune III</h3><p>Up to 4 diamonds from one ore!</p></div><div class="ic"><h3>&#127968; Build Near Villages</h3><p>Free food, beds, and trades!</p></div><div class="ic"><h3>&#128674; Ice Boat Highway</h3><p>70 blocks/sec on blue ice! Faster than Elytra.</p></div></div>
-<div class="cs"><div class="ic"><h3 id="mc-qq">Minecraft Quiz!</h3><div id="mc-qo"></div><div id="mc-qr" class="qr"></div><div style="margin-top:15px"><button class="ab" style="background:#2d5a1a" onclick="nextQ('mc')" id="mc-nb">Next Question!</button></div><div class="ctr" style="color:#888" id="mc-qc"></div></div></div>
-<div class="cs"><div class="ic" style="padding:15px"><h3 style="font-size:1.4rem">&#9935;&#65039; Ore Merge!</h3><p style="margin-bottom:8px">Tap 3 of the same ore to merge into the next! Make a Diamond to win!</p><div style="background:#f0f4f0;border-radius:10px;padding:8px;margin-bottom:10px;font-size:.85rem;color:#555;text-align:center">Dirt x3 &#8594; Stone x3 &#8594; Coal x3 &#8594; Iron x3 &#8594; Gold x3 &#8594; Emerald x3 &#8594; <b>Diamond!</b></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:5px"><div style="font-size:1rem;font-weight:bold;color:#1a3a5c" id="merge-level">Level 1: Make Stone!</div><div style="font-size:.9rem;color:#888" id="merge-moves">Moves: 0</div><button class="ab" style="background:#2d5a1a;padding:8px 16px;font-size:.95rem" onclick="resetMerge()">New Game</button></div><div style="display:flex;justify-content:center;gap:15px;margin-bottom:8px;flex-wrap:wrap"><div style="background:#f0f4f0;border-radius:10px;padding:6px 14px;font-size:1rem;font-weight:bold;color:#1a3a5c" id="merge-score">Score: 0</div><div style="background:#f0f4f0;border-radius:10px;padding:6px 14px;font-size:1rem;font-weight:bold;color:#4AEDD9" id="merge-diamonds">\u{1F48E} 0</div><div style="background:#f0f4f0;border-radius:10px;padding:6px 14px;font-size:.85rem;color:#888" id="merge-best">Best: 0</div></div><div style="display:flex;justify-content:center;gap:8px;margin-bottom:10px;align-items:center"><div id="slot-0" style="width:46px;height:46px;border-radius:10px;border:3px dashed #bbb;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:#f5f5f5"></div><div style="font-size:1.2rem;color:#aaa">+</div><div id="slot-1" style="width:46px;height:46px;border-radius:10px;border:3px dashed #bbb;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:#f5f5f5"></div><div style="font-size:1.2rem;color:#aaa">+</div><div id="slot-2" style="width:46px;height:46px;border-radius:10px;border:3px dashed #bbb;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:#f5f5f5"></div><div style="font-size:1.2rem;color:#aaa">=</div><div id="merge-preview" style="width:46px;height:46px;border-radius:10px;border:3px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:#fafafa">?</div></div><div id="merge-grid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;max-width:330px;margin:0 auto"></div><div id="merge-msg" style="font-size:1.1rem;font-weight:bold;margin-top:10px;min-height:28px;color:#1a3a5c"></div><div id="ore-legend" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px;width:100%;max-width:330px"></div></div></div>
-</div></div></div></div>
+<!-- MC Card Grid -->
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:15px;max-width:500px;width:100%;margin-bottom:20px">
+<div onclick="openMcModal('facts')" style="background:rgba(255,255,255,.95);border-radius:16px;padding:20px;text-align:center;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,.2);transition:transform .2s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"><div style="font-size:3rem;margin-bottom:8px">&#128218;</div><div style="font-size:1.1rem;font-weight:bold;color:#1a3a5c">Cool Facts</div><div style="font-size:.8rem;color:#888;margin-top:4px">8 awesome facts</div></div>
+<div onclick="openMcModal('mobs')" style="background:rgba(255,255,255,.95);border-radius:16px;padding:20px;text-align:center;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,.2);transition:transform .2s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"><div style="font-size:3rem;margin-bottom:8px">&#129503;</div><div style="font-size:1.1rem;font-weight:bold;color:#1a3a5c">Mobs Guide</div><div style="font-size:.8rem;color:#888;margin-top:4px">16 mobs to learn</div></div>
+<div onclick="openMcModal('tips')" style="background:rgba(255,255,255,.95);border-radius:16px;padding:20px;text-align:center;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,.2);transition:transform .2s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"><div style="font-size:3rem;margin-bottom:8px">&#128161;</div><div style="font-size:1.1rem;font-weight:bold;color:#1a3a5c">Tips &amp; Tricks</div><div style="font-size:.8rem;color:#888;margin-top:4px">6 pro tips</div></div>
+<div onclick="openMcModal('quiz')" style="background:rgba(255,255,255,.95);border-radius:16px;padding:20px;text-align:center;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,.2);transition:transform .2s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"><div style="font-size:3rem;margin-bottom:8px">&#10067;</div><div style="font-size:1.1rem;font-weight:bold;color:#1a3a5c">Quiz!</div><div style="font-size:.8rem;color:#888;margin-top:4px">12 questions</div></div>
+<div onclick="openMcModal('game')" style="background:linear-gradient(135deg,#1a1a2e,#2a1a4e);border-radius:16px;padding:20px;text-align:center;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,.3);transition:transform .2s;grid-column:span 2;border:2px solid rgba(255,255,255,.2)" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"><div style="font-size:3rem;margin-bottom:8px">&#9935;&#65039;&#128142;</div><div style="font-size:1.3rem;font-weight:bold;color:#fff">Ore Merge Game!</div><div style="font-size:.85rem;color:rgba(255,255,255,.8);margin-top:4px">Merge ores to make diamonds!</div></div>
+</div>
+
+<!-- MC Modal -->
+<div id="mc-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;overflow-y:auto" onclick="if(event.target===this)closeMcModal()">
+<div id="mc-modal-inner" style="min-height:100%;padding:20px">
+<div id="mc-modal-content" style="max-width:600px;margin:0 auto"></div>
+</div>
+</div>
+
+<!-- Hidden containers for quiz and game -->
+<div style="display:none">
+<div id="mc-quiz-container"><div class="ic"><h3 id="mc-qq">Minecraft Quiz!</h3><div id="mc-qo"></div><div id="mc-qr" class="qr"></div><div style="margin-top:15px"><button class="ab" style="background:#2d5a1a" onclick="nextQ('mc')" id="mc-nb">Next Question!</button></div><div class="ctr" style="color:#888" id="mc-qc"></div></div></div>
+<div id="mc-game-container"><div style="padding:15px;background:rgba(255,255,255,.95);border-radius:16px;box-shadow:0 5px 20px rgba(0,0,0,.2)"><h3 style="font-size:1.4rem;color:#1a3a5c;margin-bottom:8px">&#9935;&#65039; Ore Merge!</h3><p style="margin-bottom:8px;color:#444">Tap 3 of the same ore to merge into the next! Make a Diamond to win!</p><div style="background:#f0f4f0;border-radius:10px;padding:8px;margin-bottom:10px;font-size:.85rem;color:#555;text-align:center">Dirt x3 &#8594; Stone x3 &#8594; Coal x3 &#8594; Iron x3 &#8594; Gold x3 &#8594; Emerald x3 &#8594; <b>Diamond!</b></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:5px"><div style="font-size:1rem;font-weight:bold;color:#1a3a5c" id="merge-level">Level 1: Make Stone!</div><div style="font-size:.9rem;color:#888" id="merge-moves">Moves: 0</div><button class="ab" style="background:#2d5a1a;padding:8px 16px;font-size:.95rem" onclick="resetMerge()">New Game</button></div><div style="display:flex;justify-content:center;gap:15px;margin-bottom:8px;flex-wrap:wrap"><div style="background:#f0f4f0;border-radius:10px;padding:6px 14px;font-size:1rem;font-weight:bold;color:#1a3a5c" id="merge-score">Score: 0</div><div style="background:#f0f4f0;border-radius:10px;padding:6px 14px;font-size:1rem;font-weight:bold;color:#4AEDD9" id="merge-diamonds">&#128142; 0</div><div style="background:#f0f4f0;border-radius:10px;padding:6px 14px;font-size:.85rem;color:#888" id="merge-best">Best: 0</div></div><div style="display:flex;justify-content:center;gap:8px;margin-bottom:10px;align-items:center"><div id="slot-0" style="width:50px;height:50px;border-radius:10px;border:3px dashed #bbb;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:#f5f5f5"></div><div style="font-size:1.2rem;color:#aaa">+</div><div id="slot-1" style="width:50px;height:50px;border-radius:10px;border:3px dashed #bbb;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:#f5f5f5"></div><div style="font-size:1.2rem;color:#aaa">+</div><div id="slot-2" style="width:50px;height:50px;border-radius:10px;border:3px dashed #bbb;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:#f5f5f5"></div><div style="font-size:1.2rem;color:#aaa">=</div><div id="merge-preview" style="width:50px;height:50px;border-radius:10px;border:3px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:#fafafa">?</div></div><div id="merge-grid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:5px;max-width:100%;margin:0 auto"></div><div id="merge-msg" style="font-size:1.1rem;font-weight:bold;margin-top:10px;min-height:28px;color:#1a3a5c"></div><div id="ore-legend" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px;width:100%"></div></div></div>
+</div>
+</div>
 
 <script>
 function openApp(n){document.getElementById('home').style.display='none';document.getElementById('page-'+n).classList.add('active');window.scrollTo(0,0)}
@@ -244,15 +258,14 @@ function rF(f){document.getElementById('fact-display').innerHTML='<div style="fo
 const shuf={movie:createShuffler(movies),riddle:createShuffler(riddles),fact:createShuffler(facts)};
 
 // CAROUSEL
-const car={titanic:{i:0,l:["Ship Stats","Cool Facts","Timeline","Quiz!"],c:4},space:{i:0,l:["The Planets","Amazing Facts","Explorers","Quiz!"],c:4},minecraft:{i:0,l:["Cool Facts","Mobs Guide","Tips & Tricks","Quiz!","Ore Merge!"],c:5},
-recipes:{i:0,l:["Breakfast","Snacks","Lunch","Desserts","Drinks"],c:5}};
+const car={titanic:{i:0,l:["Ship Stats","Cool Facts","Timeline","Quiz!"],c:4},space:{i:0,l:["The Planets","Amazing Facts","Explorers","Quiz!"],c:4},recipes:{i:0,l:["Breakfast","Snacks","Lunch","Desserts","Drinks"],c:5}};
 function initC(n){let c=car[n],el=document.getElementById(n+'-dots');el.innerHTML='';for(let i=0;i<c.c;i++){let d=document.createElement('div');d.className='dot'+(i?'':' active');d.onclick=(()=>{let idx=i;return()=>cGo(n,idx)})();el.appendChild(d)}upC(n)}
 function upC(n){let c=car[n];document.getElementById(n+'-track').style.transform='translateX(-'+c.i*100+'%)';let lb=document.getElementById(n+'-cl');lb.style.opacity='0';setTimeout(()=>{lb.textContent=c.l[c.i];lb.style.transition='opacity .3s';lb.style.opacity='1'},150);let dots=document.getElementById(n+'-dots').children;for(let i=0;i<dots.length;i++)dots[i].classList.toggle('active',i===c.i);document.getElementById('page-'+n).scrollTo({top:0,behavior:'smooth'})}
 function cNext(n){car[n].i=(car[n].i+1)%car[n].c;upC(n)}
 function cPrev(n){car[n].i=(car[n].i-1+car[n].c)%car[n].c;upC(n)}
 function cGo(n,i){car[n].i=i;upC(n)}
 function addSw(n){let el=document.getElementById(n+'-track'),sx=0;el.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});el.addEventListener('touchend',e=>{let dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50){dx<0?cNext(n):cPrev(n)}},{passive:true})}
-['titanic','space','minecraft','recipes'].forEach(n=>{initC(n);addSw(n)});
+['titanic','space','recipes'].forEach(n=>{initC(n);addSw(n)});
 
 // QUIZZES
 const qd={titanic:{qs:[{q:"How long was it?",o:["500 ft","882 ft","1200 ft","650 ft"],a:1},{q:"Year it sank?",o:["1905","1915","1912","1920"],a:2},{q:"How many smokestacks?",o:["2","3","5","4"],a:3},{q:"How many funnels worked?",o:["4","2","3","1"],a:2},{q:"Departed from?",o:["New York","Belfast","Southampton","Liverpool"],a:2},{q:"Headed to?",o:["London","Paris","New York","Boston"],a:2},{q:"People on board?",o:["~1000","~2224","~5000","~3500"],a:1},{q:"Lifeboats?",o:["50","32","20","10"],a:2},{q:"Wreck depth?",o:["500ft","5000ft","12500ft","25000ft"],a:2},{q:"RMS means?",o:["Really Massive Ship","Royal Mail Ship","Royal Maritime Svc","Registered Marine Ship"],a:1}],sh:null,cur:null,cnt:0},
@@ -329,6 +342,164 @@ function resetQuiz(t){
 }
 
 ['titanic','space','mc'].forEach(nextQ);
+
+// MC MODALS
+const mcContent={
+facts:'<div class="ic"><h3>\u{1F30E} 300M+ Copies Sold!</h3><p>Best-selling game ever! More than the US population.</p></div><div class="ic"><h3>\u{1F464} One Person Made It</h3><p>Markus "Notch" Persson built v1 in just 6 days in 2009!</p></div><div class="ic"><h3>\u{1F7E9} Creeper = Accident</h3><p>Notch mixed up pig height/length. Kept the creepy result!</p></div><div class="ic"><h3>\u{1F5FA}\uFE0F 8x Bigger Than Earth</h3><p>Worlds are 60 million blocks wide!</p></div><div class="ic"><h3>\u{1F48E} Diamonds: 0.0846%</h3><p>Best at Y level -59. Happy mining!</p></div><div class="ic"><h3>\u{1F4DA} Enchanting Table</h3><p>Uses "Standard Galactic Alphabet" from Commander Keen!</p></div><div class="ic"><h3>\u{1F393} Used in 115+ Countries</h3><p>Minecraft Education teaches math, science, and coding!</p></div><div class="ic"><h3>\u{1F382} Almost "Cave Game"</h3><p>Mine + craft. Great name choice, Notch!</p></div>',
+mobs:'MOBS_GRID',
+tips:'<div class="ic"><h3>\u{1F4A7} Water Bucket</h3><p>Place before landing = zero fall damage! Always carry one.</p></div><div class="ic"><h3>\u{1F525} Lava = 100 Smelts</h3><p>Best fuel in the game! Way better than coal.</p></div><div class="ic"><h3>\u{1F6E1}\uFE0F Shield vs Creeper</h3><p>Hold up a shield = zero explosion damage!</p></div><div class="ic"><h3>\u26CF\uFE0F Fortune III</h3><p>Up to 4 diamonds from one ore! Get this enchantment first.</p></div><div class="ic"><h3>\u{1F3E0} Build Near Villages</h3><p>Free food, beds, and trading partners!</p></div><div class="ic"><h3>\u{1F6A2} Ice Boat Highway</h3><p>Boats on blue ice = 70 blocks/sec! Faster than Elytra.</p></div>',
+};
+
+const mcMobs=[
+{n:"Zombie",e:"\u{1F9DF}",bg:"#5a8a4a",type:"Hostile",hp:"20 HP (10 hearts)",spawns:"Dark areas in Overworld",drops:"Rotten flesh, iron, carrots, potatoes",
+desc:"Slow undead monsters that shamble around looking for players and villagers. One of the most common hostile mobs!",
+facts:["About 5% of zombie spawns are babies that run TWICE as fast","Zombies can wear armor they find, making them tougher","In deserts, 80% become 'Husks' instead","Zombies are attracted to villagers and try to attack them","They can break down wooden doors on Hard difficulty!"]},
+{n:"Skeleton",e:"\u{1F480}",bg:"#c8c8c8",type:"Hostile",hp:"20 HP (10 hearts)",spawns:"Dark areas in Overworld",drops:"Bones, arrows, bows",
+desc:"Scary undead archers that spawn in darkness with bows. They shoot arrows from a distance and can spawn with enchanted weapons!",
+facts:["In snowy biomes, 80% become 'Strays' that shoot slow arrows","If a skeleton kills a creeper, it drops a music disc!","Healing potions actually HURT skeletons since they're undead","Can spawn with enchanted bows and armor","They drop bones which you can use to tame wolves!"]},
+{n:"Creeper",e:"\u{1F7E9}",bg:"#3d8a2e",type:"Hostile",hp:"20 HP (10 hearts)",spawns:"Dark places in Overworld",drops:"Gunpowder, music discs",
+desc:"The most famous Minecraft mob! Silently sneaks up and EXPLODES. Famous for destroying buildings and scaring players.",
+facts:["Created by accident when Notch messed up a pig model!","They hiss for 1.5 seconds before exploding - RUN!","Cats and ocelots scare them away","If struck by lightning, they become CHARGED and explode even bigger","They only explode when within 3 blocks of a player"]},
+{n:"Spider",e:"\u{1F577}\uFE0F",bg:"#4a3a2a",type:"Hostile",hp:"16 HP (8 hearts)",spawns:"Dark areas, surface at night",drops:"String, spider eyes",
+desc:"Eight-legged enemies that can climb walls! Hostile at night but neutral during the day. Cave spiders are smaller but poisonous.",
+facts:["Can climb straight up any wall or surface","Neutral during daytime but hostile at night","Have a smaller cousin - the Cave Spider - that's poisonous","Their eyes glow red in the dark","String they drop is used to make bows and fishing rods"]},
+{n:"Enderman",e:"\u{1F47E}",bg:"#1a0a2e",type:"Neutral",hp:"40 HP (20 hearts)",spawns:"All 3 dimensions!",drops:"Ender pearls",
+desc:"Tall, mysterious mobs that can teleport instantly. Neutral until you look at their face. The only mob in all 3 dimensions!",
+facts:["Looking directly at their face makes them angry","They can pick up and move blocks around","Completely terrified of water - teleport away from it","They're 3 blocks tall - taller than the player!","Ender pearls they drop help find the End Portal"]},
+{n:"Ender Dragon",e:"\u{1F409}",bg:"#2a0a3e",type:"Boss",hp:"200 HP (100 hearts!)",spawns:"The End dimension",drops:"12,000 XP + Dragon Egg",
+desc:"The FINAL BOSS of Minecraft! The largest and most powerful mob. Defeating her is the main goal of the game!",
+facts:["She's 16 blocks wide and 16 blocks long - MASSIVE!","Heals from nearby End Crystals - destroy them first!","Drops 12,000 XP on first kill - level 0 to 68!","You can respawn her with End Crystals","Shoots fireballs that create damaging purple clouds"]},
+{n:"Wither",e:"\u{1F571}\uFE0F",bg:"#2a2a2a",type:"Boss",hp:"300 HP (150 hearts!)",spawns:"Player-crafted",drops:"Nether Star",
+desc:"An evil three-headed boss even more dangerous than the Ender Dragon! Destroys almost EVERYTHING including obsidian!",
+facts:["The ONLY mob that can destroy obsidian!","Has 3 heads that attack different targets at once","Below half health, becomes immune to arrows!","Shoots black wither skulls as projectiles","Nether Star it drops is used to craft beacons"]},
+{n:"Blaze",e:"\u{1F525}",bg:"#cc6600",type:"Hostile",hp:"20 HP (10 hearts)",spawns:"Nether fortresses",drops:"Blaze rods",
+desc:"Fiery flying mobs found in Nether fortresses. They shoot triple fireballs and are surrounded by flames!",
+facts:["Shoot 3 fireballs in quick bursts","Blaze rods are essential for making Eyes of Ender","They take damage from snowballs! 7 hits to kill","Surrounded by fire particles when ready to attack","One of the most important mobs to defeat to beat the game"]},
+{n:"Ghast",e:"\u{1F47B}",bg:"#e8e8e8",type:"Hostile",hp:"10 HP (5 hearts)",spawns:"The Nether",drops:"Ghast tears, gunpowder",
+desc:"Giant floating ghost-like mobs that cry and shoot explosive fireballs. They're huge but surprisingly fragile!",
+facts:["You can hit their fireballs BACK at them to kill them!","They're 4x4x4 blocks - one of the largest mobs","Their sounds were recorded from a sleeping cat!","Ghast tears are used to make potions of Regeneration","They can't see you through glass blocks"]},
+{n:"Iron Golem",e:"\u{1F916}",bg:"#b8b8b8",type:"Neutral",hp:"100 HP (50 hearts!)",spawns:"Villages, or player-built",drops:"Iron ingots, poppies",
+desc:"Huge protectors of villages made from iron blocks and a pumpkin head. They attack hostile mobs to keep villagers safe!",
+facts:["Build one with 4 iron blocks and a carved pumpkin","One of the strongest non-boss mobs in the game","They give poppies to baby villagers!","Won't attack you unless you hurt a villager","Can launch mobs high into the air with their attacks"]},
+{n:"Wolf",e:"\u{1F43A}",bg:"#a0a0a0",type:"Neutral",hp:"8-20 HP",spawns:"Forests and taigas",drops:"Nothing (they're pets!)",
+desc:"Wolves can be tamed with bones to become loyal dogs! They follow you, fight for you, and their tail shows their health.",
+facts:["Feed bones to tame them - takes 1-12 bones","Their tail droops when health is low","Tamed wolves attack anything that hurts you","You can dye their collar any color","They shake off water when they get wet, just like real dogs!"]},
+{n:"Axolotl",e:"\u{1F98E}",bg:"#f0a0b0",type:"Passive",hp:"14 HP (7 hearts)",spawns:"Lush cave biomes",drops:"Nothing (they're friends!)",
+desc:"Adorable aquatic creatures that help you fight underwater enemies! They come in 5 colors and can play dead to heal.",
+facts:["5 colors: pink, brown, gold, cyan, and the super rare BLUE","Blue axolotl = 1 in 1,200 chance from breeding!","They 'play dead' when hurt to heal for 10 seconds","Will attack drowned zombies and guardians for you","Named after real axolotls, which are endangered"]},
+{n:"Bee",e:"\u{1F41D}",bg:"#f0c030",type:"Neutral",hp:"10 HP (5 hearts)",spawns:"Bee nests in trees",drops:"Honey, honeycomb",
+desc:"Small flying mobs that pollinate flowers and make honey. Friendly unless you mess with their hive!",
+facts:["They pollinate flowers and help crops grow faster","Stay inside during rain and at night","If you attack one, the WHOLE hive swarms you","They die after stinging, just like real bees","2-3 bees naturally live in each nest"]},
+{n:"Cat",e:"\u{1F431}",bg:"#e8c898",type:"Passive",hp:"10 HP (5 hearts)",spawns:"Villages and swamp huts",drops:"Nothing (they're pets!)",
+desc:"Tame them with raw fish and they become loyal companions! They scare away creepers and phantoms.",
+facts:["Tame with raw salmon or raw cod","Immune to fall damage - always land safely!","Creepers and phantoms are TERRIFIED of cats","They bring you gifts while you sleep","Come in 11 different skins with customizable collars"]},
+{n:"Phantom",e:"\u{1F987}",bg:"#2a3a6a",type:"Hostile",hp:"20 HP (10 hearts)",spawns:"Night sky (if you don't sleep!)",drops:"Phantom membrane",
+desc:"Scary flying undead mobs that attack players who haven't slept for 3+ nights. Sleep in a bed to keep them away!",
+facts:["Only spawn if you haven't slept for 3 or more nights","Swoop down from the sky to attack","Burn in sunlight like zombies and skeletons","Phantom membranes repair Elytra wings!","Cats scare them away - another reason to tame a cat"]},
+{n:"Villager",e:"\u{1F9D1}\u200D\u{1F33E}",bg:"#8B6B4A",type:"Passive",hp:"20 HP (10 hearts)",spawns:"Villages",drops:"Nothing",
+desc:"Friendly NPCs that live in villages and trade items with you. They have different jobs and can offer amazing deals!",
+facts:["13 different professions: farmer, librarian, weaponsmith, etc.","You can get enchanted books, diamond gear, and more from trading","They sleep in beds and go to work during the day","Zombie villagers can be cured back to normal!","They gossip about players who help or hurt them"]}
+];
+
+const mcTitles={facts:'Cool Facts',mobs:'Mobs Guide',tips:'Tips & Tricks',quiz:'Minecraft Quiz',game:'Ore Merge!'};
+const mcColors={facts:'#4a8c2a',mobs:'#8B0000',tips:'#2176ae',quiz:'#e67e22',game:'#1a3a5c'};
+
+function openMcModal(type){
+    var modal=document.getElementById('mc-modal');
+    var inner=document.getElementById('mc-modal-inner');
+    var content=document.getElementById('mc-modal-content');
+    var isGame=type==='game';
+    var isQuiz=type==='quiz';
+
+    inner.style.background=isGame?'linear-gradient(135deg,#1a3a1a,#2d5a2d)':isQuiz?'linear-gradient(135deg,#7d4e1a,#c47a2a)':'linear-gradient(135deg,#2d5a1a,#4a8c2a)';
+
+    var html='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px"><h2 style="color:#fff;font-size:1.6rem;text-shadow:1px 1px 3px rgba(0,0,0,.3)">'+mcTitles[type]+'</h2><button onclick="closeMcModal()" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);color:#fff;font-size:1.2rem;padding:8px 16px;border-radius:50px;cursor:pointer">&#10005; Close</button></div>';
+
+    if(type==='mobs'){
+        var grid='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">';
+        mcMobs.forEach(function(m,i){
+            var typeColor=m.type==='Hostile'?'#e74c3c':m.type==='Boss'?'#9b59b6':'#2ecc71';
+            grid+='<div onclick="openMobDetail('+i+')" style="background:rgba(255,255,255,.95);border-radius:14px;padding:15px 10px;text-align:center;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.2);transition:transform .2s" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'">';
+            grid+='<div style="width:70px;height:70px;margin:0 auto 8px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:2.8rem;background:'+m.bg+'">'+m.e+'</div>';
+            grid+='<div style="font-size:1rem;font-weight:bold;color:#1a3a5c">'+m.n+'</div>';
+            grid+='<div style="font-size:.7rem;color:#fff;background:'+typeColor+';border-radius:8px;padding:2px 8px;display:inline-block;margin-top:4px">'+m.type+'</div>';
+            grid+='</div>';
+        });
+        grid+='</div>';
+        content.innerHTML=html+grid;
+        modal.style.display='block';
+        document.body.style.overflow='hidden';
+        return;
+    }
+
+    if(isGame){
+        content.innerHTML=html+'<div id="mc-game-mount"></div>';
+        document.getElementById('mc-game-mount').appendChild(document.getElementById('mc-game-container').firstElementChild.cloneNode(false));
+        // Move actual game container into modal
+        document.getElementById('mc-game-mount').innerHTML='';
+        document.getElementById('mc-game-mount').appendChild(document.getElementById('mc-game-container').children[0]);
+        modal.style.display='block';
+        resetMerge();
+    }else if(isQuiz){
+        content.innerHTML=html+'<div id="mc-quiz-mount"></div>';
+        document.getElementById('mc-quiz-mount').appendChild(document.getElementById('mc-quiz-container').children[0]);
+        modal.style.display='block';
+        resetQuiz('mc');
+    }else{
+        content.innerHTML=html+mcContent[type];
+        modal.style.display='block';
+    }
+    document.body.style.overflow='hidden';
+}
+
+function closeMcModal(){
+    var modal=document.getElementById('mc-modal');
+    modal.style.display='none';
+    document.body.style.overflow='';
+    // Move game/quiz back to hidden containers
+    var gameMnt=document.getElementById('mc-game-mount');
+    var quizMnt=document.getElementById('mc-quiz-mount');
+    if(gameMnt&&gameMnt.children.length){document.getElementById('mc-game-container').appendChild(gameMnt.children[0]);}
+    if(quizMnt&&quizMnt.children.length){document.getElementById('mc-quiz-container').appendChild(quizMnt.children[0]);}
+}
+
+function openMobDetail(idx){
+    var m=mcMobs[idx];
+    var typeColor=m.type==='Hostile'?'#e74c3c':m.type==='Boss'?'#9b59b6':'#2ecc71';
+    var content=document.getElementById('mc-modal-content');
+    var html='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px"><button onclick="openMcModal(\'mobs\')" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);color:#fff;font-size:1rem;padding:8px 16px;border-radius:50px;cursor:pointer">\u25C0 All Mobs</button><button onclick="closeMcModal()" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);color:#fff;font-size:1.2rem;padding:8px 16px;border-radius:50px;cursor:pointer">\u2715 Close</button></div>';
+    html+='<div style="background:rgba(255,255,255,.95);border-radius:16px;padding:20px;box-shadow:0 5px 20px rgba(0,0,0,.2);text-align:center">';
+    html+='<div style="width:120px;height:120px;margin:0 auto 12px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:5rem;background:'+m.bg+';box-shadow:0 5px 15px rgba(0,0,0,.2)">'+m.e+'</div>';
+    html+='<h2 style="font-size:1.8rem;color:#1a3a5c;margin-bottom:5px">'+m.n+'</h2>';
+    html+='<span style="font-size:.85rem;color:#fff;background:'+typeColor+';border-radius:10px;padding:3px 12px;display:inline-block;margin-bottom:12px">'+m.type+'</span>';
+    html+='<p style="color:#555;font-size:1.05rem;line-height:1.5;margin-bottom:15px">'+m.desc+'</p>';
+    html+='</div>';
+
+    // Stats
+    html+='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:15px 0">';
+    html+='<div style="background:rgba(255,255,255,.9);border-radius:12px;padding:12px;text-align:center"><div style="font-size:.75rem;color:#888;text-transform:uppercase">Health</div><div style="font-size:1rem;font-weight:bold;color:#e74c3c">'+m.hp+'</div></div>';
+    html+='<div style="background:rgba(255,255,255,.9);border-radius:12px;padding:12px;text-align:center"><div style="font-size:.75rem;color:#888;text-transform:uppercase">Spawns</div><div style="font-size:1rem;font-weight:bold;color:#2176ae">'+m.spawns+'</div></div>';
+    html+='<div style="background:rgba(255,255,255,.9);border-radius:12px;padding:12px;text-align:center;grid-column:span 2"><div style="font-size:.75rem;color:#888;text-transform:uppercase">Drops</div><div style="font-size:1rem;font-weight:bold;color:#2ecc71">'+m.drops+'</div></div>';
+    html+='</div>';
+
+    // Fun facts
+    html+='<div style="background:rgba(255,255,255,.95);border-radius:16px;padding:18px;box-shadow:0 5px 20px rgba(0,0,0,.2)">';
+    html+='<h3 style="color:#1a3a5c;font-size:1.1rem;margin-bottom:12px">\u{1F4A1} Fun Facts</h3>';
+    m.facts.forEach(function(f,i){
+        html+='<div style="display:flex;gap:10px;margin-bottom:10px;align-items:flex-start"><div style="background:#4a8c2a;color:#fff;min-width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:.85rem">'+(i+1)+'</div><p style="color:#444;font-size:.95rem;line-height:1.4;padding-top:2px">'+f+'</p></div>';
+    });
+    html+='</div>';
+
+    // Nav to next/prev mob
+    html+='<div style="display:flex;justify-content:space-between;margin-top:15px">';
+    if(idx>0)html+='<button onclick="openMobDetail('+(idx-1)+')" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);color:#fff;padding:10px 18px;border-radius:50px;cursor:pointer;font-size:.95rem">\u25C0 '+mcMobs[idx-1].n+'</button>';
+    else html+='<div></div>';
+    if(idx<mcMobs.length-1)html+='<button onclick="openMobDetail('+(idx+1)+')" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);color:#fff;padding:10px 18px;border-radius:50px;cursor:pointer;font-size:.95rem">'+mcMobs[idx+1].n+' \u25B6</button>';
+    html+='</div>';
+
+    content.innerHTML=html;
+    document.getElementById('mc-modal-inner').scrollTo(0,0);
+}
 
 // RECIPES
 const recipes={
