@@ -19,6 +19,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 .as{background:linear-gradient(135deg,#0b0b3b,#1b1b6b)}.amc{background:linear-gradient(135deg,#4a8c2a,#2d5a1a)}
 .arc{background:linear-gradient(135deg,#FF6B6B,#ee5a24)}
 .ajk{background:linear-gradient(135deg,#f9ca24,#f0932b)}
+.amm{background:linear-gradient(135deg,#6c5ce7,#a29bfe)}
 .app-page{display:none;min-height:100vh;padding:20px;flex-direction:column;align-items:center;overflow-y:auto}
 .app-page.active{display:flex}
 .pm{background:linear-gradient(135deg,#e74c3c,#c0392b)}.pr{background:linear-gradient(135deg,#2ecc71,#1a9c54)}
@@ -26,6 +27,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 .ps{background:linear-gradient(135deg,#0b0b2b,#1a1a4e,#0b0b2b)}.pmc{background:linear-gradient(135deg,#2d5a1a,#4a8c2a,#2d5a1a)}
 .prc{background:linear-gradient(135deg,#ee5a24,#FF6B6B,#ee5a24)}
 .pjk{background:linear-gradient(135deg,#f0932b,#f9ca24,#f0932b)}
+.pmm{background:linear-gradient(135deg,#6c5ce7,#a29bfe,#6c5ce7)}
 .top-bar{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:600px;margin-bottom:15px}
 .nb{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);color:#fff;font-size:1.1rem;padding:10px 20px;border-radius:50px;cursor:pointer;transition:background .2s}
 .nb:hover{background:rgba(255,255,255,.3)}.nb:disabled{opacity:.3;cursor:default}
@@ -86,6 +88,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 <div><div class="app-icon amc" onclick="openApp('minecraft')"><span class="ie">&#9935;&#65039;</span></div><div class="app-label">Minecraft</div></div>
 <div><div class="app-icon arc" onclick="openApp('recipes')"><span class="ie">&#127859;</span></div><div class="app-label">Recipes</div></div>
 <div><div class="app-icon ajk" onclick="openApp('jokes')"><span class="ie">&#129315;</span></div><div class="app-label">Jokes</div></div>
+<div><div class="app-icon amm" onclick="openApp('memes')"><span class="ie">&#128517;</span></div><div class="app-label">Memes</div></div>
 </div></div>
 
 <div class="app-page pm" id="page-movies">
@@ -127,6 +130,26 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 <div class="cs"><div class="ic"><h3>&#129489;&#8205;&#128640; Yuri Gagarin (1961)</h3><p>First human in space!</p></div><div class="ic"><h3>&#127769; Neil Armstrong (1969)</h3><p>First Moon walk! 600M watched.</p></div><div class="ic"><h3>&#128105;&#8205;&#128640; Mae Jemison (1992)</h3><p>First African American woman in space!</p></div><div class="ic"><h3>&#128302; Mars Rovers</h3><p>Curiosity & Perseverance exploring now!</p></div><div class="ic"><h3>&#128752; Voyager 1</h3><p>15 billion miles away! Golden record for aliens.</p></div></div>
 <div class="cs"><div class="ic"><h3 id="space-qq">Space Quiz!</h3><div id="space-qo"></div><div id="space-qr" class="qr"></div><div style="margin-top:15px"><button class="ab" style="background:#0b0b3b" onclick="nextQ('space')" id="space-nb">Next Question!</button></div><div class="ctr" style="color:#888" id="space-qc"></div></div></div>
 </div></div></div></div>
+
+<!-- MEMES -->
+<div class="app-page pmm" id="page-memes">
+<div class="top-bar"><button class="nb" onclick="goHome()">&#8592; Home</button></div>
+<div class="pe">&#128517;&#128176;</div><h2 class="ptl">Kid Memes!</h2>
+
+<div style="max-width:420px;width:100%">
+<div id="meme-card" style="background:#000;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.3);position:relative;min-height:350px;display:flex;flex-direction:column;justify-content:space-between">
+<div id="meme-top" style="color:#fff;font-family:Impact,Arial Black,sans-serif;font-size:1.6rem;text-align:center;padding:15px 15px 0;text-transform:uppercase;text-shadow:2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000;letter-spacing:1px;line-height:1.3"></div>
+<div id="meme-img" style="font-size:8rem;text-align:center;padding:10px 0"></div>
+<div id="meme-bottom" style="color:#fff;font-family:Impact,Arial Black,sans-serif;font-size:1.6rem;text-align:center;padding:0 15px 15px;text-transform:uppercase;text-shadow:2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000;letter-spacing:1px;line-height:1.3"></div>
+</div>
+<div style="display:flex;justify-content:center;gap:10px;margin-top:15px;flex-wrap:wrap">
+<button class="ab" style="background:linear-gradient(135deg,#6c5ce7,#a29bfe);color:#fff" onclick="nextMeme()">Next Meme!</button>
+<button class="ab" style="background:rgba(255,255,255,.2);color:#fff;border:2px solid rgba(255,255,255,.4)" onclick="randomMemeCategory()">Random!</button>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px" id="meme-cats"></div>
+<div style="text-align:center;margin-top:8px;color:rgba(255,255,255,.5);font-size:.85rem" id="meme-counter"></div>
+</div>
+</div>
 
 <!-- JOKES -->
 <div class="app-page pjk" id="page-jokes">
@@ -366,6 +389,106 @@ function resetQuiz(t){
 }
 
 ['titanic','space','mc'].forEach(nextQ);
+
+// MEMES
+const memeData={
+school:{name:"School",emoji:"\u{1F3EB}",memes:[
+{top:"Teacher: The test is easy",bottom:"The test:",emoji:"\u{1F4DA}\u{1F525}",bg:"#1a1a2e"},
+{top:"Me: I'll start homework early",bottom:"Also me at 11pm:",emoji:"\u{1F634}\u{1F4F1}",bg:"#2d3436"},
+{top:"When the teacher says",bottom:"'Pick your own groups'",emoji:"\u{1F440}\u{1F91D}",bg:"#0a3d62"},
+{top:"Nobody:",bottom:"The kid who reminds the teacher about homework:",emoji:"\u{1F913}\u261D\uFE0F",bg:"#6c3483"},
+{top:"When the bell rings",bottom:"But the teacher says 'I dismiss you, not the bell'",emoji:"\u{1F620}\u{1F514}",bg:"#c0392b"},
+{top:"Me: reads the whole page",bottom:"My brain: I remember nothing",emoji:"\u{1F9E0}\u274C",bg:"#2c3e50"},
+{top:"Friday feeling",bottom:"When school is done for the week",emoji:"\u{1F57A}\u{1F389}",bg:"#6c5ce7"},
+{top:"When you finally understand",bottom:"The math problem",emoji:"\u{1F4A1}\u{1F929}",bg:"#00b894"},
+{top:"That one kid who says",bottom:"'Shouldn't we have homework?'",emoji:"\u{1F92C}\u{1F644}",bg:"#d63031"},
+{top:"Walking into class",bottom:"On Monday morning",emoji:"\u{1F9DF}\u2615",bg:"#636e72"},
+]},
+gaming:{name:"Gaming",emoji:"\u{1F3AE}",memes:[
+{top:"Me: just one more game",bottom:"3 hours later...",emoji:"\u{1F3AE}\u{1F553}",bg:"#0c2461"},
+{top:"When you find diamonds",bottom:"But fall in lava",emoji:"\u{1F48E}\u{1F525}\u{1F62D}",bg:"#e55039"},
+{top:"Creeper behind you:",bottom:"Ssssssss...",emoji:"\u{1F7E9}\u{1F4A5}",bg:"#2d5a1a"},
+{top:"'I'll just play for 5 minutes'",bottom:"The sun coming up:",emoji:"\u{1F305}\u{1F631}",bg:"#fa983a"},
+{top:"When your friend says",bottom:"'I'm right behind you' in game",emoji:"\u{1F52B}\u{1F608}",bg:"#4a1a6b"},
+{top:"Finally beat the boss",bottom:"It has a second phase",emoji:"\u{1F480}\u{1F480}\u{1F480}",bg:"#2d3436"},
+{top:"Building a house",bottom:"vs what I actually built",emoji:"\u{1F3E0}\u27A1\uFE0F\u{1F4E6}",bg:"#6c5ce7"},
+{top:"When the WiFi drops",bottom:"During an online game",emoji:"\u{1F4F6}\u274C\u{1F62D}",bg:"#e74c3c"},
+{top:"Me at 1HP running away",bottom:"From everything",emoji:"\u{1F3C3}\u{1F4A8}",bg:"#2c3e50"},
+{top:"Noob: This game is easy",bottom:"5 minutes later: rage quit",emoji:"\u{1F60E}\u27A1\uFE0F\u{1F92F}",bg:"#8e44ad"},
+]},
+animals:{name:"Animals",emoji:"\u{1F436}",memes:[
+{top:"Dog when you grab the leash:",bottom:"WALK TIME!!!",emoji:"\u{1F436}\u{1F929}\u{1F3C3}",bg:"#27ae60"},
+{top:"Cat knocking things off the table",bottom:"And staring at you while doing it",emoji:"\u{1F431}\u{1F610}",bg:"#8e44ad"},
+{top:"My dog: loves everyone",bottom:"Also my dog: barks at a leaf",emoji:"\u{1F43E}\u{1F342}\u{1F4E2}",bg:"#d35400"},
+{top:"When you open",bottom:"A bag of chips near your dog",emoji:"\u{1F436}\u{1F440}\u{1F35F}",bg:"#2c3e50"},
+{top:"Cat at 3am:",bottom:"Time to run around the house!",emoji:"\u{1F431}\u{1F3C3}\u{1F4A8}",bg:"#1a1a2e"},
+{top:"When you say 'walk'",bottom:"And your dog understands English",emoji:"\u{1F436}\u2049\uFE0F",bg:"#0a3d62"},
+{top:"Hamster on a wheel",bottom:"Going nowhere but loving it",emoji:"\u{1F439}\u{1F3A1}",bg:"#6c5ce7"},
+{top:"When the dog sees its own reflection",bottom:"WHO IS THAT DOG???",emoji:"\u{1F436}\u{1F631}",bg:"#e74c3c"},
+{top:"Duck at the park:",bottom:"You got any grapes?",emoji:"\u{1F986}\u{1F347}",bg:"#00b894"},
+{top:"Every cat ever:",bottom:"If I fits, I sits",emoji:"\u{1F431}\u{1F4E6}",bg:"#636e72"},
+]},
+life:{name:"Life",emoji:"\u{1F3E0}",memes:[
+{top:"Me: I'm not tired",bottom:"Also me: falls asleep in 2 seconds",emoji:"\u{1F634}\u{1F4A4}",bg:"#2d3436"},
+{top:"When mum says",bottom:"'We have food at home'",emoji:"\u{1F3E0}\u{1F622}",bg:"#d63031"},
+{top:"Fridge at midnight:",bottom:"Let me check again maybe something appeared",emoji:"\u{1F9CA}\u{1F440}",bg:"#0c2461"},
+{top:"When your sibling gets in trouble",bottom:"And not you for once",emoji:"\u{1F60F}\u{1F451}",bg:"#6c3483"},
+{top:"Monday morning vibes",bottom:"Weekend please come back",emoji:"\u{1F62B}\u{1F6CF}\uFE0F",bg:"#636e72"},
+{top:"When someone says",bottom:"'We need to talk'",emoji:"\u{1F630}\u{1F4AC}",bg:"#c0392b"},
+{top:"Me after eating one healthy meal:",bottom:"I am the healthiest person alive",emoji:"\u{1F957}\u{1F4AA}",bg:"#27ae60"},
+{top:"When the WiFi goes down",bottom:"The whole family appears",emoji:"\u{1F4F6}\u274C\u{1F468}\u200D\u{1F469}\u200D\u{1F467}\u200D\u{1F466}",bg:"#2c3e50"},
+{top:"Setting 15 alarms",bottom:"And sleeping through all of them",emoji:"\u23F0\u{1F634}\u23F0\u{1F634}",bg:"#e55039"},
+{top:"That feeling when",bottom:"It's a snow day and school is cancelled",emoji:"\u2744\uFE0F\u{1F389}\u{1F57A}",bg:"#0984e3"},
+]},
+};
+
+const memeCatKeys=Object.keys(memeData);
+let curMemeCat='school',memeCount=0;
+const memeShufflers={};
+memeCatKeys.forEach(k=>{memeShufflers[k]=createShuffler(memeData[k].memes);});
+
+function buildMemeCats(){
+    var el=document.getElementById('meme-cats');
+    memeCatKeys.forEach(function(k){
+        var d=memeData[k];
+        var btn=document.createElement('button');
+        btn.id='meme-cat-'+k;
+        btn.style.cssText='padding:6px 14px;border-radius:50px;border:2px solid rgba(255,255,255,.3);cursor:pointer;font-size:.9rem;font-weight:bold;transition:all .2s;color:#fff;background:'+(k===curMemeCat?'rgba(255,255,255,.25)':'rgba(255,255,255,.08)');
+        btn.textContent=d.emoji+' '+d.name;
+        btn.onclick=function(){switchMemeCat(k);};
+        el.appendChild(btn);
+    });
+}
+
+function switchMemeCat(k){
+    curMemeCat=k;memeCount=0;
+    memeCatKeys.forEach(function(key){
+        var b=document.getElementById('meme-cat-'+key);
+        b.style.background=key===k?'rgba(255,255,255,.25)':'rgba(255,255,255,.08)';
+    });
+    nextMeme();
+}
+
+function randomMemeCategory(){
+    var k=memeCatKeys[Math.floor(Math.random()*memeCatKeys.length)];
+    switchMemeCat(k);
+}
+
+function nextMeme(){
+    var m=memeShufflers[curMemeCat]();
+    memeCount++;
+    var card=document.getElementById('meme-card');
+    card.style.background=m.bg;
+    document.getElementById('meme-top').textContent=m.top;
+    document.getElementById('meme-img').textContent=m.emoji;
+    document.getElementById('meme-bottom').textContent=m.bottom;
+    document.getElementById('meme-counter').textContent=memeData[curMemeCat].name+' meme #'+memeCount;
+    card.style.transform='scale(0.95)';
+    setTimeout(function(){card.style.transform='scale(1)';card.style.transition='transform .3s';},50);
+}
+
+buildMemeCats();
+nextMeme();
 
 // JOKES
 const jokeData={
