@@ -18,12 +18,14 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 .af{background:linear-gradient(135deg,#3498db,#2176ae)}.at{background:linear-gradient(135deg,#2c3e50,#1a252f)}
 .as{background:linear-gradient(135deg,#0b0b3b,#1b1b6b)}.amc{background:linear-gradient(135deg,#4a8c2a,#2d5a1a)}
 .arc{background:linear-gradient(135deg,#FF6B6B,#ee5a24)}
+.ajk{background:linear-gradient(135deg,#f9ca24,#f0932b)}
 .app-page{display:none;min-height:100vh;padding:20px;flex-direction:column;align-items:center;overflow-y:auto}
 .app-page.active{display:flex}
 .pm{background:linear-gradient(135deg,#e74c3c,#c0392b)}.pr{background:linear-gradient(135deg,#2ecc71,#1a9c54)}
 .pf{background:linear-gradient(135deg,#3498db,#2176ae)}.pt{background:linear-gradient(135deg,#0c1a2e,#1a3a5c,#0c1a2e)}
 .ps{background:linear-gradient(135deg,#0b0b2b,#1a1a4e,#0b0b2b)}.pmc{background:linear-gradient(135deg,#2d5a1a,#4a8c2a,#2d5a1a)}
 .prc{background:linear-gradient(135deg,#ee5a24,#FF6B6B,#ee5a24)}
+.pjk{background:linear-gradient(135deg,#f0932b,#f9ca24,#f0932b)}
 .top-bar{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:600px;margin-bottom:15px}
 .nb{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);color:#fff;font-size:1.1rem;padding:10px 20px;border-radius:50px;cursor:pointer;transition:background .2s}
 .nb:hover{background:rgba(255,255,255,.3)}.nb:disabled{opacity:.3;cursor:default}
@@ -83,6 +85,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 <div><div class="app-icon as" onclick="openApp('space')"><span class="ie">&#128640;</span></div><div class="app-label">Space</div></div>
 <div><div class="app-icon amc" onclick="openApp('minecraft')"><span class="ie">&#9935;&#65039;</span></div><div class="app-label">Minecraft</div></div>
 <div><div class="app-icon arc" onclick="openApp('recipes')"><span class="ie">&#127859;</span></div><div class="app-label">Recipes</div></div>
+<div><div class="app-icon ajk" onclick="openApp('jokes')"><span class="ie">&#129315;</span></div><div class="app-label">Jokes</div></div>
 </div></div>
 
 <div class="app-page pm" id="page-movies">
@@ -124,6 +127,27 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 <div class="cs"><div class="ic"><h3>&#129489;&#8205;&#128640; Yuri Gagarin (1961)</h3><p>First human in space!</p></div><div class="ic"><h3>&#127769; Neil Armstrong (1969)</h3><p>First Moon walk! 600M watched.</p></div><div class="ic"><h3>&#128105;&#8205;&#128640; Mae Jemison (1992)</h3><p>First African American woman in space!</p></div><div class="ic"><h3>&#128302; Mars Rovers</h3><p>Curiosity & Perseverance exploring now!</p></div><div class="ic"><h3>&#128752; Voyager 1</h3><p>15 billion miles away! Golden record for aliens.</p></div></div>
 <div class="cs"><div class="ic"><h3 id="space-qq">Space Quiz!</h3><div id="space-qo"></div><div id="space-qr" class="qr"></div><div style="margin-top:15px"><button class="ab" style="background:#0b0b3b" onclick="nextQ('space')" id="space-nb">Next Question!</button></div><div class="ctr" style="color:#888" id="space-qc"></div></div></div>
 </div></div></div></div>
+
+<!-- JOKES -->
+<div class="app-page pjk" id="page-jokes">
+<div class="top-bar"><button class="nb" onclick="goHome()">&#8592; Home</button></div>
+<div class="pe">&#129315;&#128514;</div><h2 class="ptl">Jokes for Kids!</h2>
+<p style="color:rgba(0,0,0,.6);margin-bottom:15px;text-align:center;max-width:500px;font-size:1.1rem">Tap a category, then tap the card to see the punchline!</p>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:20px" id="joke-cats"></div>
+<div style="max-width:500px;width:100%">
+<div id="joke-card" style="background:#fff;border-radius:20px;padding:30px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.15);cursor:pointer;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .2s" onclick="tapJokeCard()">
+<div id="joke-emoji" style="font-size:4rem;margin-bottom:15px">&#128071;</div>
+<div id="joke-text" style="font-size:1.4rem;color:#333;line-height:1.5;font-weight:bold">Pick a category above!</div>
+<div id="joke-punchline" style="font-size:1.3rem;color:#f0932b;margin-top:15px;min-height:30px;font-weight:bold"></div>
+<div id="joke-tap-hint" style="font-size:.85rem;color:#aaa;margin-top:10px"></div>
+</div>
+<div style="display:flex;justify-content:center;gap:10px;margin-top:15px">
+<button class="ab" style="background:linear-gradient(135deg,#f9ca24,#f0932b);color:#fff" onclick="nextJoke()">Next Joke!</button>
+</div>
+<div style="text-align:center;margin-top:8px;color:rgba(0,0,0,.4);font-size:.85rem" id="joke-counter"></div>
+</div>
+</div>
 
 <!-- RECIPES -->
 <div class="app-page prc" id="page-recipes">
@@ -342,6 +366,151 @@ function resetQuiz(t){
 }
 
 ['titanic','space','mc'].forEach(nextQ);
+
+// JOKES
+const jokeData={
+animals:{name:"Animals",emoji:"\u{1F43E}",jokes:[
+{q:"What do you call a sleeping dinosaur?",a:"A dino-snore!"},
+{q:"What do you call a fish without eyes?",a:"A fsh!"},
+{q:"Why don't elephants use computers?",a:"Because they're afraid of the mouse!"},
+{q:"What do you call a bear with no teeth?",a:"A gummy bear!"},
+{q:"Why do cows wear bells?",a:"Because their horns don't work!"},
+{q:"What do you call an alligator in a vest?",a:"An investigator!"},
+{q:"What do you get when you cross a snake and a pie?",a:"A python!"},
+{q:"Why can't you give Elsa a balloon?",a:"Because she'll let it go!"},
+{q:"What do you call a dog that does magic?",a:"A Labracadabrador!"},
+{q:"Why do seagulls fly over the sea?",a:"Because if they flew over the bay, they'd be bagels!"},
+{q:"What do cats eat for breakfast?",a:"Mice Krispies!"},
+{q:"Why don't oysters share?",a:"Because they're shellfish!"},
+{q:"What do you call a lazy kangaroo?",a:"A pouch potato!"},
+{q:"How do bees get to school?",a:"On the school buzz!"},
+{q:"What do you call a fly without wings?",a:"A walk!"},
+]},
+food:{name:"Food",emoji:"\u{1F355}",jokes:[
+{q:"What did the pizza say to the photographer?",a:"Cheese!"},
+{q:"Why did the banana go to the doctor?",a:"Because it wasn't peeling well!"},
+{q:"What do you call a fake noodle?",a:"An impasta!"},
+{q:"Why did the cookie go to the hospital?",a:"Because it felt crummy!"},
+{q:"What did one plate say to the other?",a:"Lunch is on me!"},
+{q:"What do you call cheese that isn't yours?",a:"Nacho cheese!"},
+{q:"Why did the tomato turn red?",a:"Because it saw the salad dressing!"},
+{q:"What did the grape do when it got stepped on?",a:"It let out a little wine!"},
+{q:"Why don't eggs tell jokes?",a:"They'd crack each other up!"},
+{q:"What do you call a sad strawberry?",a:"A blueberry!"},
+{q:"What did the ocean say to the sushi?",a:"Nothing, it just waved!"},
+{q:"Why did the mushroom go to the party?",a:"Because he was a fun-gi!"},
+]},
+school:{name:"School",emoji:"\u{1F4DA}",jokes:[
+{q:"Why did the student eat his homework?",a:"Because the teacher said it was a piece of cake!"},
+{q:"What's a math teacher's favourite season?",a:"Sum-mer!"},
+{q:"Why was the math book sad?",a:"Because it had too many problems!"},
+{q:"What did the pencil say to the other pencil?",a:"You're looking sharp!"},
+{q:"Why did the kid bring a ladder to school?",a:"Because they wanted to go to high school!"},
+{q:"What's the king of all school supplies?",a:"The ruler!"},
+{q:"Why was 6 afraid of 7?",a:"Because 7, 8, 9!"},
+{q:"What do elves learn in school?",a:"The elf-abet!"},
+{q:"Why did the teacher wear sunglasses?",a:"Because her students were so bright!"},
+{q:"What did 0 say to 8?",a:"Nice belt!"},
+{q:"What's a pirate's favourite letter?",a:"You think it's R, but it's the C!"},
+{q:"Why can't you do a math test in the jungle?",a:"Too many cheetahs!"},
+]},
+knockknock:{name:"Knock Knock",emoji:"\u{1F6AA}",jokes:[
+{q:"Knock knock! Who's there? Cow says.",a:"Cow says who? No silly, cow says MOOOO!"},
+{q:"Knock knock! Who's there? Boo.",a:"Boo who? Don't cry, it's just a joke!"},
+{q:"Knock knock! Who's there? Lettuce.",a:"Lettuce who? Lettuce in, it's cold out here!"},
+{q:"Knock knock! Who's there? Atch.",a:"Atch who? Bless you!"},
+{q:"Knock knock! Who's there? Tank.",a:"Tank who? You're welcome!"},
+{q:"Knock knock! Who's there? Nobel.",a:"Nobel who? Nobel, that's why I knocked!"},
+{q:"Knock knock! Who's there? Interrupting cow.",a:"Interrupting cow wh- MOOOOO!"},
+{q:"Knock knock! Who's there? Banana. Banana who? Knock knock! Who's there? Orange.",a:"Orange who? Orange you glad I didn't say banana?"},
+{q:"Knock knock! Who's there? Ice cream.",a:"Ice cream who? Ice cream every time I see a spider!"},
+{q:"Knock knock! Who's there? Wooden shoe.",a:"Wooden shoe who? Wooden shoe like to hear another joke?"},
+{q:"Knock knock! Who's there? Harry.",a:"Harry who? Harry up and open the door!"},
+{q:"Knock knock! Who's there? Owl.",a:"Owl who? Owl you need is love!"},
+]},
+minecraft:{name:"Minecraft",emoji:"\u26CF\uFE0F",jokes:[
+{q:"What's a creeper's favourite food?",a:"Ssssssalad!"},
+{q:"Why did the Enderman break up with his girlfriend?",a:"She kept looking at other guys!"},
+{q:"What did Steve say to the diamond?",a:"I dig you!"},
+{q:"Why can't the Ender Dragon read a book?",a:"Because he always starts at The End!"},
+{q:"What's a skeleton's favourite instrument?",a:"The trom-BONE!"},
+{q:"Why did the zombie go to school?",a:"He wanted to improve his DEAD-ucation!"},
+{q:"What do you call a creeper in a flower shop?",a:"A bloom and doom!"},
+{q:"Why don't skeletons fight each other?",a:"They don't have the guts!"},
+{q:"What's a ghast's favourite country?",a:"The Nether-lands!"},
+{q:"How does Steve stay in shape?",a:"He runs around the block!"},
+{q:"What did the pig say on a hot day?",a:"I'm bacon in the sun!"},
+{q:"Why was the slime so bouncy?",a:"Because it had a great spring in its step!"},
+]},
+silly:{name:"Silly",emoji:"\u{1F92A}",jokes:[
+{q:"What do you call a boomerang that doesn't come back?",a:"A stick!"},
+{q:"What did one wall say to the other wall?",a:"I'll meet you at the corner!"},
+{q:"What do you call a snowman in summer?",a:"A puddle!"},
+{q:"Why can't your nose be 12 inches long?",a:"Because then it would be a foot!"},
+{q:"What has ears but can't hear?",a:"A cornfield!"},
+{q:"What did the stamp say to the envelope?",a:"Stick with me and we'll go places!"},
+{q:"Why did the bicycle fall over?",a:"Because it was two-tired!"},
+{q:"What do you call a train that sneezes?",a:"Achoo-choo train!"},
+{q:"Why did the scarecrow win an award?",a:"Because he was outstanding in his field!"},
+{q:"What do you call a shoe made out of a banana?",a:"A slipper!"},
+{q:"What did one toilet say to the other?",a:"You look flushed!"},
+{q:"Why did the golfer bring two pairs of pants?",a:"In case he got a hole in one!"},
+{q:"What do you call a dinosaur that crashes their car?",a:"Tyrannosaurus Wrecks!"},
+{q:"Why can't Cinderella play football?",a:"Because she always runs away from the ball!"},
+{q:"What did the ocean say to the beach?",a:"Nothing, it just waved!"},
+]},
+};
+
+const jokeCatKeys=Object.keys(jokeData);
+let curJokeCat='animals',curJoke=null,jokeRevealed=false,jokeCount=0;
+const jokeShufflers={};
+jokeCatKeys.forEach(k=>{jokeShufflers[k]=createShuffler(jokeData[k].jokes);});
+
+function buildJokeCats(){
+    var el=document.getElementById('joke-cats');
+    jokeCatKeys.forEach(function(k){
+        var d=jokeData[k];
+        var btn=document.createElement('button');
+        btn.id='joke-cat-'+k;
+        btn.style.cssText='padding:8px 16px;border-radius:50px;border:2px solid rgba(0,0,0,.15);cursor:pointer;font-size:.95rem;font-weight:bold;transition:all .2s;background:'+(k===curJokeCat?'#fff':'rgba(255,255,255,.5)')+';color:#333';
+        btn.textContent=d.emoji+' '+d.name;
+        btn.onclick=function(){switchJokeCat(k);};
+        el.appendChild(btn);
+    });
+}
+
+function switchJokeCat(k){
+    curJokeCat=k;jokeCount=0;
+    jokeCatKeys.forEach(function(key){
+        var b=document.getElementById('joke-cat-'+key);
+        b.style.background=key===k?'#fff':'rgba(255,255,255,.5)';
+    });
+    nextJoke();
+}
+
+function nextJoke(){
+    curJoke=jokeShufflers[curJokeCat]();
+    jokeRevealed=false;jokeCount++;
+    document.getElementById('joke-emoji').textContent=jokeData[curJokeCat].emoji;
+    document.getElementById('joke-text').textContent=curJoke.q;
+    document.getElementById('joke-punchline').textContent='';
+    document.getElementById('joke-tap-hint').textContent='\u{1F447} Tap the card to see the answer!';
+    document.getElementById('joke-counter').textContent=jokeData[curJokeCat].name+' joke #'+jokeCount;
+    document.getElementById('joke-card').style.transform='scale(1)';
+}
+
+function tapJokeCard(){
+    if(!curJoke)return;
+    if(!jokeRevealed){
+        jokeRevealed=true;
+        document.getElementById('joke-punchline').textContent=curJoke.a;
+        document.getElementById('joke-tap-hint').textContent='\u{1F602}';
+        document.getElementById('joke-card').style.transform='scale(1.02)';
+    }
+}
+
+buildJokeCats();
+nextJoke();
 
 // MC MODALS
 const mcContent={
