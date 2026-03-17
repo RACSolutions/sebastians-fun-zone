@@ -17,11 +17,13 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 .am{background:linear-gradient(135deg,#e74c3c,#c0392b)}.ar{background:linear-gradient(135deg,#2ecc71,#1a9c54)}
 .af{background:linear-gradient(135deg,#3498db,#2176ae)}.at{background:linear-gradient(135deg,#2c3e50,#1a252f)}
 .as{background:linear-gradient(135deg,#0b0b3b,#1b1b6b)}.amc{background:linear-gradient(135deg,#4a8c2a,#2d5a1a)}
+.arc{background:linear-gradient(135deg,#FF6B6B,#ee5a24)}
 .app-page{display:none;min-height:100vh;padding:20px;flex-direction:column;align-items:center;overflow-y:auto}
 .app-page.active{display:flex}
 .pm{background:linear-gradient(135deg,#e74c3c,#c0392b)}.pr{background:linear-gradient(135deg,#2ecc71,#1a9c54)}
 .pf{background:linear-gradient(135deg,#3498db,#2176ae)}.pt{background:linear-gradient(135deg,#0c1a2e,#1a3a5c,#0c1a2e)}
 .ps{background:linear-gradient(135deg,#0b0b2b,#1a1a4e,#0b0b2b)}.pmc{background:linear-gradient(135deg,#2d5a1a,#4a8c2a,#2d5a1a)}
+.prc{background:linear-gradient(135deg,#ee5a24,#FF6B6B,#ee5a24)}
 .top-bar{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:600px;margin-bottom:15px}
 .nb{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);color:#fff;font-size:1.1rem;padding:10px 20px;border-radius:50px;cursor:pointer;transition:background .2s}
 .nb:hover{background:rgba(255,255,255,.3)}.nb:disabled{opacity:.3;cursor:default}
@@ -80,6 +82,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 <div><div class="app-icon at" onclick="openApp('titanic')"><span class="ie">&#128674;</span></div><div class="app-label">Titanic</div></div>
 <div><div class="app-icon as" onclick="openApp('space')"><span class="ie">&#128640;</span></div><div class="app-label">Space</div></div>
 <div><div class="app-icon amc" onclick="openApp('minecraft')"><span class="ie">&#9935;&#65039;</span></div><div class="app-label">Minecraft</div></div>
+<div><div class="app-icon arc" onclick="openApp('recipes')"><span class="ie">&#127859;</span></div><div class="app-label">Recipes</div></div>
 </div></div>
 
 <div class="app-page pm" id="page-movies">
@@ -121,6 +124,34 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 <div class="cs"><div class="ic"><h3>&#129489;&#8205;&#128640; Yuri Gagarin (1961)</h3><p>First human in space!</p></div><div class="ic"><h3>&#127769; Neil Armstrong (1969)</h3><p>First Moon walk! 600M watched.</p></div><div class="ic"><h3>&#128105;&#8205;&#128640; Mae Jemison (1992)</h3><p>First African American woman in space!</p></div><div class="ic"><h3>&#128302; Mars Rovers</h3><p>Curiosity & Perseverance exploring now!</p></div><div class="ic"><h3>&#128752; Voyager 1</h3><p>15 billion miles away! Golden record for aliens.</p></div></div>
 <div class="cs"><div class="ic"><h3 id="space-qq">Space Quiz!</h3><div id="space-qo"></div><div id="space-qr" class="qr"></div><div style="margin-top:15px"><button class="ab" style="background:#0b0b3b" onclick="nextQ('space')" id="space-nb">Next Question!</button></div><div class="ctr" style="color:#888" id="space-qc"></div></div></div>
 </div></div></div></div>
+
+<!-- RECIPES -->
+<div class="app-page prc" id="page-recipes">
+<div class="top-bar"><button class="nb" onclick="goHome()">&#8592; Home</button></div>
+<div class="pe">&#127859;&#129379;</div><h2 class="ptl">Kid-Friendly Recipes!</h2>
+<p style="color:#fff;margin-bottom:20px;text-align:center;max-width:500px;font-size:1.1rem">Easy recipes you can make yourself (with a grown-up nearby for the hot stuff!)</p>
+
+<div class="cw" id="recipes-carousel">
+<div class="clb"><button class="ca" onclick="cPrev('recipes')">&#9664;</button><div class="cl" id="recipes-cl">Breakfast</div><button class="ca" onclick="cNext('recipes')">&#9654;</button></div>
+<div class="cd" id="recipes-dots"></div>
+<div class="cv"><div class="ct" id="recipes-track">
+<div class="cs" id="recipe-slide-0"></div>
+<div class="cs" id="recipe-slide-1"></div>
+<div class="cs" id="recipe-slide-2"></div>
+<div class="cs" id="recipe-slide-3"></div>
+<div class="cs" id="recipe-slide-4"></div>
+</div></div></div>
+
+<!-- Recipe detail overlay -->
+<div id="recipe-detail" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;overflow-y:auto;padding:20px" onclick="if(event.target===this)closeRecipe()">
+<div style="max-width:500px;margin:40px auto;background:#fff;border-radius:20px;padding:25px;box-shadow:0 15px 50px rgba(0,0,0,.4);position:relative">
+<button onclick="closeRecipe()" style="position:absolute;top:12px;right:15px;background:none;border:none;font-size:1.8rem;cursor:pointer;color:#888">&#10005;</button>
+<div id="recipe-detail-content"></div>
+</div>
+</div>
+</div>
+
+
 
 <div class="app-page pmc" id="page-minecraft">
 <div class="top-bar"><button class="nb" onclick="goHome()">&#8592; Home</button></div>
@@ -213,14 +244,15 @@ function rF(f){document.getElementById('fact-display').innerHTML='<div style="fo
 const shuf={movie:createShuffler(movies),riddle:createShuffler(riddles),fact:createShuffler(facts)};
 
 // CAROUSEL
-const car={titanic:{i:0,l:["Ship Stats","Cool Facts","Timeline","Quiz!"],c:4},space:{i:0,l:["The Planets","Amazing Facts","Explorers","Quiz!"],c:4},minecraft:{i:0,l:["Cool Facts","Mobs Guide","Tips & Tricks","Quiz!","Ore Merge!"],c:5}};
+const car={titanic:{i:0,l:["Ship Stats","Cool Facts","Timeline","Quiz!"],c:4},space:{i:0,l:["The Planets","Amazing Facts","Explorers","Quiz!"],c:4},minecraft:{i:0,l:["Cool Facts","Mobs Guide","Tips & Tricks","Quiz!","Ore Merge!"],c:5},
+recipes:{i:0,l:["Breakfast","Snacks","Lunch","Desserts","Drinks"],c:5}};
 function initC(n){let c=car[n],el=document.getElementById(n+'-dots');el.innerHTML='';for(let i=0;i<c.c;i++){let d=document.createElement('div');d.className='dot'+(i?'':' active');d.onclick=(()=>{let idx=i;return()=>cGo(n,idx)})();el.appendChild(d)}upC(n)}
 function upC(n){let c=car[n];document.getElementById(n+'-track').style.transform='translateX(-'+c.i*100+'%)';let lb=document.getElementById(n+'-cl');lb.style.opacity='0';setTimeout(()=>{lb.textContent=c.l[c.i];lb.style.transition='opacity .3s';lb.style.opacity='1'},150);let dots=document.getElementById(n+'-dots').children;for(let i=0;i<dots.length;i++)dots[i].classList.toggle('active',i===c.i);document.getElementById('page-'+n).scrollTo({top:0,behavior:'smooth'})}
 function cNext(n){car[n].i=(car[n].i+1)%car[n].c;upC(n)}
 function cPrev(n){car[n].i=(car[n].i-1+car[n].c)%car[n].c;upC(n)}
 function cGo(n,i){car[n].i=i;upC(n)}
 function addSw(n){let el=document.getElementById(n+'-track'),sx=0;el.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});el.addEventListener('touchend',e=>{let dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50){dx<0?cNext(n):cPrev(n)}},{passive:true})}
-['titanic','space','minecraft'].forEach(n=>{initC(n);addSw(n)});
+['titanic','space','minecraft','recipes'].forEach(n=>{initC(n);addSw(n)});
 
 // QUIZZES
 const qd={titanic:{qs:[{q:"How long was it?",o:["500 ft","882 ft","1200 ft","650 ft"],a:1},{q:"Year it sank?",o:["1905","1915","1912","1920"],a:2},{q:"How many smokestacks?",o:["2","3","5","4"],a:3},{q:"How many funnels worked?",o:["4","2","3","1"],a:2},{q:"Departed from?",o:["New York","Belfast","Southampton","Liverpool"],a:2},{q:"Headed to?",o:["London","Paris","New York","Boston"],a:2},{q:"People on board?",o:["~1000","~2224","~5000","~3500"],a:1},{q:"Lifeboats?",o:["50","32","20","10"],a:2},{q:"Wreck depth?",o:["500ft","5000ft","12500ft","25000ft"],a:2},{q:"RMS means?",o:["Really Massive Ship","Royal Mail Ship","Royal Maritime Svc","Registered Marine Ship"],a:1}],sh:null,cur:null,cnt:0},
@@ -298,13 +330,92 @@ function resetQuiz(t){
 
 ['titanic','space','mc'].forEach(nextQ);
 
+// RECIPES
+const recipes={
+breakfast:[
+{n:"Banana Pancakes",e:"\u{1F95E}",time:"10 min",serves:"1-2",need:"1 banana, 2 eggs",steps:["Mash the banana in a bowl until smooth","Crack in 2 eggs and mix well","Pour small circles onto a warm pan (grown-up helps!)","Cook 2 min each side until golden","Top with berries, honey, or maple syrup!"]},
+{n:"PB & Banana Toast",e:"\u{1F35E}",time:"5 min",serves:"1",need:"Bread, peanut butter, banana, honey",steps:["Toast the bread","Spread peanut butter on top","Slice banana and lay on top","Drizzle with a little honey","Sprinkle cinnamon if you like!"]},
+{n:"Berry Yogurt Parfait",e:"\u{1F366}",time:"5 min",serves:"1",need:"Yogurt, granola, berries",steps:["Put a layer of yogurt in a glass","Add a layer of granola","Add a layer of berries","Repeat layers until full!","Top with a drizzle of honey"]},
+{n:"French Toast Sticks",e:"\u{1F962}",time:"15 min",serves:"2",need:"Bread, 2 eggs, milk, cinnamon, sugar",steps:["Cut bread into thick strips","Mix eggs, splash of milk, cinnamon and sugar","Dip bread strips in the mixture","Cook until golden on both sides (grown-up helps!)","Dip in maple syrup!"]},
+],
+snacks:[
+{n:"Ants on a Log",e:"\u{1F41C}",time:"5 min",serves:"1-2",need:"Celery, peanut butter, raisins",steps:["Wash celery and cut into sticks","Fill the groove with peanut butter","Place raisins on top like little ants!","You can also use cream cheese instead"]},
+{n:"Frozen Banana Pops",e:"\u{1F366}",time:"10 min + freeze",serves:"4",need:"Bananas, chocolate chips, sprinkles, sticks",steps:["Cut bananas in half, push a stick in each","Melt chocolate chips in microwave (30 sec, stir!)","Dip bananas in melted chocolate","Add sprinkles before chocolate hardens","Freeze for 1 hour and enjoy!"]},
+{n:"Trail Mix",e:"\u{1F95C}",time:"3 min",serves:"Lots!",need:"Cheerios, pretzels, raisins, chocolate chips",steps:["Pour a handful of each into a big bowl","Mix it all up!","Put in small bags or containers","Perfect for school or road trips!"]},
+{n:"Fruit Kabobs",e:"\u{1F353}",time:"10 min",serves:"4",need:"Strawberries, grapes, melon, pineapple, skewers",steps:["Wash and cut fruit into chunks","Thread fruit onto sticks in a pattern","Make a yogurt dip: mix yogurt + honey","Dip and enjoy!"]},
+],
+lunch:[
+{n:"Mini Pizzas",e:"\u{1F355}",time:"15 min",serves:"2-4",need:"English muffins, pizza sauce, cheese, toppings",steps:["Split muffins in half on a baking tray","Spread pizza sauce on each half","Sprinkle cheese on top","Add your favorite toppings","Bake at 375\u00B0F for 10 min (grown-up helps!)"]},
+{n:"Quesadillas",e:"\u{1F32E}",time:"10 min",serves:"1",need:"Tortillas, cheese, chicken or beans (optional)",steps:["Place a tortilla on a warm pan","Sprinkle cheese on one half","Add chicken, beans, or veggies if you want","Fold tortilla in half","Cook 2 min each side until crispy! (grown-up helps!)"]},
+{n:"Banana Sushi",e:"\u{1F363}",time:"5 min",serves:"1",need:"Tortilla, peanut butter, banana",steps:["Spread peanut butter all over the tortilla","Place a whole banana at one edge","Roll the tortilla tightly around the banana","Cut into rounds like sushi!","Drizzle with honey or chocolate"]},
+{n:"Sandwich Shapes",e:"\u{1F96A}",time:"5 min",serves:"1",need:"Bread, sandwich fillings, cookie cutters",steps:["Make your favorite sandwich","Use cookie cutters to cut out fun shapes!","Stars, hearts, dinosaurs - whatever you have!","Eat the edges too - no waste!"]},
+],
+desserts:[
+{n:"Mug Cake",e:"\u{1F375}",time:"5 min",serves:"1",need:"4 tbsp flour, 4 tbsp sugar, 2 tbsp cocoa, 1 egg, 3 tbsp milk, 3 tbsp oil",steps:["Mix all dry ingredients in a big mug","Add egg, milk, and oil - stir until smooth","Microwave for 90 seconds","Let it cool for a minute","Top with whipped cream or ice cream!"]},
+{n:"No-Bake Cookies",e:"\u{1F36A}",time:"10 min + chill",serves:"15-20",need:"Oats, peanut butter, honey, chocolate chips, vanilla",steps:["Mix 1 cup oats, 1/2 cup PB, 1/3 cup honey","Add 1/2 cup chocolate chips and vanilla","Stir everything together","Roll into small balls","Fridge for 30 minutes to set!"]},
+{n:"S'mores Dip",e:"\u{1F36B}",time:"10 min",serves:"4",need:"Chocolate chips, marshmallows, graham crackers",steps:["Pour chocolate chips in an oven-safe dish","Cover with marshmallows","Bake at 350\u00B0F for 5-7 min (grown-up helps!)","Dip graham crackers in the gooey goodness!"]},
+{n:"Frozen Yogurt Bark",e:"\u{1F9CA}",time:"5 min + freeze",serves:"Lots!",need:"Yogurt, berries, granola, honey",steps:["Spread yogurt on a tray with baking paper","Drop berries, granola, and honey on top","Freeze for 2+ hours","Break into pieces like chocolate bark!"]},
+],
+drinks:[
+{n:"Strawberry Smoothie",e:"\u{1F353}",time:"5 min",serves:"1-2",need:"Strawberries, banana, yogurt, milk, honey",steps:["Put 1 cup strawberries in blender","Add 1 banana, yogurt, splash of milk","Add honey to taste","Blend until smooth!","Pour and add a fun straw"]},
+{n:"Chocolate Banana Shake",e:"\u{1F36B}",time:"5 min",serves:"1",need:"Banana, milk, cocoa powder, honey, ice",steps:["Put frozen banana chunks in blender","Add 1 cup milk, 1 tbsp cocoa, honey","Add a few ice cubes","Blend until thick and creamy!"]},
+{n:"Lemonade",e:"\u{1F34B}",time:"10 min",serves:"4",need:"4 lemons, sugar, water, ice",steps:["Squeeze all lemons into a jug (watch for seeds!)","Add 1/2 cup sugar and stir","Add 4 cups cold water","Stir until sugar dissolves","Add lots of ice and enjoy!"]},
+{n:"Watermelon Slushie",e:"\u{1F349}",time:"5 min",serves:"2",need:"Watermelon, ice, lime, honey",steps:["Cut watermelon into chunks (remove seeds)","Put in blender with ice cubes","Squeeze in half a lime","Add honey if needed","Blend until slushy and pour!"]},
+]};
+
+const recipeCategories=['breakfast','snacks','lunch','desserts','drinks'];
+
+function buildRecipeSlides(){
+    recipeCategories.forEach((cat,ci)=>{
+        var slide=document.getElementById('recipe-slide-'+ci);
+        slide.innerHTML='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:100%">'+
+            recipes[cat].map((r,ri)=>
+                '<div onclick="openRecipe(\''+cat+'\','+ri+')" style="background:rgba(255,255,255,.95);border-radius:16px;padding:18px;text-align:center;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,.2);transition:transform .2s" onmouseover="this.style.transform=\'scale(1.03)\'" onmouseout="this.style.transform=\'scale(1)\'">'+
+                '<div style="font-size:3.5rem;margin-bottom:8px">'+r.e+'</div>'+
+                '<div style="font-size:1rem;font-weight:bold;color:#1a3a5c">'+r.n+'</div>'+
+                '<div style="font-size:.8rem;color:#888;margin-top:4px">\u23F0 '+r.time+'</div>'+
+                '</div>'
+            ).join('')+'</div>';
+    });
+}
+
+function openRecipe(cat,idx){
+    var r=recipes[cat][idx];
+    var html='<div style="text-align:center;margin-bottom:15px">'+
+        '<div style="font-size:5rem;margin-bottom:5px">'+r.e+'</div>'+
+        '<h2 style="color:#1a3a5c;font-size:1.6rem">'+r.n+'</h2>'+
+        '<div style="color:#888;font-size:.9rem;margin-top:5px">\u23F0 '+r.time+' \u2022 Serves '+r.serves+'</div>'+
+        '</div>'+
+        '<div style="background:#f8f4f0;border-radius:12px;padding:15px;margin-bottom:15px">'+
+        '<h3 style="color:#ee5a24;font-size:1.1rem;margin-bottom:8px">\u{1F6D2} What you need:</h3>'+
+        '<p style="color:#444;font-size:1rem;line-height:1.5">'+r.need+'</p></div>'+
+        '<div style="background:#f0f8f0;border-radius:12px;padding:15px">'+
+        '<h3 style="color:#2ecc71;font-size:1.1rem;margin-bottom:10px">\u{1F468}\u200D\u{1F373} Steps:</h3>'+
+        r.steps.map((s,i)=>
+            '<div style="display:flex;gap:10px;margin-bottom:10px;align-items:flex-start">'+
+            '<div style="background:#2ecc71;color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:.9rem;flex-shrink:0">'+(i+1)+'</div>'+
+            '<p style="color:#444;font-size:1rem;line-height:1.4;padding-top:3px">'+s+'</p></div>'
+        ).join('')+'</div>';
+    document.getElementById('recipe-detail-content').innerHTML=html;
+    document.getElementById('recipe-detail').style.display='block';
+}
+
+function closeRecipe(){
+    document.getElementById('recipe-detail').style.display='none';
+}
+
+buildRecipeSlides();
+
 // ORE MERGE GAME
 const ores=[{n:"Dirt",e:"\u{1F7EB}",c:"#8B5E3C"},{n:"Stone",e:"\u{1FAA8}",c:"#808080"},{n:"Coal",e:"\u2B1B",c:"#333"},{n:"Iron",e:"\u2B1C",c:"#A8A8C0"},{n:"Gold",e:"\u{1F7E1}",c:"#FFD700"},{n:"Emerald",e:"\u{1F7E2}",c:"#2ECC71"},{n:"Diamond",e:"\u{1F48E}",c:"#4AEDD9"}];
+const TNT_ID=-1;
 const lvlG=["Level 1: Make Stone!","Level 2: Make Coal!","Level 3: Make Iron!","Level 4: Make Gold!","Level 5: Make Emerald!","Level 6: Make DIAMOND!","Keep mining for more!"];
 const mergePoints=[0,1,3,10,30,100,500];
 let mS=[],mSC=[],mMv=0,mLv=0,mG=[],merging=false,mScore=0,mDiamonds=0,mBest=0;
 
 function rOre(){
+    // 8% chance of TNT
+    if(Math.random()<0.08)return TNT_ID;
     let mx=Math.min(mLv+1,ores.length-2),w=[];
     for(let i=0;i<=mx;i++)w.push(mx-i+2);
     let tot=w.reduce((a,b)=>a+b),r=Math.random()*tot;
@@ -331,8 +442,8 @@ function resetMerge(){
 }
 
 function stC(c,oi,gi){
-    let o=ores[oi];
-    c.textContent=o.e;
+    var isTNT=oi===TNT_ID;
+    c.textContent=isTNT?'\u{1F9E8}':ores[oi].e;
     c.dataset.idx=gi;
     c.dataset.ore=oi;
     c.style.width='100%';
@@ -344,17 +455,80 @@ function stC(c,oi,gi){
     c.style.justifyContent='center';
     c.style.fontSize='1.4rem';
     c.style.transition='all .3s';
-    c.style.border='3px solid transparent';
-    c.style.boxShadow='0 2px 6px rgba(0,0,0,.15)';
-    c.style.background=o.c;
+    c.style.border=isTNT?'3px solid #ff4444':'3px solid transparent';
+    c.style.boxShadow=isTNT?'0 0 10px rgba(255,0,0,.3)':'0 2px 6px rgba(0,0,0,.15)';
+    c.style.background=isTNT?'#cc0000':ores[oi].c;
     c.style.opacity='1';
     c.style.transform='scale(1)';
     c.onclick=function(){selC(gi,c)};
 }
 
+function getNeighbors(gi){
+    var row=Math.floor(gi/6),col=gi%6,nb=[];
+    if(row>0)nb.push(gi-6);
+    if(row<5)nb.push(gi+6);
+    if(col>0)nb.push(gi-1);
+    if(col<5)nb.push(gi+1);
+    if(row>0&&col>0)nb.push(gi-7);
+    if(row>0&&col<5)nb.push(gi-5);
+    if(row<5&&col>0)nb.push(gi+5);
+    if(row<5&&col<5)nb.push(gi+7);
+    return nb;
+}
+
+function blowTNT(gi,cell){
+    if(merging)return;
+    merging=true;
+    var grid=document.getElementById('merge-grid');
+    var allCells=grid.children;
+    var targets=getNeighbors(gi);
+    targets.push(gi);
+
+    // Explosion animation
+    document.getElementById('merge-msg').innerHTML='<span style="color:#ff4444">\u{1F4A5} BOOM! \u{1F4A5}</span>';
+    mScore+=5;
+    document.getElementById('merge-score').textContent='Score: '+mScore;
+
+    // Flash red and shake
+    targets.forEach(function(idx){
+        var c=allCells[idx];
+        if(c){c.style.background='#ff4444';c.style.transform='scale(1.2)';c.style.opacity='0.8';}
+    });
+
+    setTimeout(function(){
+        // Shrink them
+        targets.forEach(function(idx){
+            var c=allCells[idx];
+            if(c){c.style.transform='scale(0)';c.style.opacity='0';}
+        });
+
+        setTimeout(function(){
+            // Replace with new random ores
+            targets.forEach(function(idx){
+                var c=allCells[idx];
+                if(c){
+                    var nr=rOre();
+                    mG[idx]=nr;
+                    stC(c,nr,idx);
+                    c.style.transform='scale(0)';
+                    c.style.opacity='0';
+                    setTimeout(function(){
+                        c.style.transform='scale(1)';
+                        c.style.opacity='1';
+                    },50+Math.random()*200);
+                }
+            });
+            mS=[];mSC=[];clrSlots();
+            setTimeout(function(){merging=false;},500);
+        },300);
+    },300);
+}
+
 function selC(gi,cell){
     if(merging)return;
     let oi=mG[gi];
+    // Handle TNT click
+    if(oi===TNT_ID){blowTNT(gi,cell);return;}
     let pos=mSC.indexOf(cell);
     if(pos!==-1){
         cell.style.border='3px solid transparent';
@@ -363,6 +537,7 @@ function selC(gi,cell){
         upSlots();return;
     }
     if(mS.length>=3)return;
+    if(oi<0)return;
     if(oi>=ores.length-1){
         document.getElementById('merge-msg').innerHTML='<span style="color:#4AEDD9">Diamond is max!</span>';return;
     }
@@ -376,7 +551,7 @@ function selC(gi,cell){
     cell.style.transform='scale(1.1)';
     document.getElementById('merge-msg').textContent='';
     upSlots();
-    if(mS.length===3)setTimeout(doMrg,400);
+    if(mS.length===3)setTimeout(doMrg,250);
 }
 
 function clrSlots(){
@@ -413,7 +588,7 @@ function doMrg(){
     // Step 1: Shrink all 3 selected cells
     savedCells.forEach(c=>{c.style.transform='scale(0)';c.style.opacity='0';});
 
-    // Step 2: After shrink, show the MERGED result on the first cell
+    // Step 2: After quick shrink, show the MERGED result
     setTimeout(()=>{
         // Update grid data for first cell to new ore
         mG[savedIdxs[0]]=ni;
@@ -452,27 +627,16 @@ function doMrg(){
             document.getElementById('merge-msg').innerHTML='<span style="color:'+no.c+'">'+no.e+' '+no.n+' +'+mergePoints[ni]+'</span>';
         }
 
-        // Step 3: After a pause, fill the other 2 spots with new blocks (greyed out initially)
+        // Step 3: Quickly fill the other 2 spots with new blocks (TNT can spawn!)
         setTimeout(()=>{
             for(let i=1;i<3;i++){
                 let nr=rOre();
+                while(nr===ni)nr=rOre();
                 mG[savedIdxs[i]]=nr;
                 stC(savedCells[i],nr,savedIdxs[i]);
-                // Make them appear small and faded so they're clearly "new"
-                savedCells[i].style.opacity='0.4';
-                savedCells[i].style.transform='scale(0.7)';
-                savedCells[i].style.filter='grayscale(80%)';
             }
-            // Fade them in fully after a beat
-            setTimeout(()=>{
-                for(let i=1;i<3;i++){
-                    savedCells[i].style.opacity='1';
-                    savedCells[i].style.transform='scale(1)';
-                    savedCells[i].style.filter='none';
-                }
-            },400);
 
-            // Keep merged cell glowing a bit longer
+            // Settle merged cell glow
             setTimeout(()=>{
                 savedCells[0].style.transform='scale(1)';
                 savedCells[0].style.boxShadow='0 2px 6px rgba(0,0,0,.15)';
@@ -480,9 +644,9 @@ function doMrg(){
                 savedCells[0].style.zIndex='';
                 mS=[];mSC=[];clrSlots();
                 merging=false;
-            },800);
-        },600);
-    },400);
+            },300);
+        },200);
+    },200);
 }
 function celebrate(){
     var container=document.getElementById('merge-grid');
@@ -513,6 +677,15 @@ resetMerge();
 // Build legend from ores array so emojis render properly
 (function(){
     var lg=document.getElementById('ore-legend');
+    // Add TNT to legend
+    var tntd=document.createElement('div');
+    tntd.style.cssText='display:flex;align-items:center;gap:4px;font-size:.8rem;color:#555';
+    var tnts=document.createElement('span');
+    tnts.style.cssText='width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;background:#cc0000';
+    tnts.textContent='\u{1F9E8}';
+    tntd.appendChild(tnts);
+    tntd.appendChild(document.createTextNode('TNT!'));
+    lg.appendChild(tntd);
     ores.forEach(function(o){
         var d=document.createElement('div');
         d.style.cssText='display:flex;align-items:center;gap:4px;font-size:.8rem;color:#555';
