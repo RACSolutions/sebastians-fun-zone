@@ -136,20 +136,45 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 
 <!-- GAMES -->
 <div class="app-page pgm" id="page-games">
-<div class="top-bar"><button class="nb" onclick="goHome();stopBB()">&#8592; Home</button></div>
-<div style="text-align:center;color:#fff;margin-bottom:10px">
-<h2 class="ptl" style="margin-bottom:10px">Brick Breaker!</h2>
+<div class="top-bar"><button class="nb" onclick="goHome();stopBB();stopAdv()">&#8592; Home</button></div>
+<div class="pe">&#127918;</div><h2 class="ptl">Games!</h2>
+<div id="games-menu" style="display:grid;grid-template-columns:repeat(2,1fr);gap:15px;max-width:400px;width:100%">
+<div onclick="showGame('bb')" style="background:linear-gradient(135deg,#e84393,#fd79a8);border-radius:16px;padding:20px;text-align:center;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,.2);transition:transform .2s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"><div style="font-size:3rem;margin-bottom:8px">&#127863;</div><div style="font-size:1.1rem;font-weight:bold;color:#fff">Brick Breaker</div></div>
+<div onclick="showGame('adv')" style="background:linear-gradient(135deg,#2d5a1a,#1a3a0a);border-radius:16px;padding:20px;text-align:center;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,.2);transition:transform .2s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"><div style="font-size:3rem;margin-bottom:8px">&#127794;&#128100;</div><div style="font-size:1.1rem;font-weight:bold;color:#fff">Forest Adventure</div></div>
+</div>
+
+<!-- Brick Breaker -->
+<div id="game-bb" style="display:none;width:100%;max-width:500px;text-align:center">
+<button class="nb" onclick="hideGame()" style="margin-bottom:10px">&#8592; Back to Games</button>
+<h3 style="color:#fff;margin-bottom:10px">Brick Breaker</h3>
 <div style="display:flex;justify-content:center;gap:20px;margin-bottom:10px;flex-wrap:wrap">
 <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px 16px"><span style="color:#aaa;font-size:.8rem">Score</span><div style="font-size:1.4rem;font-weight:bold" id="bb-score">0</div></div>
 <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px 16px"><span style="color:#aaa;font-size:.8rem">Level</span><div style="font-size:1.4rem;font-weight:bold" id="bb-level">1</div></div>
 <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px 16px"><span style="color:#aaa;font-size:.8rem">Lives</span><div style="font-size:1.4rem;font-weight:bold" id="bb-lives">&#10084;&#10084;&#10084;</div></div>
 </div>
-</div>
 <canvas id="bb-canvas" style="background:#111;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.5);max-width:100%;touch-action:none"></canvas>
-<div style="text-align:center;margin-top:12px">
-<button class="ab" style="background:linear-gradient(135deg,#e84393,#fd79a8)" onclick="startBB()" id="bb-start-btn">Start Game!</button>
+<div style="margin-top:12px"><button class="ab" style="background:linear-gradient(135deg,#e84393,#fd79a8)" onclick="startBB()" id="bb-start-btn">Start Game!</button></div>
+<p style="color:rgba(255,255,255,.4);font-size:.8rem;margin-top:8px">Move: mouse, touch, or arrow keys</p>
 </div>
-<p style="color:rgba(255,255,255,.4);font-size:.8rem;text-align:center;margin-top:8px">Move: mouse, touch, or arrow keys</p>
+
+<!-- Forest Adventure -->
+<div id="game-adv" style="display:none;width:100%;max-width:600px;text-align:center">
+<button class="nb" onclick="hideGame();stopAdv()" style="margin-bottom:10px">&#8592; Back to Games</button>
+<div style="display:flex;justify-content:center;gap:12px;margin-bottom:8px;flex-wrap:wrap">
+<div style="background:rgba(255,255,255,.1);border-radius:10px;padding:6px 14px"><span style="color:#aaa;font-size:.75rem">Night</span><div style="font-size:1.2rem;font-weight:bold;color:#fff" id="adv-night">0</div></div>
+<div style="background:rgba(255,255,255,.1);border-radius:10px;padding:6px 14px"><span style="color:#aaa;font-size:.75rem">Health</span><div style="font-size:1.2rem;font-weight:bold;color:#e74c3c" id="adv-hp">&#10084;&#10084;&#10084;&#10084;&#10084;</div></div>
+<div style="background:rgba(255,255,255,.1);border-radius:10px;padding:6px 14px"><span style="color:#aaa;font-size:.75rem">Score</span><div style="font-size:1.2rem;font-weight:bold;color:#f9ca24" id="adv-score">0</div></div>
+</div>
+<div style="display:flex;justify-content:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+<div style="background:rgba(255,255,255,.08);border-radius:8px;padding:4px 12px;font-size:.85rem;color:#fff" id="adv-inv"></div>
+<div style="background:rgba(255,255,255,.08);border-radius:8px;padding:4px 12px;font-size:.85rem" id="adv-time" style="color:#fff"></div>
+</div>
+<div id="adv-grid" style="display:inline-grid;gap:0;border-radius:8px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.5);font-size:1.6rem;line-height:1;touch-action:none"></div>
+<div style="margin-top:10px" id="adv-msg" style="color:#fff;font-size:1rem;min-height:24px"></div>
+<div style="margin-top:8px"><button class="ab" style="background:linear-gradient(135deg,#2d5a1a,#4a8c2a)" onclick="startAdv()" id="adv-start-btn">Start Adventure!</button>
+<button class="ab" style="background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.3)" onclick="advBuildFire()" id="adv-fire-btn">&#128293; Build Campfire (5 wood)</button></div>
+<p style="color:rgba(255,255,255,.4);font-size:.8rem;margin-top:6px">Move: arrow keys, WASD, or tap/swipe on the map</p>
+</div>
 </div>
 
 <!-- MEMES -->
@@ -1398,9 +1423,274 @@ function bbLoop(){
     bbAnim=requestAnimationFrame(bbLoop);
 }
 
-// Init canvas when games page opens
-var origOpenApp=openApp;
-openApp=function(n){origOpenApp(n);if(n==='games'&&!bbCanvas)initBB();};
+// GAME MENU
+function showGame(g){
+    document.getElementById('games-menu').style.display='none';
+    document.getElementById('game-'+g).style.display='block';
+    if(g==='bb'&&!bbCanvas)initBB();
+    if(g==='adv')initAdv();
+}
+function hideGame(){
+    document.getElementById('games-menu').style.display='grid';
+    document.getElementById('game-bb').style.display='none';
+    document.getElementById('game-adv').style.display='none';
+    stopBB();stopAdv();
+}
+
+// FOREST ADVENTURE
+var advMap=[],advW=40,advH=40,advVW=13,advVH=11;
+var advP={x:20,y:20},advHP=5,advScore=0,advNight=0;
+var advWood=0,advBerries=0,advGems=0;
+var advTime=0,advIsNight=false,advDayLen=45,advNightLen=30;
+var advTimer=null,advRunning=false;
+var advFires=[],advMonsters=[];
+var advMonsterTimer=null;
+// Tile types
+var T={GRASS:0,TREE:1,ROCK:2,WATER:3,WOOD:4,BERRY:5,GEM:6,FIRE:7,FLOWER:8,PATH:9};
+var tileEmoji={};
+tileEmoji[T.GRASS]='';tileEmoji[T.TREE]='\u{1F332}';tileEmoji[T.ROCK]='\u{1FAA8}';
+tileEmoji[T.WATER]='\u{1F30A}';tileEmoji[T.WOOD]='\u{1FAB5}';tileEmoji[T.BERRY]='\u{1FAD0}';
+tileEmoji[T.GEM]='\u{1F48E}';tileEmoji[T.FIRE]='\u{1F525}';tileEmoji[T.FLOWER]='\u{1F33C}';tileEmoji[T.PATH]='';
+var tileBg={};
+tileBg[T.GRASS]='#2d5a1a';tileBg[T.TREE]='#1a3a0a';tileBg[T.ROCK]='#4a4a3a';
+tileBg[T.WATER]='#1a3a6a';tileBg[T.WOOD]='#3a5a2a';tileBg[T.BERRY]='#2a4a1a';
+tileBg[T.GEM]='#2a3a5a';tileBg[T.FIRE]='#5a3a1a';tileBg[T.FLOWER]='#2a5a2a';tileBg[T.PATH]='#3a4a2a';
+var tileSolid={};tileSolid[T.ROCK]=true;tileSolid[T.WATER]=true;
+var tileChoppable={};tileChoppable[T.TREE]=true;
+
+function genMap(){
+    advMap=[];
+    for(var y=0;y<advH;y++){advMap[y]=[];for(var x=0;x<advW;x++){
+        var r=Math.random();
+        if(r<0.2)advMap[y][x]=T.TREE;
+        else if(r<0.25)advMap[y][x]=T.ROCK;
+        else if(r<0.28)advMap[y][x]=T.WATER;
+        else if(r<0.32)advMap[y][x]=T.FLOWER;
+        else advMap[y][x]=T.GRASS;
+    }}
+    // Clear spawn area
+    for(var dy=-2;dy<=2;dy++)for(var dx=-2;dx<=2;dx++){
+        var nx=advP.x+dx,ny=advP.y+dy;
+        if(nx>=0&&nx<advW&&ny>=0&&ny<advH)advMap[ny][nx]=T.GRASS;
+    }
+    // Scatter collectibles
+    for(var i=0;i<25;i++){spawnItem(T.WOOD);}
+    for(var i=0;i<15;i++){spawnItem(T.BERRY);}
+    for(var i=0;i<5;i++){spawnItem(T.GEM);}
+    // Create some paths
+    for(var i=0;i<6;i++){
+        var px=Math.floor(Math.random()*advW),py=Math.floor(Math.random()*advH);
+        for(var s=0;s<15;s++){
+            if(px>=0&&px<advW&&py>=0&&py<advH&&!tileSolid[advMap[py][px]])advMap[py][px]=T.PATH;
+            if(Math.random()<0.5)px+=Math.random()<0.5?1:-1;else py+=Math.random()<0.5?1:-1;
+        }
+    }
+}
+
+function spawnItem(type){
+    for(var tries=0;tries<50;tries++){
+        var x=Math.floor(Math.random()*advW),y=Math.floor(Math.random()*advH);
+        if(advMap[y][x]===T.GRASS||advMap[y][x]===T.PATH){advMap[y][x]=type;return;}
+    }
+}
+
+function initAdv(){
+    var grid=document.getElementById('adv-grid');
+    var tileSize=Math.min(38,Math.floor((window.innerWidth-40)/advVW));
+    grid.style.gridTemplateColumns='repeat('+advVW+','+tileSize+'px)';
+    grid.style.gridTemplateRows='repeat('+advVH+','+tileSize+'px)';
+    grid.innerHTML='';
+    for(var i=0;i<advVW*advVH;i++){
+        var cell=document.createElement('div');
+        cell.style.cssText='width:'+tileSize+'px;height:'+tileSize+'px;display:flex;align-items:center;justify-content:center;font-size:'+Math.floor(tileSize*0.7)+'px;transition:background .3s;';
+        grid.appendChild(cell);
+    }
+    // Touch/swipe controls
+    var sx=0,sy=0;
+    grid.ontouchstart=function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;};
+    grid.ontouchend=function(e){
+        if(!advRunning)return;
+        var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+        if(Math.abs(dx)>Math.abs(dy)){if(dx>20)moveAdv(1,0);else if(dx<-20)moveAdv(-1,0);}
+        else{if(dy>20)moveAdv(0,1);else if(dy<-20)moveAdv(0,-1);}
+    };
+    renderAdv();
+}
+
+function renderAdv(){
+    var grid=document.getElementById('adv-grid');
+    if(!grid)return;
+    var cells=grid.children;
+    var sx=advP.x-Math.floor(advVW/2),sy=advP.y-Math.floor(advVH/2);
+    for(var vy=0;vy<advVH;vy++){for(var vx=0;vx<advVW;vx++){
+        var idx=vy*advVW+vx;
+        var mx=sx+vx,my=sy+vy;
+        var cell=cells[idx];
+        if(mx<0||mx>=advW||my<0||my>=advH){
+            cell.textContent='';cell.style.background='#111';continue;
+        }
+        var tile=advMap[my][mx];
+        var bg=tileBg[tile]||'#2d5a1a';
+        // Night darkness
+        if(advIsNight){
+            var distP=Math.abs(mx-advP.x)+Math.abs(my-advP.y);
+            var lit=distP<=2;
+            advFires.forEach(function(f){if(Math.abs(mx-f.x)+Math.abs(my-f.y)<=3)lit=true;});
+            if(!lit)bg='#0a0a0a';
+            else bg=tileBg[tile]||'#2d5a1a';
+        }
+        cell.style.background=bg;
+        // Content
+        if(mx===advP.x&&my===advP.y){
+            cell.textContent='\u{1F9D1}';
+        }else{
+            var mon=advMonsters.find(function(m){return m.x===mx&&m.y===my;});
+            if(mon){cell.textContent=mon.e;}
+            else if(advFires.find(function(f){return f.x===mx&&f.y===my;})){cell.textContent='\u{1F525}';}
+            else{cell.textContent=tileEmoji[tile]||'';}
+        }
+    }}
+    // Update UI
+    var h='';for(var i=0;i<advHP;i++)h+='\u2764\uFE0F';
+    if(advHP<=0)h='\u{1F480}';
+    document.getElementById('adv-hp').innerHTML=h;
+    document.getElementById('adv-score').textContent=advScore;
+    document.getElementById('adv-night').textContent=advNight;
+    document.getElementById('adv-inv').innerHTML='\u{1FAB5} x'+advWood+' &nbsp; \u{1FAD0} x'+advBerries+' &nbsp; \u{1F48E} x'+advGems;
+    var timeLeft=advIsNight?(advNightLen-advTime):(advDayLen-advTime);
+    document.getElementById('adv-time').innerHTML=(advIsNight?'\u{1F319} Night':'☀️ Day')+' '+Math.ceil(timeLeft)+'s';
+    document.getElementById('adv-time').style.color=advIsNight?'#aaa':'#f9ca24';
+}
+
+function startAdv(){
+    if(advRunning)return;
+    advP={x:20,y:20};advHP=5;advScore=0;advNight=0;
+    advWood=0;advBerries=0;advGems=0;advTime=0;advIsNight=false;
+    advFires=[];advMonsters=[];
+    genMap();initAdv();advRunning=true;
+    document.getElementById('adv-start-btn').textContent='Restart';
+    document.getElementById('adv-msg').innerHTML='<span style="color:#f9ca24">Day time! Collect wood and berries before night falls!</span>';
+    advGameLoop();
+}
+
+function stopAdv(){advRunning=false;clearTimeout(advTimer);clearInterval(advMonsterTimer);}
+
+function advGameLoop(){
+    if(!advRunning)return;
+    advTime++;
+    if(!advIsNight&&advTime>=advDayLen){
+        // Night falls
+        advIsNight=true;advTime=0;advNight++;
+        document.getElementById('adv-msg').innerHTML='<span style="color:#9b59b6">\u{1F319} Night '+advNight+'! Stay near campfires! Monsters are coming!</span>';
+        spawnMonsters();
+        advMonsterTimer=setInterval(moveMonsters,800);
+    }else if(advIsNight&&advTime>=advNightLen){
+        // Day breaks
+        advIsNight=false;advTime=0;
+        advMonsters=[];clearInterval(advMonsterTimer);
+        advScore+=50*advNight;
+        document.getElementById('adv-msg').innerHTML='<span style="color:#f9ca24">\u2600\uFE0F Dawn! You survived night '+advNight+'! +'+50*advNight+' pts!</span>';
+        // Respawn items
+        for(var i=0;i<8;i++)spawnItem(T.WOOD);
+        for(var i=0;i<5;i++)spawnItem(T.BERRY);
+        if(advNight%2===0)for(var i=0;i<2;i++)spawnItem(T.GEM);
+    }
+    renderAdv();
+    advTimer=setTimeout(advGameLoop,1000);
+}
+
+function spawnMonsters(){
+    var count=2+advNight;
+    for(var i=0;i<count;i++){
+        var m;
+        for(var t=0;t<50;t++){
+            var mx=advP.x+((Math.random()<0.5?-1:1)*(6+Math.floor(Math.random()*8)));
+            var my=advP.y+((Math.random()<0.5?-1:1)*(6+Math.floor(Math.random()*8)));
+            mx=Math.max(0,Math.min(advW-1,mx));my=Math.max(0,Math.min(advH-1,my));
+            if(!tileSolid[advMap[my][mx]]){m={x:mx,y:my,e:Math.random()<0.5?'\u{1F47B}':'\u{1F987}'};break;}
+        }
+        if(m)advMonsters.push(m);
+    }
+}
+
+function moveMonsters(){
+    if(!advRunning||!advIsNight)return;
+    advMonsters.forEach(function(m){
+        // Move toward player
+        var dx=0,dy=0;
+        if(Math.random()<0.7){
+            if(m.x<advP.x)dx=1;else if(m.x>advP.x)dx=-1;
+            if(m.y<advP.y)dy=1;else if(m.y>advP.y)dy=-1;
+            if(Math.random()<0.5)dx=0;else dy=0;
+        }else{
+            dx=Math.floor(Math.random()*3)-1;dy=Math.floor(Math.random()*3)-1;
+        }
+        var nx=m.x+dx,ny=m.y+dy;
+        // Monsters avoid fire
+        var nearFire=advFires.some(function(f){return Math.abs(nx-f.x)+Math.abs(ny-f.y)<=2;});
+        if(nearFire)return;
+        if(nx>=0&&nx<advW&&ny>=0&&ny<advH&&!tileSolid[advMap[ny][nx]]){m.x=nx;m.y=ny;}
+        // Hit player
+        if(m.x===advP.x&&m.y===advP.y){
+            advHP--;advScore=Math.max(0,advScore-10);
+            document.getElementById('adv-msg').innerHTML='<span style="color:#e74c3c">\u{1F4A5} A '+m.e+' hit you! -1 HP</span>';
+            // Push monster back
+            m.x=m.x+(m.x>advP.x?2:-2);m.y=m.y+(m.y>advP.y?2:-2);
+            m.x=Math.max(0,Math.min(advW-1,m.x));m.y=Math.max(0,Math.min(advH-1,m.y));
+            if(advHP<=0){advRunning=false;clearTimeout(advTimer);clearInterval(advMonsterTimer);
+                document.getElementById('adv-msg').innerHTML='<div style="color:#e74c3c;font-size:1.3rem">\u{1F480} Game Over! Survived '+advNight+' nights. Score: '+advScore+'</div>';
+                document.getElementById('adv-start-btn').textContent='Play Again!';
+            }
+        }
+    });
+    renderAdv();
+}
+
+function moveAdv(dx,dy){
+    if(!advRunning)return;
+    var nx=advP.x+dx,ny=advP.y+dy;
+    if(nx<0||nx>=advW||ny<0||ny>=advH)return;
+    if(tileSolid[advMap[ny][nx]])return;
+    var tile=advMap[ny][nx];
+    // Chop tree (don't walk through, just chop and stay)
+    if(tileChoppable[tile]){
+        advWood+=3;advScore+=15;
+        advMap[ny][nx]=T.GRASS;
+        document.getElementById('adv-msg').innerHTML='<span style="color:#8B6B4A">\u{1FAB5} Chopped tree! +3 Wood (total: '+advWood+')</span>';
+        renderAdv();
+        return;
+    }
+    // Collect items by walking over
+    if(tile===T.WOOD){advWood++;advScore+=5;advMap[ny][nx]=T.GRASS;document.getElementById('adv-msg').innerHTML='<span style="color:#8B6B4A">\u{1FAB5} +1 Wood (total: '+advWood+')</span>';}
+    if(tile===T.BERRY){advBerries++;advScore+=10;advMap[ny][nx]=T.GRASS;
+        if(advHP<5){advHP++;document.getElementById('adv-msg').innerHTML='<span style="color:#e74c3c">\u{1FAD0} +1 Berry! HP restored! (total: '+advBerries+')</span>';}
+        else{document.getElementById('adv-msg').innerHTML='<span style="color:#27ae60">\u{1FAD0} +1 Berry (total: '+advBerries+')</span>';}
+    }
+    if(tile===T.GEM){advGems++;advScore+=100;advMap[ny][nx]=T.GRASS;document.getElementById('adv-msg').innerHTML='<span style="color:#4AEDD9">\u{1F48E} +1 Gem! +100 pts! (total: '+advGems+')</span>';}
+    advP.x=nx;advP.y=ny;
+    renderAdv();
+}
+
+function advBuildFire(){
+    if(!advRunning)return;
+    if(advWood<5){document.getElementById('adv-msg').innerHTML='<span style="color:#e74c3c">Need 5 wood! You have '+advWood+'</span>';return;}
+    advWood-=5;
+    advFires.push({x:advP.x,y:advP.y});
+    advMap[advP.y][advP.x]=T.FIRE;
+    advScore+=25;
+    document.getElementById('adv-msg').innerHTML='<span style="color:#f0932b">\u{1F525} Campfire built! Monsters stay away from fire!</span>';
+    renderAdv();
+}
+
+// Keyboard controls for adventure
+document.addEventListener('keydown',function(e){
+    if(!advRunning)return;
+    if(e.key==='ArrowUp'||e.key==='w'||e.key==='W')moveAdv(0,-1);
+    if(e.key==='ArrowDown'||e.key==='s'||e.key==='S')moveAdv(0,1);
+    if(e.key==='ArrowLeft'||e.key==='a'||e.key==='A')moveAdv(-1,0);
+    if(e.key==='ArrowRight'||e.key==='d'||e.key==='D')moveAdv(1,0);
+    if(e.key==='f'||e.key==='F')advBuildFire();
+});
 
 </script>
 </body>
