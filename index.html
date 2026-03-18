@@ -1576,14 +1576,62 @@ function initAdv(){
         cell.style.cssText='width:'+tileSize+'px;height:'+tileSize+'px;display:flex;align-items:center;justify-content:center;font-size:'+Math.floor(tileSize*0.7)+'px;transition:background .3s;';
         grid.appendChild(cell);
     }
-    // Touch/swipe controls
-    var sx=0,sy=0;
-    grid.ontouchstart=function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;};
-    grid.ontouchend=function(e){
-        if(!advRunning)return;
-        var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
-        if(Math.abs(dx)>Math.abs(dy)){if(dx>20)moveAdv(1,0);else if(dx<-20)moveAdv(-1,0);}
-        else{if(dy>20)moveAdv(0,1);else if(dy<-20)moveAdv(0,-1);}
+    // Tap to move / tap to interact
+    grid.onclick=function(e){
+        if(!advRunning||advTransitioning)return;
+        var rect=grid.getBoundingClientRect();
+        var clickX=e.clientX-rect.left;
+        var clickY=e.clientY-rect.top;
+        var tileSize=rect.width/advVW;
+        var tapVX=Math.floor(clickX/tileSize);
+        var tapVY=Math.floor(clickY/tileSize);
+        if(tapVX<0||tapVX>=advVW||tapVY<0||tapVY>=advVH)return;
+
+        // World coords of tapped tile
+        var twx=advScr.x*advVW+tapVX;
+        var twy=advScr.y*advVH+tapVY;
+        // Player local coords
+        var dx=tapVX-advP.x;
+        var dy=tapVY-advP.y;
+
+        // If tapped adjacent tile (1 away), interact directly
+        if(Math.abs(dx)<=1&&Math.abs(dy)<=1&&(dx!==0||dy!==0)){
+            var tile=advMap[twy][twx];
+            // Tap tree or rock = hit it
+            if(tileChoppable[tile]||tileMineable[tile]){
+                advFacing={x:dx>0?1:(dx<0?-1:0),y:dy>0?1:(dy<0?-1:0)};
+                advAction();
+                return;
+            }
+            // Otherwise move there
+            if(dx!==0&&dy!==0){
+                // Diagonal: move in the longer axis first
+                if(Math.abs(dx)>=Math.abs(dy))moveAdv(dx>0?1:-1,0);
+                else moveAdv(0,dy>0?1:-1);
+            }else{
+                moveAdv(dx,dy);
+            }
+            return;
+        }
+
+        // Tapped further away: move one step toward that tile
+        if(dx===0&&dy===0)return;
+        var sdx=0,sdy=0;
+        if(Math.abs(dx)>=Math.abs(dy)){sdx=dx>0?1:-1;}
+        else{sdy=dy>0?1:-1;}
+
+        // Check if stepping toward a tree/rock - auto-hit it
+        var stepWX=advScr.x*advVW+advP.x+sdx;
+        var stepWY=advScr.y*advVH+advP.y+sdy;
+        if(stepWX>=0&&stepWX<advW&&stepWY>=0&&stepWY<advH){
+            var stepTile=advMap[stepWY][stepWX];
+            if(tileChoppable[stepTile]||tileMineable[stepTile]){
+                advFacing={x:sdx,y:sdy};
+                advAction();
+                return;
+            }
+        }
+        moveAdv(sdx,sdy);
     };
     renderAdv();
 }
