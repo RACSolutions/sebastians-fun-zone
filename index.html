@@ -90,7 +90,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 <div><div class="app-icon amc" onclick="openApp('minecraft')"><span class="ie">&#9935;&#65039;</span></div><div class="app-label">Minecraft</div></div>
 <div><div class="app-icon arc" onclick="openApp('recipes')"><span class="ie">&#127859;</span></div><div class="app-label">Recipes</div></div>
 <div><div class="app-icon ajk" onclick="openApp('jokes')"><span class="ie">&#129315;</span></div><div class="app-label">Jokes</div></div>
-<div><div class="app-icon amm" onclick="openApp('memes')"><span class="ie">&#128517;</span></div><div class="app-label">Memes</div></div>
+<div><div class="app-icon amm" onclick="openApp('memes')"><span class="ie">&#128517;</span></div><div class="app-label">Funny Memes</div></div>
 <div><div class="app-icon agm" onclick="openApp('games')"><span class="ie">&#127918;</span></div><div class="app-label">Games</div></div>
 </div></div>
 
@@ -158,29 +158,54 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 </div>
 
 <!-- Forest Adventure -->
-<div id="game-adv" style="display:none;width:100%;max-width:600px;text-align:center">
-<button class="nb" onclick="hideGame();stopAdv()" style="margin-bottom:10px">&#8592; Back to Games</button>
-<div style="display:flex;justify-content:center;gap:12px;margin-bottom:8px;flex-wrap:wrap">
-<div style="background:rgba(255,255,255,.1);border-radius:10px;padding:6px 14px"><span style="color:#aaa;font-size:.75rem">Night</span><div style="font-size:1.2rem;font-weight:bold;color:#fff" id="adv-night">0</div></div>
-<div style="background:rgba(255,255,255,.1);border-radius:10px;padding:6px 14px"><span style="color:#aaa;font-size:.75rem">Health</span><div style="font-size:1.2rem;font-weight:bold;color:#e74c3c" id="adv-hp">&#10084;&#10084;&#10084;&#10084;&#10084;</div></div>
-<div style="background:rgba(255,255,255,.1);border-radius:10px;padding:6px 14px"><span style="color:#aaa;font-size:.75rem">Score</span><div style="font-size:1.2rem;font-weight:bold;color:#f9ca24" id="adv-score">0</div></div>
+<div id="game-adv" style="display:none;width:100%;text-align:center">
+<div style="display:flex;justify-content:space-between;align-items:center;max-width:100%;margin-bottom:4px;padding:0 4px">
+<button class="nb" onclick="hideGame();stopAdv()" style="padding:6px 12px;font-size:.9rem">&#8592; Back</button>
+<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+<div style="background:rgba(255,255,255,.1);border-radius:8px;padding:4px 10px"><span style="color:#aaa;font-size:.65rem">Night</span><div style="font-size:1rem;font-weight:bold;color:#fff" id="adv-night">0</div></div>
+<div style="background:rgba(255,255,255,.1);border-radius:8px;padding:4px 10px"><span style="color:#aaa;font-size:.65rem">HP</span><div style="font-size:1rem;font-weight:bold;color:#e74c3c" id="adv-hp">&#10084;&#10084;&#10084;&#10084;&#10084;</div></div>
+<div style="background:rgba(255,255,255,.1);border-radius:8px;padding:4px 10px"><span style="color:#aaa;font-size:.65rem">Score</span><div style="font-size:1rem;font-weight:bold;color:#f9ca24" id="adv-score">0</div></div>
 </div>
-<div style="display:flex;justify-content:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
-<div style="background:rgba(255,255,255,.08);border-radius:8px;padding:4px 12px;font-size:.85rem;color:#fff" id="adv-inv"></div>
-<div style="background:rgba(255,255,255,.08);border-radius:8px;padding:4px 12px;font-size:.85rem" id="adv-time" style="color:#fff"></div>
 </div>
-<div id="adv-grid" style="display:inline-grid;gap:0;border-radius:8px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.5);font-size:1.6rem;line-height:1;touch-action:none"></div>
-<div style="margin-top:10px" id="adv-msg" style="color:#fff;font-size:1rem;min-height:24px"></div>
-<div style="margin-top:8px"><button class="ab" style="background:linear-gradient(135deg,#2d5a1a,#4a8c2a)" onclick="startAdv()" id="adv-start-btn">Start Adventure!</button>
-<button class="ab" style="background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.3)" onclick="advBuildFire()" id="adv-fire-btn">&#128293; Build Campfire (5 wood)</button></div>
-<p style="color:rgba(255,255,255,.4);font-size:.8rem;margin-top:6px">Move: arrow keys, WASD, or tap/swipe on the map</p>
+<div style="display:flex;justify-content:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;font-size:.8rem">
+<div style="background:rgba(255,255,255,.08);border-radius:6px;padding:3px 10px;color:#fff" id="adv-inv"></div>
+<div style="background:rgba(255,255,255,.08);border-radius:6px;padding:3px 10px" id="adv-time"></div>
+<div id="adv-compass" style="background:rgba(240,147,43,.2);border:2px solid #f0932b;border-radius:8px;padding:4px 14px;color:#f0932b;font-weight:bold;font-size:.95rem;display:none"></div>
+</div>
+<div id="adv-grid" style="display:inline-grid;gap:0;border-radius:6px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.5);line-height:1;touch-action:none;transition:opacity .2s"></div>
+<div id="adv-msg" style="color:#fff;font-size:.9rem;min-height:22px;margin-top:4px"></div>
+<!-- D-PAD + ACTION BUTTONS -->
+<div style="display:flex;justify-content:space-between;align-items:center;max-width:100%;margin-top:8px;padding:0 10px">
+<!-- D-Pad -->
+<div style="display:grid;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,52px);gap:4px">
+<div></div>
+<button onclick="moveAdv(0,-1)" style="width:52px;height:52px;border-radius:12px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.4rem;cursor:pointer;touch-action:manipulation">&#9650;</button>
+<div></div>
+<button onclick="moveAdv(-1,0)" style="width:52px;height:52px;border-radius:12px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.4rem;cursor:pointer;touch-action:manipulation">&#9664;</button>
+<div style="width:52px;height:52px;border-radius:12px;background:rgba(255,255,255,.05)"></div>
+<button onclick="moveAdv(1,0)" style="width:52px;height:52px;border-radius:12px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.4rem;cursor:pointer;touch-action:manipulation">&#9654;</button>
+<div></div>
+<button onclick="moveAdv(0,1)" style="width:52px;height:52px;border-radius:12px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.4rem;cursor:pointer;touch-action:manipulation">&#9660;</button>
+<div></div>
+</div>
+<!-- Action buttons -->
+<div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+<button onclick="advAction()" id="adv-action-btn" style="width:64px;height:64px;border-radius:50%;border:none;background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 15px rgba(231,76,60,.4);touch-action:manipulation">&#9935;&#65039;</button>
+<span style="color:rgba(255,255,255,.4);font-size:.7rem" id="adv-action-label">Hit</span>
+<button onclick="advBuildFire()" style="width:52px;height:52px;border-radius:50%;border:none;background:linear-gradient(135deg,#f0932b,#e67e22);color:#fff;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 15px rgba(240,147,43,.4);touch-action:manipulation">&#128293;</button>
+<span style="color:rgba(255,255,255,.4);font-size:.7rem">Fire</span>
+<button onclick="advEat()" style="width:52px;height:52px;border-radius:50%;border:none;background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 15px rgba(46,204,113,.4);touch-action:manipulation">&#127823;</button>
+<span style="color:rgba(255,255,255,.4);font-size:.7rem">Eat</span>
+</div>
+</div>
+<div style="margin-top:6px"><button class="ab" style="background:linear-gradient(135deg,#2d5a1a,#4a8c2a);padding:10px 24px;font-size:1rem" onclick="startAdv()" id="adv-start-btn">Start Adventure!</button></div>
 </div>
 </div>
 
 <!-- MEMES -->
 <div class="app-page pmm" id="page-memes">
 <div class="top-bar"><button class="nb" onclick="goHome()">&#8592; Home</button></div>
-<div class="pe">&#128517;&#128176;</div><h2 class="ptl">Kid Memes!</h2>
+<div class="pe">&#128517;&#128176;</div><h2 class="ptl">Funny Memes!</h2>
 
 <div style="max-width:420px;width:100%">
 <div id="meme-card" style="background:#000;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.3);position:relative;min-height:350px;display:flex;flex-direction:column;justify-content:space-between">
@@ -1427,6 +1452,10 @@ function bbLoop(){
 function showGame(g){
     document.getElementById('games-menu').style.display='none';
     document.getElementById('game-'+g).style.display='block';
+    // Hide page header to save space
+    document.querySelector('#page-games .pe').style.display='none';
+    document.querySelector('#page-games .ptl').style.display='none';
+    document.querySelector('#page-games .top-bar').style.display='none';
     if(g==='bb'&&!bbCanvas)initBB();
     if(g==='adv')initAdv();
 }
@@ -1434,17 +1463,26 @@ function hideGame(){
     document.getElementById('games-menu').style.display='grid';
     document.getElementById('game-bb').style.display='none';
     document.getElementById('game-adv').style.display='none';
+    // Show page header again
+    document.querySelector('#page-games .pe').style.display='';
+    document.querySelector('#page-games .ptl').style.display='';
+    document.querySelector('#page-games .top-bar').style.display='';
     stopBB();stopAdv();
 }
 
 // FOREST ADVENTURE
-var advMap=[],advW=40,advH=40,advVW=13,advVH=11;
-var advP={x:20,y:20},advHP=5,advScore=0,advNight=0;
-var advWood=0,advBerries=0,advGems=0;
+var advMap=[],advTreeHP=[],advVW=17,advVH=13;
+var advSX=4,advSY=4; // number of screens
+var advW,advH; // total map size (computed)
+var advP={x:2,y:2},advHP=5,advScore=0,advNight=0;
+var advScr={x:1,y:1}; // which screen we're on
+var advWood=0,advBerries=0,advGems=0,advStone=0;
 var advTime=0,advIsNight=false,advDayLen=45,advNightLen=30;
 var advTimer=null,advRunning=false;
 var advFires=[],advMonsters=[];
 var advMonsterTimer=null;
+var advFacing={x:0,y:-1};
+var advTransitioning=false;
 // Tile types
 var T={GRASS:0,TREE:1,ROCK:2,WATER:3,WOOD:4,BERRY:5,GEM:6,FIRE:7,FLOWER:8,PATH:9};
 var tileEmoji={};
@@ -1455,12 +1493,14 @@ var tileBg={};
 tileBg[T.GRASS]='#2d5a1a';tileBg[T.TREE]='#1a3a0a';tileBg[T.ROCK]='#4a4a3a';
 tileBg[T.WATER]='#1a3a6a';tileBg[T.WOOD]='#3a5a2a';tileBg[T.BERRY]='#2a4a1a';
 tileBg[T.GEM]='#2a3a5a';tileBg[T.FIRE]='#5a3a1a';tileBg[T.FLOWER]='#2a5a2a';tileBg[T.PATH]='#3a4a2a';
-var tileSolid={};tileSolid[T.ROCK]=true;tileSolid[T.WATER]=true;
+var tileSolid={};tileSolid[T.WATER]=true;
 var tileChoppable={};tileChoppable[T.TREE]=true;
+var tileMineable={};tileMineable[T.ROCK]=true;
 
 function genMap(){
-    advMap=[];
-    for(var y=0;y<advH;y++){advMap[y]=[];for(var x=0;x<advW;x++){
+    advW=advVW*advSX;advH=advVH*advSY;
+    advMap=[];advTreeHP=[];
+    for(var y=0;y<advH;y++){advMap[y]=[];advTreeHP[y]=[];for(var x=0;x<advW;x++){advTreeHP[y][x]=0;
         var r=Math.random();
         if(r<0.2)advMap[y][x]=T.TREE;
         else if(r<0.25)advMap[y][x]=T.ROCK;
@@ -1468,10 +1508,16 @@ function genMap(){
         else if(r<0.32)advMap[y][x]=T.FLOWER;
         else advMap[y][x]=T.GRASS;
     }}
-    // Clear spawn area
-    for(var dy=-2;dy<=2;dy++)for(var dx=-2;dx<=2;dx++){
-        var nx=advP.x+dx,ny=advP.y+dy;
-        if(nx>=0&&nx<advW&&ny>=0&&ny<advH)advMap[ny][nx]=T.GRASS;
+    // Set tree/rock HP
+    for(var y=0;y<advH;y++)for(var x=0;x<advW;x++){
+        if(advMap[y][x]===T.TREE)advTreeHP[y][x]=3;
+        if(advMap[y][x]===T.ROCK)advTreeHP[y][x]=3;
+    }
+    // Clear spawn area (screen-relative to world coords)
+    var spX=advScr.x*advVW+advP.x,spY=advScr.y*advVH+advP.y;
+    for(var dy=-3;dy<=3;dy++)for(var dx=-3;dx<=3;dx++){
+        var nx=spX+dx,ny=spY+dy;
+        if(nx>=0&&nx<advW&&ny>=0&&ny<advH){advMap[ny][nx]=T.GRASS;advTreeHP[ny][nx]=0;}
     }
     // Scatter collectibles
     for(var i=0;i<25;i++){spawnItem(T.WOOD);}
@@ -1496,7 +1542,12 @@ function spawnItem(type){
 
 function initAdv(){
     var grid=document.getElementById('adv-grid');
-    var tileSize=Math.min(38,Math.floor((window.innerWidth-40)/advVW));
+    // Fill available width and height
+    var availW=window.innerWidth-16;
+    var availH=window.innerHeight-240; // leave room for HUD + controls
+    var tileSizeW=Math.floor(availW/advVW);
+    var tileSizeH=Math.floor(availH/advVH);
+    var tileSize=Math.min(tileSizeW,tileSizeH,56);
     grid.style.gridTemplateColumns='repeat('+advVW+','+tileSize+'px)';
     grid.style.gridTemplateRows='repeat('+advVH+','+tileSize+'px)';
     grid.innerHTML='';
@@ -1521,10 +1572,13 @@ function renderAdv(){
     var grid=document.getElementById('adv-grid');
     if(!grid)return;
     var cells=grid.children;
-    var sx=advP.x-Math.floor(advVW/2),sy=advP.y-Math.floor(advVH/2);
+    // Screen top-left in world coords
+    var sx=advScr.x*advVW,sy=advScr.y*advVH;
     for(var vy=0;vy<advVH;vy++){for(var vx=0;vx<advVW;vx++){
         var idx=vy*advVW+vx;
         var mx=sx+vx,my=sy+vy;
+        // Player world position
+        var pwx=sx+advP.x,pwy=sy+advP.y;
         var cell=cells[idx];
         if(mx<0||mx>=advW||my<0||my>=advH){
             cell.textContent='';cell.style.background='#111';continue;
@@ -1532,21 +1586,25 @@ function renderAdv(){
         var tile=advMap[my][mx];
         var bg=tileBg[tile]||'#2d5a1a';
         // Night darkness
+        var lit=true;
         if(advIsNight){
-            var distP=Math.abs(mx-advP.x)+Math.abs(my-advP.y);
-            var lit=distP<=2;
+            var distP=Math.abs(mx-pwx)+Math.abs(my-pwy);
+            lit=distP<=2;
             advFires.forEach(function(f){if(Math.abs(mx-f.x)+Math.abs(my-f.y)<=3)lit=true;});
-            if(!lit)bg='#0a0a0a';
-            else bg=tileBg[tile]||'#2d5a1a';
+            if(!lit){bg='#0a0a0a';}
         }
         cell.style.background=bg;
-        // Content
-        if(mx===advP.x&&my===advP.y){
+        // Content - hide everything in darkness
+        if(!lit){
+            cell.textContent='';
+        }else if(mx===pwx&&my===pwy){
             cell.textContent='\u{1F9D1}';
         }else{
             var mon=advMonsters.find(function(m){return m.x===mx&&m.y===my;});
             if(mon){cell.textContent=mon.e;}
             else if(advFires.find(function(f){return f.x===mx&&f.y===my;})){cell.textContent='\u{1F525}';}
+            else if(tile===T.TREE&&advTreeHP[my]&&advTreeHP[my][mx]<3&&advTreeHP[my][mx]>0){
+                cell.textContent='\u{1FAB5}';}
             else{cell.textContent=tileEmoji[tile]||'';}
         }
     }}
@@ -1556,16 +1614,17 @@ function renderAdv(){
     document.getElementById('adv-hp').innerHTML=h;
     document.getElementById('adv-score').textContent=advScore;
     document.getElementById('adv-night').textContent=advNight;
-    document.getElementById('adv-inv').innerHTML='\u{1FAB5} x'+advWood+' &nbsp; \u{1FAD0} x'+advBerries+' &nbsp; \u{1F48E} x'+advGems;
+    document.getElementById('adv-inv').innerHTML='\u{1FAB5}x'+advWood+' \u{1FAA8}x'+advStone+' \u{1FAD0}x'+advBerries+' \u{1F48E}x'+advGems;
     var timeLeft=advIsNight?(advNightLen-advTime):(advDayLen-advTime);
     document.getElementById('adv-time').innerHTML=(advIsNight?'\u{1F319} Night':'☀️ Day')+' '+Math.ceil(timeLeft)+'s';
     document.getElementById('adv-time').style.color=advIsNight?'#aaa':'#f9ca24';
+    updateCompass();
 }
 
 function startAdv(){
-    if(advRunning)return;
-    advP={x:20,y:20};advHP=5;advScore=0;advNight=0;
-    advWood=0;advBerries=0;advGems=0;advTime=0;advIsNight=false;
+    stopAdv();
+    advScr={x:1,y:1};advP={x:2,y:2};advHP=5;advScore=0;advNight=0;
+    advWood=0;advBerries=0;advGems=0;advStone=0;advTime=0;advIsNight=false;
     advFires=[];advMonsters=[];
     genMap();initAdv();advRunning=true;
     document.getElementById('adv-start-btn').textContent='Restart';
@@ -1601,11 +1660,12 @@ function advGameLoop(){
 
 function spawnMonsters(){
     var count=2+advNight;
+    var pwx=advScr.x*advVW+advP.x,pwy=advScr.y*advVH+advP.y;
     for(var i=0;i<count;i++){
         var m;
         for(var t=0;t<50;t++){
-            var mx=advP.x+((Math.random()<0.5?-1:1)*(6+Math.floor(Math.random()*8)));
-            var my=advP.y+((Math.random()<0.5?-1:1)*(6+Math.floor(Math.random()*8)));
+            var mx=pwx+((Math.random()<0.5?-1:1)*(6+Math.floor(Math.random()*10)));
+            var my=pwy+((Math.random()<0.5?-1:1)*(6+Math.floor(Math.random()*10)));
             mx=Math.max(0,Math.min(advW-1,mx));my=Math.max(0,Math.min(advH-1,my));
             if(!tileSolid[advMap[my][mx]]){m={x:mx,y:my,e:Math.random()<0.5?'\u{1F47B}':'\u{1F987}'};break;}
         }
@@ -1615,27 +1675,35 @@ function spawnMonsters(){
 
 function moveMonsters(){
     if(!advRunning||!advIsNight)return;
+    var pwx=advScr.x*advVW+advP.x,pwy=advScr.y*advVH+advP.y;
     advMonsters.forEach(function(m){
-        // Move toward player
         var dx=0,dy=0;
         if(Math.random()<0.7){
-            if(m.x<advP.x)dx=1;else if(m.x>advP.x)dx=-1;
-            if(m.y<advP.y)dy=1;else if(m.y>advP.y)dy=-1;
+            if(m.x<pwx)dx=1;else if(m.x>pwx)dx=-1;
+            if(m.y<pwy)dy=1;else if(m.y>pwy)dy=-1;
             if(Math.random()<0.5)dx=0;else dy=0;
         }else{
             dx=Math.floor(Math.random()*3)-1;dy=Math.floor(Math.random()*3)-1;
         }
         var nx=m.x+dx,ny=m.y+dy;
-        // Monsters avoid fire
-        var nearFire=advFires.some(function(f){return Math.abs(nx-f.x)+Math.abs(ny-f.y)<=2;});
-        if(nearFire)return;
-        if(nx>=0&&nx<advW&&ny>=0&&ny<advH&&!tileSolid[advMap[ny][nx]]){m.x=nx;m.y=ny;}
-        // Hit player
-        if(m.x===advP.x&&m.y===advP.y){
+        // Monsters CANNOT enter fire light radius
+        var nearFire=advFires.some(function(f){return Math.abs(nx-f.x)+Math.abs(ny-f.y)<=3;});
+        if(nearFire){
+            // Push monster away from fire instead
+            var cf=advFires[0];advFires.forEach(function(f){if(Math.abs(m.x-f.x)+Math.abs(m.y-f.y)<Math.abs(m.x-cf.x)+Math.abs(m.y-cf.y))cf=f;});
+            var fdx=m.x>cf.x?1:(m.x<cf.x?-1:0);
+            var fdy=m.y>cf.y?1:(m.y<cf.y?-1:0);
+            var fx=m.x+fdx,fy=m.y+fdy;
+            if(fx>=0&&fx<advW&&fy>=0&&fy<advH&&!tileSolid[advMap[fy][fx]]&&!tileChoppable[advMap[fy][fx]]&&!tileMineable[advMap[fy][fx]])
+                {m.x=fx;m.y=fy;}
+            return;
+        }
+        if(nx>=0&&nx<advW&&ny>=0&&ny<advH&&!tileSolid[advMap[ny][nx]]&&!tileChoppable[advMap[ny][nx]]&&!tileMineable[advMap[ny][nx]]){m.x=nx;m.y=ny;}
+        // Hit player (world coords)
+        if(m.x===pwx&&m.y===pwy){
             advHP--;advScore=Math.max(0,advScore-10);
             document.getElementById('adv-msg').innerHTML='<span style="color:#e74c3c">\u{1F4A5} A '+m.e+' hit you! -1 HP</span>';
-            // Push monster back
-            m.x=m.x+(m.x>advP.x?2:-2);m.y=m.y+(m.y>advP.y?2:-2);
+            m.x=m.x+(m.x>pwx?2:-2);m.y=m.y+(m.y>pwy?2:-2);
             m.x=Math.max(0,Math.min(advW-1,m.x));m.y=Math.max(0,Math.min(advH-1,m.y));
             if(advHP<=0){advRunning=false;clearTimeout(advTimer);clearInterval(advMonsterTimer);
                 document.getElementById('adv-msg').innerHTML='<div style="color:#e74c3c;font-size:1.3rem">\u{1F480} Game Over! Survived '+advNight+' nights. Score: '+advScore+'</div>';
@@ -1647,39 +1715,165 @@ function moveMonsters(){
 }
 
 function moveAdv(dx,dy){
-    if(!advRunning)return;
+    if(!advRunning||advTransitioning)return;
+    advFacing={x:dx,y:dy};
     var nx=advP.x+dx,ny=advP.y+dy;
-    if(nx<0||nx>=advW||ny<0||ny>=advH)return;
-    if(tileSolid[advMap[ny][nx]])return;
-    var tile=advMap[ny][nx];
-    // Chop tree (don't walk through, just chop and stay)
-    if(tileChoppable[tile]){
-        advWood+=3;advScore+=15;
-        advMap[ny][nx]=T.GRASS;
-        document.getElementById('adv-msg').innerHTML='<span style="color:#8B6B4A">\u{1FAB5} Chopped tree! +3 Wood (total: '+advWood+')</span>';
-        renderAdv();
+    // World coords of target
+    var wx=advScr.x*advVW+nx,wy=advScr.y*advVH+ny;
+
+    // Screen transition check
+    if(nx<0||nx>=advVW||ny<0||ny>=advVH){
+        var newScrX=advScr.x,newScrY=advScr.y;
+        var newPx=advP.x,newPy=advP.y;
+        if(nx<0){newScrX--;newPx=advVW-1;}
+        if(nx>=advVW){newScrX++;newPx=0;}
+        if(ny<0){newScrY--;newPy=advVH-1;}
+        if(ny>=advVH){newScrY++;newPy=0;}
+        // Check bounds
+        if(newScrX<0||newScrX>=advSX||newScrY<0||newScrY>=advSY)return;
+        // Check target tile on new screen
+        var twx=newScrX*advVW+newPx,twy=newScrY*advVH+newPy;
+        if(twx>=advW||twy>=advH)return;
+        var ttile=advMap[twy][twx];
+        if(tileSolid[ttile]||tileChoppable[ttile]||tileMineable[ttile])return;
+        // Do screen transition
+        advTransitioning=true;
+        advScr.x=newScrX;advScr.y=newScrY;
+        advP.x=newPx;advP.y=newPy;
+        // Collect on new tile
+        collectAt(twx,twy);
+        var grid=document.getElementById('adv-grid');
+        grid.style.opacity='0';
+        setTimeout(function(){renderAdv();grid.style.opacity='1';advTransitioning=false;},200);
         return;
     }
-    // Collect items by walking over
-    if(tile===T.WOOD){advWood++;advScore+=5;advMap[ny][nx]=T.GRASS;document.getElementById('adv-msg').innerHTML='<span style="color:#8B6B4A">\u{1FAB5} +1 Wood (total: '+advWood+')</span>';}
-    if(tile===T.BERRY){advBerries++;advScore+=10;advMap[ny][nx]=T.GRASS;
-        if(advHP<5){advHP++;document.getElementById('adv-msg').innerHTML='<span style="color:#e74c3c">\u{1FAD0} +1 Berry! HP restored! (total: '+advBerries+')</span>';}
-        else{document.getElementById('adv-msg').innerHTML='<span style="color:#27ae60">\u{1FAD0} +1 Berry (total: '+advBerries+')</span>';}
-    }
-    if(tile===T.GEM){advGems++;advScore+=100;advMap[ny][nx]=T.GRASS;document.getElementById('adv-msg').innerHTML='<span style="color:#4AEDD9">\u{1F48E} +1 Gem! +100 pts! (total: '+advGems+')</span>';}
+
+    // Normal move within screen
+    if(wx<0||wx>=advW||wy<0||wy>=advH)return;
+    var tile=advMap[wy][wx];
+    if(tileSolid[tile]||tileChoppable[tile]||tileMineable[tile])return;
+    collectAt(wx,wy);
     advP.x=nx;advP.y=ny;
     renderAdv();
+}
+
+function collectAt(wx,wy){
+    var tile=advMap[wy][wx];
+    if(tile===T.WOOD){advWood++;advScore+=5;advMap[wy][wx]=T.GRASS;document.getElementById('adv-msg').innerHTML='<span style="color:#8B6B4A">\u{1FAB5} +1 Wood ('+advWood+')</span>';}
+    if(tile===T.BERRY){advBerries++;advScore+=10;advMap[wy][wx]=T.GRASS;
+        if(advHP<5){advHP++;document.getElementById('adv-msg').innerHTML='<span style="color:#e74c3c">\u{1FAD0} Berry! +1 HP ('+advBerries+')</span>';}
+        else{document.getElementById('adv-msg').innerHTML='<span style="color:#27ae60">\u{1FAD0} +1 Berry ('+advBerries+')</span>';}
+    }
+    if(tile===T.GEM){advGems++;advScore+=100;advMap[wy][wx]=T.GRASS;document.getElementById('adv-msg').innerHTML='<span style="color:#4AEDD9">\u{1F48E} +1 Gem! +100 ('+advGems+')</span>';}
 }
 
 function advBuildFire(){
     if(!advRunning)return;
     if(advWood<5){document.getElementById('adv-msg').innerHTML='<span style="color:#e74c3c">Need 5 wood! You have '+advWood+'</span>';return;}
     advWood-=5;
-    advFires.push({x:advP.x,y:advP.y});
-    advMap[advP.y][advP.x]=T.FIRE;
+    var wx=advScr.x*advVW+advP.x,wy=advScr.y*advVH+advP.y;
+    advFires.push({x:wx,y:wy});
+    advMap[wy][wx]=T.FIRE;
     advScore+=25;
     document.getElementById('adv-msg').innerHTML='<span style="color:#f0932b">\u{1F525} Campfire built! Monsters stay away from fire!</span>';
     renderAdv();
+}
+
+function advAction(){
+    if(!advRunning||advTransitioning)return;
+    // Target in world coords
+    var tx=advScr.x*advVW+advP.x+advFacing.x;
+    var ty=advScr.y*advVH+advP.y+advFacing.y;
+    if(tx<0||tx>=advW||ty<0||ty>=advH)return;
+    var tile=advMap[ty][tx];
+    // Hit tree
+    if(tile===T.TREE){
+        advTreeHP[ty][tx]--;
+        if(advTreeHP[ty][tx]<=0){
+            advMap[ty][tx]=T.GRASS;
+            advWood+=3;advScore+=15;
+            document.getElementById('adv-msg').innerHTML='<span style="color:#8B6B4A">\u{1FAB5} Tree chopped! +3 Wood (total: '+advWood+')</span>';
+        }else{
+            document.getElementById('adv-msg').innerHTML='<span style="color:#8B6B4A">\u{1FA93} Hit tree! '+advTreeHP[ty][tx]+' hits left</span>';
+        }
+        renderAdv();return;
+    }
+    // Mine rock
+    if(tile===T.ROCK){
+        advTreeHP[ty][tx]--;
+        if(advTreeHP[ty][tx]<=0){
+            advMap[ty][tx]=T.GRASS;
+            advStone+=2;advScore+=10;
+            document.getElementById('adv-msg').innerHTML='<span style="color:#888">\u{1FAA8} Rock mined! +2 Stone (total: '+advStone+')</span>';
+        }else{
+            document.getElementById('adv-msg').innerHTML='<span style="color:#888">\u{1FA93} Hit rock! '+advTreeHP[ty][tx]+' hits left</span>';
+        }
+        renderAdv();return;
+    }
+    // Hit monster
+    var mi=advMonsters.findIndex(function(m){return m.x===tx&&m.y===ty;});
+    if(mi!==-1){
+        advMonsters.splice(mi,1);
+        advScore+=25;
+        document.getElementById('adv-msg').innerHTML='<span style="color:#e74c3c">\u2694\uFE0F Defeated a monster! +25 pts</span>';
+        renderAdv();return;
+    }
+    document.getElementById('adv-msg').innerHTML='<span style="color:#aaa">\u{1FA93} Nothing to hit there!</span>';
+}
+
+function advEat(){
+    if(!advRunning)return;
+    if(advBerries<=0){document.getElementById('adv-msg').innerHTML='<span style="color:#e74c3c">No berries to eat!</span>';return;}
+    if(advHP>=5){document.getElementById('adv-msg').innerHTML='<span style="color:#27ae60">Health is already full!</span>';return;}
+    advBerries--;advHP++;
+    document.getElementById('adv-msg').innerHTML='<span style="color:#e74c3c">\u{1FAD0} Ate a berry! +1 HP</span>';
+    renderAdv();
+}
+
+function updateCompass(){
+    var el=document.getElementById('adv-compass');
+    if(advFires.length===0){el.style.display='none';return;}
+    el.style.display='block';
+    var pwx=advScr.x*advVW+advP.x,pwy=advScr.y*advVH+advP.y;
+    var nearest=null,minDist=999;
+    advFires.forEach(function(f){
+        var d=Math.abs(f.x-pwx)+Math.abs(f.y-pwy);
+        if(d<minDist){minDist=d;nearest=f;}
+    });
+    if(!nearest){el.style.display='none';return;}
+    var dx=nearest.x-pwx,dy=nearest.y-pwy;
+    if(Math.abs(dx)<=3&&Math.abs(dy)<=3){
+        el.innerHTML='\u{1F525} Campfire is here!';
+        el.style.borderColor='#2ecc71';el.style.color='#2ecc71';el.style.background='rgba(46,204,113,.15)';
+    }else{
+        var arrow='\u{1F525} ';
+        if(dy<0&&Math.abs(dy)>=Math.abs(dx))arrow+='\u2B06\uFE0F North';
+        else if(dy>0&&Math.abs(dy)>=Math.abs(dx))arrow+='\u2B07\uFE0F South';
+        else if(dx<0)arrow+='\u2B05\uFE0F West';
+        else arrow+='\u27A1\uFE0F East';
+        arrow+=' ('+minDist+' away)';
+        el.innerHTML=arrow;
+        el.style.borderColor='#f0932b';el.style.color='#f0932b';el.style.background='rgba(240,147,43,.15)';
+    }
+    // Also show fire indicator on grid edge
+    showFirePointer(nearest);
+}
+
+function showFirePointer(fire){
+    var grid=document.getElementById('adv-grid');
+    if(!grid)return;
+    var cells=grid.children;
+    var sx=advScr.x*advVW,sy=advScr.y*advVH;
+    var fvx=fire.x-sx,fvy=fire.y-sy;
+    if(fvx>=0&&fvx<advVW&&fvy>=0&&fvy<advVH)return; // already visible
+    // Clamp to edge of current screen
+    var ex=Math.max(0,Math.min(advVW-1,fvx));
+    var ey=Math.max(0,Math.min(advVH-1,fvy));
+    var idx=ey*advVW+ex;
+    if(idx>=0&&idx<cells.length){
+        cells[idx].textContent='\u{1F525}';
+        cells[idx].style.background='rgba(240,147,43,.3)';
+    }
 }
 
 // Keyboard controls for adventure
@@ -1690,6 +1884,8 @@ document.addEventListener('keydown',function(e){
     if(e.key==='ArrowLeft'||e.key==='a'||e.key==='A')moveAdv(-1,0);
     if(e.key==='ArrowRight'||e.key==='d'||e.key==='D')moveAdv(1,0);
     if(e.key==='f'||e.key==='F')advBuildFire();
+    if(e.key===' '||e.key==='x'||e.key==='X'){advAction();e.preventDefault();}
+    if(e.key==='e'||e.key==='E')advEat();
 });
 
 </script>
