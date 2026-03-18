@@ -20,6 +20,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 .arc{background:linear-gradient(135deg,#FF6B6B,#ee5a24)}
 .ajk{background:linear-gradient(135deg,#f9ca24,#f0932b)}
 .amm{background:linear-gradient(135deg,#6c5ce7,#a29bfe)}
+.agm{background:linear-gradient(135deg,#e84393,#fd79a8)}
 .app-page{display:none;min-height:100vh;padding:20px;flex-direction:column;align-items:center;overflow-y:auto}
 .app-page.active{display:flex}
 .pm{background:linear-gradient(135deg,#e74c3c,#c0392b)}.pr{background:linear-gradient(135deg,#2ecc71,#1a9c54)}
@@ -28,6 +29,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 .prc{background:linear-gradient(135deg,#ee5a24,#FF6B6B,#ee5a24)}
 .pjk{background:linear-gradient(135deg,#f0932b,#f9ca24,#f0932b)}
 .pmm{background:linear-gradient(135deg,#6c5ce7,#a29bfe,#6c5ce7)}
+.pgm{background:linear-gradient(135deg,#0a0a1a,#1a1a3a,#0a0a1a)}
 .top-bar{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:600px;margin-bottom:15px}
 .nb{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);color:#fff;font-size:1.1rem;padding:10px 20px;border-radius:50px;cursor:pointer;transition:background .2s}
 .nb:hover{background:rgba(255,255,255,.3)}.nb:disabled{opacity:.3;cursor:default}
@@ -89,6 +91,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 <div><div class="app-icon arc" onclick="openApp('recipes')"><span class="ie">&#127859;</span></div><div class="app-label">Recipes</div></div>
 <div><div class="app-icon ajk" onclick="openApp('jokes')"><span class="ie">&#129315;</span></div><div class="app-label">Jokes</div></div>
 <div><div class="app-icon amm" onclick="openApp('memes')"><span class="ie">&#128517;</span></div><div class="app-label">Memes</div></div>
+<div><div class="app-icon agm" onclick="openApp('games')"><span class="ie">&#127918;</span></div><div class="app-label">Games</div></div>
 </div></div>
 
 <div class="app-page pm" id="page-movies">
@@ -130,6 +133,24 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 <div class="cs"><div class="ic"><h3>&#129489;&#8205;&#128640; Yuri Gagarin (1961)</h3><p>First human in space!</p></div><div class="ic"><h3>&#127769; Neil Armstrong (1969)</h3><p>First Moon walk! 600M watched.</p></div><div class="ic"><h3>&#128105;&#8205;&#128640; Mae Jemison (1992)</h3><p>First African American woman in space!</p></div><div class="ic"><h3>&#128302; Mars Rovers</h3><p>Curiosity & Perseverance exploring now!</p></div><div class="ic"><h3>&#128752; Voyager 1</h3><p>15 billion miles away! Golden record for aliens.</p></div></div>
 <div class="cs"><div class="ic"><h3 id="space-qq">Space Quiz!</h3><div id="space-qo"></div><div id="space-qr" class="qr"></div><div style="margin-top:15px"><button class="ab" style="background:#0b0b3b" onclick="nextQ('space')" id="space-nb">Next Question!</button></div><div class="ctr" style="color:#888" id="space-qc"></div></div></div>
 </div></div></div></div>
+
+<!-- GAMES -->
+<div class="app-page pgm" id="page-games">
+<div class="top-bar"><button class="nb" onclick="goHome();stopBB()">&#8592; Home</button></div>
+<div style="text-align:center;color:#fff;margin-bottom:10px">
+<h2 class="ptl" style="margin-bottom:10px">Brick Breaker!</h2>
+<div style="display:flex;justify-content:center;gap:20px;margin-bottom:10px;flex-wrap:wrap">
+<div style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px 16px"><span style="color:#aaa;font-size:.8rem">Score</span><div style="font-size:1.4rem;font-weight:bold" id="bb-score">0</div></div>
+<div style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px 16px"><span style="color:#aaa;font-size:.8rem">Level</span><div style="font-size:1.4rem;font-weight:bold" id="bb-level">1</div></div>
+<div style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px 16px"><span style="color:#aaa;font-size:.8rem">Lives</span><div style="font-size:1.4rem;font-weight:bold" id="bb-lives">&#10084;&#10084;&#10084;</div></div>
+</div>
+</div>
+<canvas id="bb-canvas" style="background:#111;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.5);max-width:100%;touch-action:none"></canvas>
+<div style="text-align:center;margin-top:12px">
+<button class="ab" style="background:linear-gradient(135deg,#e84393,#fd79a8)" onclick="startBB()" id="bb-start-btn">Start Game!</button>
+</div>
+<p style="color:rgba(255,255,255,.4);font-size:.8rem;text-align:center;margin-top:8px">Move: mouse, touch, or arrow keys</p>
+</div>
 
 <!-- MEMES -->
 <div class="app-page pmm" id="page-memes">
@@ -1204,6 +1225,183 @@ resetMerge();
         lg.appendChild(d);
     });
 })();
+// BRICK BREAKER
+var bbCanvas,bbCtx,bbRunning=false,bbAnim=null;
+var bbW=480,bbH=600;
+var bbPaddle,bbBall,bbBricks,bbScore,bbLives,bbLevel;
+var bbColors=['#e74c3c','#e67e22','#f1c40f','#2ecc71','#3498db','#9b59b6','#fd79a8','#00cec9'];
+
+function initBB(){
+    bbCanvas=document.getElementById('bb-canvas');
+    bbCtx=bbCanvas.getContext('2d');
+    // Responsive sizing
+    var maxW=Math.min(480,window.innerWidth-40);
+    var ratio=maxW/480;
+    bbW=maxW;bbH=Math.round(600*ratio);
+    bbCanvas.width=bbW;bbCanvas.height=bbH;
+    bbScore=0;bbLives=3;bbLevel=1;
+    resetBBLevel();
+    drawBB();
+    updateBBUI();
+    // Controls
+    bbCanvas.onmousemove=function(e){var r=bbCanvas.getBoundingClientRect();bbPaddle.x=e.clientX-r.left-bbPaddle.w/2;clampPaddle();};
+    bbCanvas.ontouchmove=function(e){e.preventDefault();var r=bbCanvas.getBoundingClientRect();bbPaddle.x=e.touches[0].clientX-r.left-bbPaddle.w/2;clampPaddle();};
+    document.onkeydown=function(e){if(!bbRunning)return;if(e.key==='ArrowLeft')bbPaddle.x-=30;if(e.key==='ArrowRight')bbPaddle.x+=30;clampPaddle();};
+}
+
+function clampPaddle(){if(bbPaddle.x<0)bbPaddle.x=0;if(bbPaddle.x+bbPaddle.w>bbW)bbPaddle.x=bbW-bbPaddle.w;}
+
+function resetBBLevel(){
+    var pw=Math.max(60,90-bbLevel*5);
+    bbPaddle={x:bbW/2-pw/2,y:bbH-30,w:pw,h:12};
+    var speed=3+bbLevel*0.5;
+    bbBall={x:bbW/2,y:bbH-50,dx:speed*(Math.random()>0.5?1:-1),dy:-speed,r:8};
+    bbBricks=[];
+    var cols=Math.min(8,5+Math.floor(bbLevel/2));
+    var rows=Math.min(7,3+bbLevel);
+    var bw=(bbW-20-(cols-1)*4)/cols;
+    var bh=20;
+    for(var r=0;r<rows;r++){
+        for(var c=0;c<cols;c++){
+            var hits=1;
+            if(bbLevel>=3&&r<2)hits=2;
+            if(bbLevel>=5&&r===0)hits=3;
+            bbBricks.push({x:10+c*(bw+4),y:40+r*(bh+4),w:bw,h:bh,color:bbColors[(r+bbLevel)%bbColors.length],hits:hits,maxHits:hits});
+        }
+    }
+}
+
+function drawBB(){
+    bbCtx.clearRect(0,0,bbW,bbH);
+    // Bricks
+    bbBricks.forEach(function(b){
+        if(b.hits<=0)return;
+        bbCtx.fillStyle=b.color;
+        bbCtx.globalAlpha=0.4+0.6*(b.hits/b.maxHits);
+        bbCtx.beginPath();
+        bbCtx.roundRect(b.x,b.y,b.w,b.h,4);
+        bbCtx.fill();
+        bbCtx.globalAlpha=1;
+        if(b.hits>1){
+            bbCtx.fillStyle='#fff';
+            bbCtx.font='bold 11px sans-serif';
+            bbCtx.textAlign='center';
+            bbCtx.fillText(b.hits,b.x+b.w/2,b.y+b.h/2+4);
+        }
+    });
+    // Paddle
+    bbCtx.fillStyle='#fff';
+    bbCtx.beginPath();
+    bbCtx.roundRect(bbPaddle.x,bbPaddle.y,bbPaddle.w,bbPaddle.h,6);
+    bbCtx.fill();
+    // Ball
+    var grd=bbCtx.createRadialGradient(bbBall.x,bbBall.y,0,bbBall.x,bbBall.y,bbBall.r);
+    grd.addColorStop(0,'#fff');
+    grd.addColorStop(1,'#fd79a8');
+    bbCtx.fillStyle=grd;
+    bbCtx.beginPath();
+    bbCtx.arc(bbBall.x,bbBall.y,bbBall.r,0,Math.PI*2);
+    bbCtx.fill();
+}
+
+function updateBBUI(){
+    document.getElementById('bb-score').textContent=bbScore;
+    document.getElementById('bb-level').textContent=bbLevel;
+    var h='';for(var i=0;i<bbLives;i++)h+='\u2764\uFE0F';
+    if(bbLives<=0)h='\u{1F4A9}';
+    document.getElementById('bb-lives').innerHTML=h;
+}
+
+function startBB(){
+    if(bbRunning)return;
+    if(!bbCanvas)initBB();
+    if(bbLives<=0){bbScore=0;bbLives=3;bbLevel=1;resetBBLevel();updateBBUI();}
+    bbRunning=true;
+    document.getElementById('bb-start-btn').textContent='Playing...';
+    bbLoop();
+}
+
+function stopBB(){
+    bbRunning=false;
+    if(bbAnim)cancelAnimationFrame(bbAnim);
+    bbAnim=null;
+    var btn=document.getElementById('bb-start-btn');
+    if(btn)btn.textContent='Start Game!';
+}
+
+function bbLoop(){
+    if(!bbRunning)return;
+    // Move ball
+    bbBall.x+=bbBall.dx;
+    bbBall.y+=bbBall.dy;
+    // Wall bounce
+    if(bbBall.x-bbBall.r<=0||bbBall.x+bbBall.r>=bbW)bbBall.dx*=-1;
+    if(bbBall.y-bbBall.r<=0)bbBall.dy*=-1;
+    // Paddle bounce
+    if(bbBall.dy>0&&bbBall.y+bbBall.r>=bbPaddle.y&&bbBall.x>=bbPaddle.x&&bbBall.x<=bbPaddle.x+bbPaddle.w&&bbBall.y+bbBall.r<=bbPaddle.y+bbPaddle.h+10){
+        bbBall.dy*=-1;
+        // Angle based on where it hits the paddle
+        var hitPos=(bbBall.x-bbPaddle.x)/bbPaddle.w;
+        bbBall.dx=6*(hitPos-0.5);
+        bbBall.y=bbPaddle.y-bbBall.r;
+    }
+    // Brick collision
+    for(var i=0;i<bbBricks.length;i++){
+        var b=bbBricks[i];
+        if(b.hits<=0)continue;
+        if(bbBall.x+bbBall.r>b.x&&bbBall.x-bbBall.r<b.x+b.w&&bbBall.y+bbBall.r>b.y&&bbBall.y-bbBall.r<b.y+b.h){
+            b.hits--;
+            bbScore+=10*bbLevel;
+            updateBBUI();
+            // Determine bounce direction
+            var overlapL=bbBall.x+bbBall.r-b.x;
+            var overlapR=b.x+b.w-(bbBall.x-bbBall.r);
+            var overlapT=bbBall.y+bbBall.r-b.y;
+            var overlapB=b.y+b.h-(bbBall.y-bbBall.r);
+            var minO=Math.min(overlapL,overlapR,overlapT,overlapB);
+            if(minO===overlapT||minO===overlapB)bbBall.dy*=-1;
+            else bbBall.dx*=-1;
+            break;
+        }
+    }
+    // Check win (all bricks gone)
+    var remaining=bbBricks.filter(function(b){return b.hits>0;}).length;
+    if(remaining===0){
+        bbLevel++;
+        resetBBLevel();
+        updateBBUI();
+        drawBB();
+        bbRunning=false;
+        document.getElementById('bb-start-btn').textContent='Level '+bbLevel+'! Go!';
+        return;
+    }
+    // Ball fell off bottom
+    if(bbBall.y>bbH+20){
+        bbLives--;
+        updateBBUI();
+        if(bbLives<=0){
+            bbRunning=false;
+            document.getElementById('bb-start-btn').textContent='Game Over! Score: '+bbScore+'. Play Again?';
+            drawBB();
+            return;
+        }
+        // Reset ball
+        var speed=3+bbLevel*0.5;
+        bbBall={x:bbW/2,y:bbH-50,dx:speed*(Math.random()>0.5?1:-1),dy:-speed,r:8};
+        bbPaddle.x=bbW/2-bbPaddle.w/2;
+        bbRunning=false;
+        document.getElementById('bb-start-btn').textContent='Lost a life! Continue';
+        drawBB();
+        return;
+    }
+    drawBB();
+    bbAnim=requestAnimationFrame(bbLoop);
+}
+
+// Init canvas when games page opens
+var origOpenApp=openApp;
+openApp=function(n){origOpenApp(n);if(n==='games'&&!bbCanvas)initBB();};
+
 </script>
 </body>
 </html>
