@@ -159,46 +159,57 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh}
 
 <!-- Forest Adventure -->
 <div id="game-adv" style="display:none;width:100%;text-align:center">
-<div style="display:flex;justify-content:space-between;align-items:center;max-width:100%;margin-bottom:4px;padding:0 4px">
-<button class="nb" onclick="hideGame();stopAdv()" style="padding:6px 12px;font-size:.9rem">&#8592; Back</button>
-<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
-<div style="background:rgba(255,255,255,.1);border-radius:8px;padding:4px 10px"><span style="color:#aaa;font-size:.65rem">Night</span><div style="font-size:1rem;font-weight:bold;color:#fff" id="adv-night">0</div></div>
-<div style="background:rgba(255,255,255,.1);border-radius:8px;padding:4px 10px"><span style="color:#aaa;font-size:.65rem">HP</span><div style="font-size:1rem;font-weight:bold;color:#e74c3c" id="adv-hp">&#10084;&#10084;&#10084;&#10084;&#10084;</div></div>
-<div style="background:rgba(255,255,255,.1);border-radius:8px;padding:4px 10px"><span style="color:#aaa;font-size:.65rem">Score</span><div style="font-size:1rem;font-weight:bold;color:#f9ca24" id="adv-score">0</div></div>
+
+<!-- TOP BAR: Back, Campfire, Score, Night/Day -->
+<div style="display:flex;justify-content:space-between;align-items:center;width:100%;padding:2px 8px">
+<button class="nb" onclick="hideGame();stopAdv()" style="padding:4px 10px;font-size:.8rem">&#8592;</button>
+<div id="adv-compass" style="background:rgba(240,147,43,.2);border:2px solid #f0932b;border-radius:8px;padding:3px 12px;color:#f0932b;font-weight:bold;font-size:.85rem;display:none"></div>
+<div style="background:rgba(255,255,255,.1);border-radius:8px;padding:3px 10px"><span style="color:#f9ca24;font-weight:bold;font-size:1rem" id="adv-score">0</span><span style="color:#aaa;font-size:.7rem"> pts</span></div>
+<div style="background:rgba(255,255,255,.1);border-radius:8px;padding:3px 10px;font-size:.85rem;font-weight:bold" id="adv-time" style="color:#fff"></div>
+<div style="background:rgba(255,255,255,.1);border-radius:8px;padding:3px 10px"><span style="color:#aaa;font-size:.7rem">Night </span><span style="color:#fff;font-weight:bold;font-size:1rem" id="adv-night">0</span></div>
 </div>
+
+<!-- MIDDLE: D-Pad | Grid | Action Buttons -->
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;flex:1">
+
+<!-- D-Pad LEFT -->
+<div style="display:grid;grid-template-columns:repeat(3,46px);grid-template-rows:repeat(3,46px);gap:3px;flex-shrink:0">
+<div></div>
+<button onclick="moveAdv(0,-1)" style="width:46px;height:46px;border-radius:10px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.3rem;cursor:pointer;touch-action:manipulation">&#9650;</button>
+<div></div>
+<button onclick="moveAdv(-1,0)" style="width:46px;height:46px;border-radius:10px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.3rem;cursor:pointer;touch-action:manipulation">&#9664;</button>
+<div style="width:46px;height:46px;border-radius:10px;background:rgba(255,255,255,.05)"></div>
+<button onclick="moveAdv(1,0)" style="width:46px;height:46px;border-radius:10px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.3rem;cursor:pointer;touch-action:manipulation">&#9654;</button>
+<div></div>
+<button onclick="moveAdv(0,1)" style="width:46px;height:46px;border-radius:10px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.3rem;cursor:pointer;touch-action:manipulation">&#9660;</button>
+<div></div>
 </div>
-<div style="display:flex;justify-content:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;font-size:.8rem">
-<div style="background:rgba(255,255,255,.08);border-radius:6px;padding:3px 10px;color:#fff" id="adv-inv"></div>
-<div style="background:rgba(255,255,255,.08);border-radius:6px;padding:3px 10px" id="adv-time"></div>
-<div id="adv-compass" style="background:rgba(240,147,43,.2);border:2px solid #f0932b;border-radius:8px;padding:4px 14px;color:#f0932b;font-weight:bold;font-size:.95rem;display:none"></div>
-</div>
+
+<!-- GRID CENTER -->
 <div id="adv-grid" style="display:inline-grid;gap:0;border-radius:6px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.5);line-height:1;touch-action:none;transition:opacity .2s"></div>
-<div id="adv-msg" style="color:#fff;font-size:.9rem;min-height:22px;margin-top:4px"></div>
-<!-- D-PAD + ACTION BUTTONS -->
-<div style="display:flex;justify-content:space-between;align-items:center;max-width:100%;margin-top:8px;padding:0 10px">
-<!-- D-Pad -->
-<div style="display:grid;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,52px);gap:4px">
-<div></div>
-<button onclick="moveAdv(0,-1)" style="width:52px;height:52px;border-radius:12px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.4rem;cursor:pointer;touch-action:manipulation">&#9650;</button>
-<div></div>
-<button onclick="moveAdv(-1,0)" style="width:52px;height:52px;border-radius:12px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.4rem;cursor:pointer;touch-action:manipulation">&#9664;</button>
-<div style="width:52px;height:52px;border-radius:12px;background:rgba(255,255,255,.05)"></div>
-<button onclick="moveAdv(1,0)" style="width:52px;height:52px;border-radius:12px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.4rem;cursor:pointer;touch-action:manipulation">&#9654;</button>
-<div></div>
-<button onclick="moveAdv(0,1)" style="width:52px;height:52px;border-radius:12px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.4rem;cursor:pointer;touch-action:manipulation">&#9660;</button>
-<div></div>
-</div>
-<!-- Action buttons -->
-<div style="display:flex;flex-direction:column;gap:6px;align-items:center">
-<button onclick="advAction()" id="adv-action-btn" style="width:64px;height:64px;border-radius:50%;border:none;background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 15px rgba(231,76,60,.4);touch-action:manipulation">&#9935;&#65039;</button>
-<span style="color:rgba(255,255,255,.4);font-size:.7rem" id="adv-action-label">Hit</span>
-<button onclick="advBuildFire()" style="width:52px;height:52px;border-radius:50%;border:none;background:linear-gradient(135deg,#f0932b,#e67e22);color:#fff;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 15px rgba(240,147,43,.4);touch-action:manipulation">&#128293;</button>
-<span style="color:rgba(255,255,255,.4);font-size:.7rem">Fire</span>
-<button onclick="advEat()" style="width:52px;height:52px;border-radius:50%;border:none;background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 15px rgba(46,204,113,.4);touch-action:manipulation">&#127823;</button>
-<span style="color:rgba(255,255,255,.4);font-size:.7rem">Eat</span>
+
+<!-- ACTION BUTTONS RIGHT -->
+<div style="display:flex;flex-direction:column;gap:8px;align-items:center;flex-shrink:0">
+<button onclick="advAction()" id="adv-action-btn" style="width:56px;height:56px;border-radius:50%;border:none;background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;font-size:1.4rem;cursor:pointer;box-shadow:0 4px 15px rgba(231,76,60,.4);touch-action:manipulation">&#9935;&#65039;</button>
+<span style="color:rgba(255,255,255,.4);font-size:.65rem" id="adv-action-label">Hit</span>
+<button onclick="advBuildFire()" style="width:50px;height:50px;border-radius:50%;border:none;background:linear-gradient(135deg,#f0932b,#e67e22);color:#fff;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 15px rgba(240,147,43,.4);touch-action:manipulation">&#128293;</button>
+<span style="color:rgba(255,255,255,.4);font-size:.65rem">Fire</span>
+<button onclick="advEat()" style="width:50px;height:50px;border-radius:50%;border:none;background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 15px rgba(46,204,113,.4);touch-action:manipulation">&#127823;</button>
+<span style="color:rgba(255,255,255,.4);font-size:.65rem">Eat</span>
 </div>
 </div>
-<div style="margin-top:6px"><button class="ab" style="background:linear-gradient(135deg,#2d5a1a,#4a8c2a);padding:10px 24px;font-size:1rem" onclick="startAdv()" id="adv-start-btn">Start Adventure!</button></div>
+
+<!-- MESSAGE -->
+<div id="adv-msg" style="color:#fff;font-size:.85rem;min-height:20px"></div>
+
+<!-- BOTTOM: Health (left) + Start button -->
+<div style="display:flex;justify-content:space-between;align-items:center;width:100%;padding:0 8px">
+<div style="font-size:1.1rem;font-weight:bold" id="adv-hp">&#10084;&#10084;&#10084;&#10084;&#10084;</div>
+<button class="ab" style="background:linear-gradient(135deg,#2d5a1a,#4a8c2a);padding:8px 20px;font-size:.9rem;margin:0" onclick="startAdv()" id="adv-start-btn">Start Adventure!</button>
+</div>
+
+<!-- INVENTORY full width -->
+<div style="background:rgba(255,255,255,.08);border-radius:8px;padding:5px 12px;font-size:.9rem;color:#fff;width:100%;margin:0 8px;display:flex;justify-content:center;gap:16px" id="adv-inv"></div>
 </div>
 </div>
 
@@ -1550,12 +1561,13 @@ function spawnItem(type){
 
 function initAdv(){
     var grid=document.getElementById('adv-grid');
-    // Fill available space - fit everything on one page
-    var availW=window.innerWidth-16;
-    var availH=window.innerHeight-280;
+    // Fill available space - account for d-pad + action buttons on sides
+    var sideWidth=140; // d-pad + action buttons
+    var availW=window.innerWidth-sideWidth*2-20;
+    var availH=window.innerHeight-200;
     var tileSizeW=Math.floor(availW/advVW);
     var tileSizeH=Math.floor(availH/advVH);
-    var tileSize=Math.min(tileSizeW,tileSizeH,72);
+    var tileSize=Math.min(tileSizeW,tileSizeH,68);
     grid.style.gridTemplateColumns='repeat('+advVW+','+tileSize+'px)';
     grid.style.gridTemplateRows='repeat('+advVH+','+tileSize+'px)';
     grid.innerHTML='';
