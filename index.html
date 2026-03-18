@@ -1451,11 +1451,16 @@ function bbLoop(){
 // GAME MENU
 function showGame(g){
     document.getElementById('games-menu').style.display='none';
-    document.getElementById('game-'+g).style.display='block';
-    // Hide page header to save space
+    var el=document.getElementById('game-'+g);
+    if(g==='adv'){el.style.display='flex';el.style.flexDirection='column';el.style.alignItems='center';el.style.height='calc(100vh - 20px)';el.style.justifyContent='space-between';}
+    else{el.style.display='block';}
+    // Hide page header and lock scroll for fullscreen game
     document.querySelector('#page-games .pe').style.display='none';
     document.querySelector('#page-games .ptl').style.display='none';
     document.querySelector('#page-games .top-bar').style.display='none';
+    document.getElementById('page-games').style.overflow='hidden';
+    document.getElementById('page-games').style.height='100vh';
+    document.body.style.overflow='hidden';
     if(g==='bb'&&!bbCanvas)initBB();
     if(g==='adv')initAdv();
 }
@@ -1463,15 +1468,18 @@ function hideGame(){
     document.getElementById('games-menu').style.display='grid';
     document.getElementById('game-bb').style.display='none';
     document.getElementById('game-adv').style.display='none';
-    // Show page header again
+    // Show page header and restore scroll
     document.querySelector('#page-games .pe').style.display='';
     document.querySelector('#page-games .ptl').style.display='';
     document.querySelector('#page-games .top-bar').style.display='';
+    document.getElementById('page-games').style.overflow='';
+    document.getElementById('page-games').style.height='';
+    document.body.style.overflow='';
     stopBB();stopAdv();
 }
 
 // FOREST ADVENTURE
-var advMap=[],advTreeHP=[],advVW=17,advVH=13;
+var advMap=[],advTreeHP=[],advVW=11,advVH=9;
 var advSX=4,advSY=4; // number of screens
 var advW,advH; // total map size (computed)
 var advP={x:2,y:2},advHP=5,advScore=0,advNight=0;
@@ -1542,12 +1550,12 @@ function spawnItem(type){
 
 function initAdv(){
     var grid=document.getElementById('adv-grid');
-    // Fill available width and height
+    // Fill available space - fit everything on one page
     var availW=window.innerWidth-16;
-    var availH=window.innerHeight-240; // leave room for HUD + controls
+    var availH=window.innerHeight-280;
     var tileSizeW=Math.floor(availW/advVW);
     var tileSizeH=Math.floor(availH/advVH);
-    var tileSize=Math.min(tileSizeW,tileSizeH,56);
+    var tileSize=Math.min(tileSizeW,tileSizeH,72);
     grid.style.gridTemplateColumns='repeat('+advVW+','+tileSize+'px)';
     grid.style.gridTemplateRows='repeat('+advVH+','+tileSize+'px)';
     grid.innerHTML='';
